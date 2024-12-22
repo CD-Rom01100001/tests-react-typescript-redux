@@ -1,9 +1,13 @@
-import './App.css'
+import { FC } from 'react'
+import './styles/app.css'
 
-const App = () => {
+const App: FC = () => {
 
   return (
-    <div className="app"></div>
+    <div className="app">
+      <p>aaaaaaaaa</p>
+      <p className='par'>aaaaaaaaa</p>
+    </div>
   )
 }
 
