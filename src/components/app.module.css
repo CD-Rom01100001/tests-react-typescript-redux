@@ -1,3 +1,15 @@
 .app {
   display: flex;
+  flex-direction: column;
+  max-width: 102.4rem;
+  margin: 0 auto;
+}
+
+.app__block_title {
+  width: 100%;
+  text-align: center;
+}
+
+.titleH1 {
+  font: 500 2.4rem / 2.4rem "agora";
 }
