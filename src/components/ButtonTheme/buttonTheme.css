@@ -1,0 +1,13 @@
+.block-theme__button {
+  cursor: pointer;
+}
+
+.block-theme__button_dark {
+  color: #1d1d1e;
+  background: #E6E6E6;
+}
+
+.block-theme__button_light {
+  color: #E6E6E6;
+  background: #2b2a3a;
+}
