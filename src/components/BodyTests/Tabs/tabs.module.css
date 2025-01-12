@@ -1,0 +1,27 @@
+.tabs {
+  z-index: 2;
+  margin-bottom: -0.1rem;
+}
+
+.unList {
+  display: flex;
+  gap: 0 1rem;
+}
+
+.li {
+  list-style-type: none;
+  background: #E6E6E6;
+}
+
+.li a {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 4rem;
+}
+
+.li a.active {
+  background: #F6F6F6;
+}

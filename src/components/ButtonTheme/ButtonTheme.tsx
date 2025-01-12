@@ -1,7 +1,5 @@
-// import {useSelector, useDispatch} from "react-redux";
 import { FC } from 'react';
 import './buttonTheme.css'
-// import {changeTheme} from "../../store/themeSlice.tsx";
 
 type ButtonThemeProps = {
   theme: string;
