@@ -7,8 +7,8 @@ const BodyTests: FC = () => {
 
   return (
     <div className={css.bodyTests}>
-      <Tabs/>
-      <WorkSpace/>
+      <Tabs />
+      <WorkSpace />
     </div>
   );
 }

@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type InitialStateType = {
+  themeSlice: string
+}
+
+const initialState: InitialStateType = {
+  themeSlice: 'Dark'
+}
+
 const themeSlice = createSlice({
   name: 'themes',// имя или название
-  initialState: {
-    themeSlice: 'Dark'// начальное состояние
-  },
+  initialState,
   /* в редьюсерах мы будем перечислять методы, которые будем в дальнейшем использовать */
   reducers: {
     changeTheme: (state) => {
