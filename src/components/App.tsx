@@ -1,7 +1,6 @@
 import { FC } from 'react'
 
-import { useDispatch } from 'react-redux';
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { changeTheme } from '../store/themeSlice';
 
 import Label from './Label/Label';
@@ -11,8 +10,8 @@ import BodyTests from './BodyTests/BodyTests';
 import { BrowserRouter } from 'react-router-dom';
 
 const App: FC = () => {
-  const theme = useSelector(state => state.themeIndex.themeSlice);
-  const dispatch = useDispatch();
+  const theme = useAppSelector(state => state.themeIndex.themeSlice);
+  const dispatch = useAppDispatch();
 
   return (
     <BrowserRouter>

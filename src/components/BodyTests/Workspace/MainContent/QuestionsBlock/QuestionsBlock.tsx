@@ -2,47 +2,58 @@ import { FC } from 'react';
 import QuestionsList from './QuestionsList/QuestionsList';
 import OrderDownload from './OrderDownload/OrderDownload';
 import questions from '../../../../../data/allQuestions.json';
+import { QuesitonsType } from '../../../../../data/types';
+// import SectionQuestions from './SecionsQuestions/SectionQuestions';
+// import { Route, Routes } from 'react-router-dom';
+
 import css from './questionsBlock.module.css'
 
 const QuestionsBlock: FC = () => {
 
-  const sectionList: string[] = [];
-  const questionsData = (): void => {
+  const sectionNames: string[] = [];
 
-    type AnswersType = {
-      section: string;
-      value: string;
-      correct: boolean;
-      id: string;
-    }
-
-    type SectionType = {
-      question: string;
-      answers: AnswersType[]
-    }
-
-    type QuesitonsType = {
-      legalTraining80: SectionType[];
-      tacticalSpecialtyTraining10: SectionType[];
-      firstAid50: SectionType[];
-      useOfSpecialTools20: SectionType[];
-      firearmsTraining84: SectionType[];
-    }
-    
+  const getSectionNames = (): void => {
     for(const key in questions) {
-      console.log(questions[key as keyof QuesitonsType][0].answers[0].section);
-      sectionList.push(questions[key as keyof QuesitonsType][0].answers[0].section)
+      sectionNames.push(questions[key as keyof QuesitonsType][0].answers[0].section)
     }
-
   }
-  questionsData()
+  getSectionNames()
+
+  const getQuestionNumber = (): number => {
+    let numQuest = 0;
+    for(const key in questions) {
+      numQuest += questions[key as keyof QuesitonsType].length
+    }
+    return numQuest
+  }  
 
   return (
     <div className={css.questionsBlock}>
-      {sectionList.map((elem: string, i: number) => 
-        <QuestionsList sectionName={elem} key={i}/>
-      )}
+      <h3>{`Всего ${getQuestionNumber()} вопроса:`}</h3>
+      <ul>
+        {sectionNames.map((elem: string, i: number) => 
+          <QuestionsList 
+            sectionName={elem} 
+            sectionLink={Object.keys(questions)[i]} key={i} />
+        )}
+      </ul>
+
       <OrderDownload/>
+
+      {/* <Routes>
+        {Object.keys(questions).map((link: string, i: number) => 
+          <Route path={`/${i+1}-${link}`} element={<SectionQuestions i={i+1}/>}/>
+        )}
+      </Routes> */}
+      {/* {questions.legalTraining80.map((qa, i) => 
+        <div>
+          <h4>{`${i+1}. ${qa.question}`}</h4>
+          <div>{qa.answers.map(elem=>
+            <p>{elem.value}</p>
+          )}</div>
+        </div>
+        
+      )} */}
     </div>
   );
 }

@@ -1,15 +1,26 @@
 import { FC } from 'react';
 import css from './questionsList.module.css'
+import { NavLink } from 'react-router-dom';
 
 type QuestionsListProps = {
-  sectionName: string
+  sectionName: string;
+  sectionLink: string;
 }
 
-const QuestionsList: FC<QuestionsListProps> = ({sectionName}) => {
-
+const QuestionsList: FC<QuestionsListProps> = ({sectionName, sectionLink}) => {
+  type ActiveType = {
+    isActive: boolean
+  }
+  const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
+ 
   return (
     <li className={css.sectionName}>
-      <a href="">{sectionName}</a>
+      <NavLink 
+        className={setActive} 
+        to={sectionLink}
+      >
+        {`${sectionName} (${sectionLink.replace(/\D/g, "")})`}
+      </NavLink>
     </li>
   );
 }
