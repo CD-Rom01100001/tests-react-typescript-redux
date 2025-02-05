@@ -1,13 +1,14 @@
 import { FC } from 'react'
+import { BrowserRouter } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { changeTheme } from '../store/themeSlice';
 
 import Label from './Label/Label';
 import ButtonTheme from './ButtonTheme/ButtonTheme';
-import './app.css';
 import BodyTests from './BodyTests/BodyTests';
-import { BrowserRouter } from 'react-router-dom';
+import Weather from './Weather/Weather';
+import './app.css';
 
 const App: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
@@ -18,6 +19,7 @@ const App: FC = () => {
       <div className={`${'app'} ${theme.toLowerCase()}`}>
         <div className={'topBlock'}>
           <Label/>
+          <Weather/>
           <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} />
         </div>
         <div className={'app__block_title'}>
