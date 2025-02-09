@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { BrowserRouter } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { changeTheme } from '../store/themeSlice';
+import { changeTheme } from '../store/slices';
 
 import Label from './Label/Label';
 import ButtonTheme from './ButtonTheme/ButtonTheme';
@@ -17,10 +17,13 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <div className={`${'app'} ${theme.toLowerCase()}`}>
+        <div className="loadingBlock">
+          
+        </div>
         <div className={'topBlock'}>
           <Label/>
-          <Weather/>
           <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} />
+          <Weather/>
         </div>
         <div className={'app__block_title'}>
           <h1 className={'titleH1'}>Обучение сотрудников ФГУП ГЦСС:</h1>

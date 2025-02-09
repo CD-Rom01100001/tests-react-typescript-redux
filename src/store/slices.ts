@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type InitialStateType = {
+type TInitialState = {
   themeSlice: string
 }
 
-const initialState: InitialStateType = {
+const initialState: TInitialState = {
   themeSlice: 'Dark'
 }
 
@@ -29,6 +29,16 @@ const themeSlice = createSlice({
   }
 })
 
-export const {changeTheme} = themeSlice.actions
+const timeSlice = createSlice({
+  name: 'time',
+  initialState,
+  reducers: {
+   //
+  }
+})
 
+export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
+
+export const {} = timeSlice.actions
+export const timeReducer = timeSlice.reducer

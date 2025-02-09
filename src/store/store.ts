@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {themeReducer} from './themeSlice'
+import {themeReducer, timeReducer} from './slices'
 
 export const store = configureStore({
   reducer: {
     themeIndex: themeReducer,
+    timeIndex: timeReducer
   },
 })
 
