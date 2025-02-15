@@ -1,0 +1,20 @@
+.blockTitle {
+  margin-bottom: 3rem;
+}
+
+.title {
+  text-align: center;
+  font: 500 2.4rem / 2.4rem "agora";
+}
+
+.blockDescription {
+  max-width: 70.68rem;
+  margin: 0 auto 3rem auto;
+}
+
+.description {
+  margin-bottom: 1rem;
+  font: 400 1.6rem / 2rem "agora";
+  text-align: justify;
+  text-indent: 2rem;
+}

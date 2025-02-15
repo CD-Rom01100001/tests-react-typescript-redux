@@ -12,7 +12,7 @@ const WorkSpace: FC = () => {
     <div className={css.workSpace}>
       {/* ----- Descriptions ----- */}
       <Routes>
-        <Route index element={<Description data={descriptionsData.questions}/>}/>
+        <Route path='/' element={<Description data={descriptionsData.questions}/>}/>
         <Route path='/training' element={<Description data={descriptionsData.training}/>}/>
         <Route path='/exam' element={<Description data={descriptionsData.exam}/>}/>
       </Routes>

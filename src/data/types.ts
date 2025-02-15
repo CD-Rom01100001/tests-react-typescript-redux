@@ -17,6 +17,17 @@ type QuesitonsType = {
   firearmsTraining84: SectionType[];
 }
 
+/* Description type */
+type ContentInnerT = {
+  title: string;
+  description: string
+}
+type ContentT = {
+  questions: ContentInnerT;
+  training: ContentInnerT;
+  exam: ContentInnerT
+}
 
 
-export type {QuesitonsType}
+
+export type {QuesitonsType, ContentT}

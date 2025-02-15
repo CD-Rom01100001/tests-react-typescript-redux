@@ -1,0 +1,7 @@
+.main {
+  z-index: 1;
+  flex-grow: 1;
+  padding: 3rem 2rem;
+  background: #F6F6F6;
+  border: 1px solid #E6E6E6;
+}

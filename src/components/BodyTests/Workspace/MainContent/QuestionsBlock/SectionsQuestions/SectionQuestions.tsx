@@ -19,15 +19,15 @@ import css from './sectionQuestions.module.css'
 //   answer: string;
 // }
 
-type SectionQuestionsProps = {
+/* type SectionQuestionsProps = {
   i: number
-}
+} */
 
-const SectionQuestions: FC<SectionQuestionsProps> = ({i}) => {
+const SectionQuestions: FC/* <SectionQuestionsProps> */ = (/* {i} */) => {
 
   return (
     <div className={css.sectionQuestions}>
-      <h3>{i}</h3>
+      <h3>{/* {i} */}Its work!!!</h3>
       {/* <h4>{question}</h4>
       <p>{answer}</p>
       <p>{answer}</p>

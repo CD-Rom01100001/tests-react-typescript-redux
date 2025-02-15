@@ -1,15 +1,16 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import css from './tabs.module.css'
+import css from './navigation.module.css'
 
-const Tabs: FC = () => {
+const Navigation: FC = () => {
   type ActiveType = {
     isActive: boolean
   }
   const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
 
+
   return (
-    <div className={css.tabs}>
+    <nav className={css.navigation}>
       <ul className={css.unList}>
         <li className={css.li}>
           <NavLink className={setActive} to='/'>Вопросы</NavLink>
@@ -21,8 +22,8 @@ const Tabs: FC = () => {
           <NavLink className={setActive} to='/exam'>Экзамен</NavLink>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }
 
-export default Tabs;
+export default Navigation;

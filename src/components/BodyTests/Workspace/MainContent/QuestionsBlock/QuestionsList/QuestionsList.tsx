@@ -6,22 +6,27 @@ type QuestionsListProps = {
   sectionName: string;
   sectionLink: string;
 }
+type ActiveType = {
+  isActive: boolean
+}
 
-const QuestionsList: FC<QuestionsListProps> = ({sectionName, sectionLink}) => {
-  type ActiveType = {
-    isActive: boolean
-  }
+const QuestionsList: FC/* <QuestionsListProps> */ = (/* {sectionName, sectionLink} */) => {
+  
   const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
- 
+  /* console.log(sectionLink); */
   return (
-    <li className={css.sectionName}>
+    <>
+    <NavLink to='/questions'>dddddddd</NavLink>
+    {/* <li className={css.sectionName}>
       <NavLink 
         className={setActive} 
-        to={sectionLink}
+        to={`/${sectionLink}`}
       >
         {`${sectionName} (${sectionLink.replace(/\D/g, "")})`}
       </NavLink>
-    </li>
+    </li> */}
+    </>
+    
   );
 }
 

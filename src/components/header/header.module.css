@@ -1,0 +1,14 @@
+.blockTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.blockTitle {
+  width: 100%;
+  text-align: center;
+}
+
+.titleH1 {
+  font: 500 2.4rem / 2.4rem "agora";
+}
