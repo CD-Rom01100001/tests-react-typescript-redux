@@ -1,5 +1,6 @@
 src/components
 
+
 src/components/header
 src/components/header/Header.tsx
 src/components/header/header.module.css
@@ -16,6 +17,12 @@ src/components/nav/navigation.module.css
 
 src/components/main
 src/components/main/questions
+src/components/main/questions/Questions.tsx
+src/components/main/questions/Questions.module.css
+src/components/main/questions/QuestionSectionLink.tsx
+src/components/main/questions/questionsSectionLink.module.css
+src/components/main/questions/QuestionSectionBlock.tsx
+src/components/main/questions/questionsSectionBlock.module.css
 src/components/main/training
 src/components/main/exam
 src/components/main/Description.tsx
