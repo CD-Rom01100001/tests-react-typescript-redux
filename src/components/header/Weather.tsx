@@ -51,13 +51,13 @@ const Weather: FC = () => {
   
   useEffect(() => {
     setTimeout(()=>{
-      axios.get(URL).then(res => {
-        setWeather({
-          name: res.data.name,
-          temp: Math.ceil(res.data.main.temp),
-          icon: res.data.weather[0].id
-        })
-      })
+      // axios.get(URL).then(res => {
+      //   setWeather({
+      //     name: res.data.name,
+      //     temp: Math.ceil(res.data.main.temp),
+      //     icon: res.data.weather[0].id
+      //   })
+      // })
       setTime(createTime)
       setDate(createFullDate)
     }, 1000)

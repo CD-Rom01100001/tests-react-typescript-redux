@@ -1,0 +1,16 @@
+.questionSectionLink {
+  margin: 0 0 0.5rem 4rem;
+  list-style: disc;
+  transition: 0.3s;
+}
+
+.link {
+  font-weight: 500;
+  color: #0064b1;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link:hover {
+  color: #0091ff;
+}

@@ -11,7 +11,7 @@ const QuestionSectionLink: FC<QuestionSectionLinkProps> = ({link, name}) => {
 
   return (
     <li className={css.questionSectionLink}>
-      <Link to={link}>{name}</Link>
+      <Link to={link} className={css.link}>{`${name} (${link.replace(/\D/g, '')})`}</Link>
     </li>
   );
 }

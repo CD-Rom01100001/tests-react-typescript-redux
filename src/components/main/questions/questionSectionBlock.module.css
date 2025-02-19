@@ -1,0 +1,47 @@
+.questionSectionBlock {
+  width: 100%;
+  padding: 0 2rem;
+  background: #f0f0f0;
+  border-top: 2rem solid #f0f0f0;
+  border-bottom: 2rem solid #f0f0f0;
+  border-radius: 0.5rem;
+  overflow: auto;
+}
+
+.title {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.blockQuestions {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #ffffff;
+  border: 0.2rem solid rgba(138, 138, 138, 0.2470588235);
+  border-radius: 0.5rem;
+}
+
+.question {
+  margin-bottom: 1rem;
+  color: #000;
+  font-weight: 600;
+}
+
+.answer {
+  margin: 0 0 1rem 2rem;
+  padding: 0.5rem;
+  font-weight: 400;
+  color: #29292b;
+  background: #f5f5f5;
+  border: 0.2rem solid rgba(138, 138, 138, 0.2470588235);
+  border-radius: 0.5rem;
+}
+
+.answerCorrect {
+  padding: 0.5rem;
+  background: rgba(115, 255, 93, 0.18);
+  border: 0.2rem solid rgba(138, 138, 138, 0.2470588235);
+  border-radius: 0.5rem;
+}

@@ -18,3 +18,34 @@
   text-align: justify;
   text-indent: 2rem;
 }
+
+.titleQuestions {
+  margin-bottom: 0.5rem;
+  font: 500 1.8rem / 2rem "agora";
+}
+
+.additionalInfo {
+  margin-bottom: 5rem;
+}
+
+.ordersBlock {
+  display: flex;
+  gap: 0 0.5rem;
+}
+
+.additionalInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.orderLink, .downloadLink {
+  font-weight: 500;
+  color: #0064b1;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.orderLink:hover, .downloadLink:hover {
+  color: #0091ff;
+}

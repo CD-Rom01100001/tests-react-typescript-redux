@@ -3,12 +3,12 @@ import { Outlet } from 'react-router-dom';
 
 import contentDescr from '../../../data/descriptions.json'
 import contentQuest from '../../../data/allQuestions.json'
+import downloadFile from '../../../assets/txt-files/pp_okhranniki_i_rabotniki_2023_itog.pdf'
 import type { QuesitonsType } from '../../../data/types';
 
 import Description from '../Description';
 import QuestionSectionLink from './QuestionSectionLink';
 import css from './questions.module.css'
-
 
 const getTotalQuestions = (): number => {
   let count = 0;
@@ -49,6 +49,16 @@ const Questions: FC = () => {
             )}
           </ul>
         </nav>
+
+        <div className={css.additionalInfo}>
+          <div className={css.ordersBlock}>
+            <p className={css.orders}>Все они утверждены</p>
+            <a href="https://rosguard.gov.ru/document/article/prikaz-federalnoj-sluzhby-vojsk-nacionalnoj-gvardii-rossijskoj-federacii-ot-25112019--387" className={css.orderLink} target=':black'>Приказом Росгвардии от 25.11.2019 N 387</a>
+          </div>
+          <div className={css.dawnloadLinkBlock}>
+            <a href={downloadFile} className={css.downloadLink} download>Скачать вопросы с ответами</a>
+          </div>
+        </div>
 
         <Outlet/>
         

@@ -15,27 +15,24 @@ type QuestionT = {
 
 interface QuestionSectionBlockProps {
   title: string;
-  question: QuestionT[]
-  // answer1: string;
-  // answer2: string;
-  // answer3: string;
+  questions: QuestionT[]
 }
 
-const QuestionSectionBlock: FC<QuestionSectionBlockProps> = ({title, question/* , answer1, answer2, answer3 */}) => {
-
-  console.log(question);
+const QuestionSectionBlock: FC<QuestionSectionBlockProps> = ({title, questions }) => {
 
   return (
     <div className={css.questionSectionBlock}>
       <div className={css.blockTitle}>
-        <h3 className={css.title}>{title}</h3>
+        <h3 className={css.title}>{`${title} (${questions.length})`}</h3>
       </div>
 
-      {question.map((qa, key) => 
+      {questions.map((qa, key) => 
         <div className={css.blockQuestions} key={key+1}>
-          <p className={css.question} key={key+2}>{qa.question}</p>
+          <p className={css.question} key={key+2}>{`${key+1}. ${qa.question}`}</p>
           <div className={css.blockAnswers} key={key+3}>
             {qa.answers.map(answer => 
+              answer.correct === true ? 
+              <p className={`${css.answer} ${css.answerCorrect}`} key={answer.id}>{answer.value}</p> :
               <p className={css.answer} key={answer.id}>{answer.value}</p>
             )}
           </div>

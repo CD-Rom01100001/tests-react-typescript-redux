@@ -45,11 +45,10 @@ const App: FC = () => {
                   element={
                     <QuestionSectionBlock 
                       title={array[1][0].answers[0].section}
-                      question={array[1].map(inElem => inElem)}
+                      questions={array[1].map(question => question)}
                     />} 
                 key={i}/>
               )}
-              {/* <Route path='legalTraining80' element={<p>Xyui</p>}/> */}
             </Route>
             <Route path='training' element={<Training/>}></Route>
             <Route path='exam' element={<Exam/>}></Route>
