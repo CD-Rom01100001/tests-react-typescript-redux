@@ -12,8 +12,11 @@ const Navigation: FC = () => {
   return (
     <nav className={css.navigation}>
       <ul className={css.unList}>
+      <li className={css.li}>
+          <NavLink className={setActive} to='/'>Главная</NavLink>
+        </li>
         <li className={css.li}>
-          <NavLink className={setActive} to='/'>Вопросы</NavLink>
+          <NavLink className={setActive} to='/questions'>Вопросы</NavLink>
         </li>
         <li className={css.li}>
           <NavLink className={setActive} to='/training'>Обучение</NavLink>

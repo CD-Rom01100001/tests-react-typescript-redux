@@ -16,6 +16,9 @@ src/components/nav/Navigation.tsx
 src/components/nav/navigation.module.css
 
 src/components/main
+src/components/main/home
+src/components/main/home/Home.tsx
+src/components/main/home/Home.module.tsx
 src/components/main/questions
 src/components/main/questions/Questions.tsx
 src/components/main/questions/Questions.module.css

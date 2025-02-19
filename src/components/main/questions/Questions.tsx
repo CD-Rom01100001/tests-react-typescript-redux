@@ -27,7 +27,6 @@ const getSectionNameLinkList = (): string[][] => {
   return sectionNameList
 }
 
-
 const Questions: FC = () => {
   return (
     <div className={css.questions}>

@@ -4,6 +4,7 @@ import { useAppSelector } from '../store/hooks';
 import contentQuest from '../data/allQuestions.json'
 
 import Layout from './Layout';
+import Home from './main/home/Home';
 import Questions from './main/questions/Questions';
 import QuestionSectionBlock from './main/questions/QuestionSectionBlock';
 import Training from './main/training/Training';
@@ -37,8 +38,8 @@ const App: FC = () => {
       <div className={`${'app'} ${theme.toLowerCase()}`}>
         <Routes>
           <Route path='/' element={<Layout/>}>
-            <Route index element={<Questions/>}/>
-            <Route path='/' element={<Questions/>}>
+            <Route index element={<Home/>}/>
+            <Route path='questions' element={<Questions/>}>
               {questArray.map((array, i) => 
                 <Route path={array[0]} 
                   element={
