@@ -1,15 +1,16 @@
-.title {
-  text-align: center;
-  font: 500 2.4rem / 2.4rem "agora";
-}
-
 .blockHistory {
   max-width: 70.68rem;
   margin: 0 auto 3rem auto;
 }
 
-.historyTitle {
+.title {
+  margin-bottom: 3rem;
+  text-align: center;
+  font: 500 2.4rem / 2.4rem "agora";
+}
 
+.historyTitle {
+  margin-bottom: 0.7rem;
 }
 
 .historyText {

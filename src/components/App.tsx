@@ -16,7 +16,6 @@ import './app.css';
 // const array1 = Object.keys(contentQuest)
 // const array2 = Object.values(contentQuest)
 const questArray = Object.entries(contentQuest)
-console.log(questArray);
 
 // const path = array3.map(elem => elem[0])
 // console.log(path);
@@ -50,7 +49,9 @@ const App: FC = () => {
                 key={i}/>
               )}
             </Route>
-            <Route path='training' element={<Training/>}></Route>
+            <Route path='training' element={<Training/>}>
+              
+            </Route>
             <Route path='exam' element={<Exam/>}></Route>
             <Route path='*' element={<NotFoundPage/>}></Route>
           </Route>
