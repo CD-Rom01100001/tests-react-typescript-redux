@@ -1,5 +1,7 @@
 .main {
   z-index: 1;
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
   padding: 3rem 2rem;
   background: #F6F6F6;

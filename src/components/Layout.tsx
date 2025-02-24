@@ -9,7 +9,7 @@ const Layout: FC = () => {
 
   return (
     <div className={css.layout}>
-      {/* <Header/> */}
+      <Header/>
       <Navigation/>
 
       <main className={css.main}>

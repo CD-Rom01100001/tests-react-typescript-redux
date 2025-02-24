@@ -10,27 +10,15 @@ import QuestionSectionBlock from './main/questions/QuestionSectionBlock';
 import Training from './main/training/Training';
 import Exam from './main/exam/Exam';
 import NotFoundPage from './NotFoundPage';
-
 import './app.css';
 
-// const array1 = Object.keys(contentQuest)
-// const array2 = Object.values(contentQuest)
 const questArray = Object.entries(contentQuest)
-
-// const path = array3.map(elem => elem[0])
-// console.log(path);
-
-// const title = array3.map(elem => elem[1][0].answers[0].section)
-// console.log(title);
-
-// const question = array3.map(elem => elem[1].map(inElem => inElem.question))
-// console.log(question);
-
-// const answers = array3.map(elem => elem[1].map(inElem => inElem))
-// console.log(answers);
 
 const App: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
+  const idStage = useAppSelector(state => state.idStageIndex.idStageSlice)
+
+  console.log(idStage);
 
   return (
     <BrowserRouter>
@@ -49,9 +37,12 @@ const App: FC = () => {
                 key={i}/>
               )}
             </Route>
-            <Route path='training' element={<Training/>}>
-              
-            </Route>
+            <Route path='training' element={<Training/>}/>
+            {Array.from({length: idStage}, (_, i) => 
+              <Route path={`training/stage-${i+1}`} 
+                element={<p>{`stage ${i+1}`}</p>} 
+                key={i}/>
+            )}
             <Route path='exam' element={<Exam/>}></Route>
             <Route path='*' element={<NotFoundPage/>}></Route>
           </Route>

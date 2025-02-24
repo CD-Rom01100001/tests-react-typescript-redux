@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type TInitialState = {
-  themeSlice: string
+  themeSlice: string;
+  idStageSlice: number;
 }
 
 const initialState: TInitialState = {
-  themeSlice: 'Dark'
+  themeSlice: 'Dark',
+  idStageSlice: 0,
 }
 
 const themeSlice = createSlice({
@@ -37,8 +39,18 @@ const timeSlice = createSlice({
   }
 })
 
+const idStageSlice = createSlice({
+  name: 'pages',
+  initialState,
+  reducers: {
+    getListPageId: (state, {payload}) => {
+      state.idStageSlice = payload
+    }
+  }
+})
+
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
 
-export const {} = timeSlice.actions
-export const timeReducer = timeSlice.reducer
+export const {getListPageId} = idStageSlice.actions
+export const idStageReducer = idStageSlice.reducer

@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect, } from 'react';
+import { useAppDispatch } from '../../../store/hooks';
+import { getListPageId } from '../../../store/slices';
 import { Link } from 'react-router-dom';
 import contentQuest from '../../../data/allQuestions.json'
 import contentDescr from '../../../data/descriptions.json'
@@ -48,6 +50,7 @@ const getAllStageLink = () => {
       inArr = []
     }
   }
+  console.log(newArr);
   return newArr
 }
 const getSectionAndNumber = (arr: AllQAT[]): [string, number][] => {
@@ -62,6 +65,12 @@ const getSectionAndNumber = (arr: AllQAT[]): [string, number][] => {
 
 
 const Training: FC = () => {
+  const identifiers = getAllStageLink().length
+  const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(getListPageId(identifiers))
+  }, [dispatch, identifiers])
+
   return (
     <div className={css.training}>
       <Description 
@@ -69,14 +78,19 @@ const Training: FC = () => {
       description={contentDescr.training.description}/>
 
       <div className={css.stageBlock}>
-        
         {getAllStageLink().map((qa, i) => 
-        <Link to={`/training/${i+1}`} className={css.stageLink} key={i}>
+        <Link to={`/training/stage-${i+1}`} className={css.stageLink} key={i}>
             <div className={css.previewBlock}>
-              <h3 className={css.Title}>{`${i+1}-й этап`}</h3>
-              {getSectionAndNumber(qa).map((elem, i) => 
-                <p className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</p>
-              )}
+              <h3 className={css.title}>{`${i+1}-й этап`}</h3>
+              <div className={css.stageNameBlock}>
+                {getSectionAndNumber(qa).map((elem, i) => 
+                  <p className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</p>
+                )}
+              </div>
+              <div className={css.blockResults}>
+                <p>{`последний результат:`}</p>
+                <p>{`лучший результат:`}</p>
+              </div>
               <p className={css.totalNumQuestStage}>{`всего ${qa.length} вопросов`}</p>
             </div>
           </Link>
