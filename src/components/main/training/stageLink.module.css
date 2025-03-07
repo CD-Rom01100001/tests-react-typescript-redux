@@ -1,14 +1,31 @@
 .stageLink {
+  flex: 1 1 100%;
+  max-width: 33rem;
+}
+
+.previewBlock {
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    max-width: 33rem;
-    padding: 1rem;
-    line-height: 3rem;
-    background: #fff;
-    border: 1px solid #E2E2E2;
-    border-radius: 0.5rem;
-    box-shadow: 1px 1px 0px 1px rgba(131, 130, 130, 0.1921568627);
-    cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  line-height: 3rem;
+  color: #1d1d1e;
+  background: #fff;
+  border: 1px solid #E2E2E2;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 0px 1px rgba(131, 130, 130, 0.1921568627);
+  cursor: pointer;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.stageNameBlock {
+  min-height: 10rem;
+}
+
+.blockResults {
+  width: 100%;
 }

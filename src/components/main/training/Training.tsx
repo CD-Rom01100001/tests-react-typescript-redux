@@ -1,11 +1,10 @@
 import { FC, useEffect, } from 'react';
 import { useAppDispatch } from '../../../store/hooks';
 import { getListPageId } from '../../../store/slices';
-import { Link } from 'react-router-dom';
 import contentQuest from '../../../data/allQuestions.json'
 import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
-// import StageLink from './StageLink';
+import StageLink from './StageLink';
 import css from './training.module.css'
 
 type AnswersT = {
@@ -79,21 +78,10 @@ const Training: FC = () => {
 
       <div className={css.stageBlock}>
         {getAllStageLink().map((qa, i) => 
-        <Link to={`/training/stage-${i+1}`} className={css.stageLink} key={i}>
-            <div className={css.previewBlock}>
-              <h3 className={css.title}>{`${i+1}-й этап`}</h3>
-              <div className={css.stageNameBlock}>
-                {getSectionAndNumber(qa).map((elem, i) => 
-                  <p className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</p>
-                )}
-              </div>
-              <div className={css.blockResults}>
-                <p>{`последний результат:`}</p>
-                <p>{`лучший результат:`}</p>
-              </div>
-              <p className={css.totalNumQuestStage}>{`всего ${qa.length} вопросов`}</p>
-            </div>
-          </Link>
+          <StageLink stageNumTitle={i+1}
+          sectionAndNum={getSectionAndNumber(qa)}
+          totalNumQuest={qa.length}
+          key={i}/>
         )}
       </div>
     </div>

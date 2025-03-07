@@ -4,22 +4,28 @@ import { Link } from 'react-router-dom';
 
 interface StageLinkProps {
   stageNumTitle: number;
-  // sectionName: string;
-  // numQuestInSection: number;
+  sectionAndNum: [string, number][]
   totalNumQuest: number;
 }
 
 const StageLink: FC<StageLinkProps> = ({
   stageNumTitle,
-  // sectionName,
-  // numQuestInSection,
+  sectionAndNum,
   totalNumQuest
 }) => {
   return (
-    <Link to={`/training/${stageNumTitle}`} className={css.stageLink}>
+    <Link to={`/training/stage-${stageNumTitle}`} className={css.stageLink}>
       <div className={css.previewBlock}>
-        <h3 className={css.Title}>{`${stageNumTitle}-й этап`}</h3>
-        <p className={css.stageName}>{/* {`${sectionName} - ${numQuestInSection}`} */}</p>
+        <h3 className={css.title}>{`${stageNumTitle}-й этап`}</h3>
+        <ul className={css.stageNameBlock}>
+          {sectionAndNum.map((elem, i) => 
+              <li className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</li>
+          )}
+        </ul>
+        <ul className={css.blockResults}>
+          <li>{`последний результат:`}</li>
+          <li>{`лучший результат:`}</li>
+        </ul>
         <p className={css.totalNumQuestStage}>{`всего ${totalNumQuest} вопросов`}</p>
       </div>
     </Link>
