@@ -32,6 +32,11 @@ src/components/main/training/training.module.css
 src/components/main/training/StageLink.tsx
 src/components/main/training/stageLink.module.cssf
 src/components/main/exam
+src/components/main/TestTakingUnit
+src/components/main/TestTakingUnit/TestTakingUnit.tsx
+src/components/main/TestTakingUnit/testTakingUnit.module.css
+src/components/main/TestTakingUnit/Indicator.tsx
+src/components/main/TestTakingUnit/indicator.module.css
 src/components/main/Description.tsx
 src/components/main/description.module.css
 

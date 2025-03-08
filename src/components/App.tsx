@@ -11,7 +11,7 @@ import Training from './main/training/Training';
 import Exam from './main/exam/Exam';
 import NotFoundPage from './NotFoundPage';
 import './app.css';
-import PassingBlock from './main/PassingBlock';
+import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
 
 const questArray = Object.entries(contentQuest)
 
@@ -41,7 +41,7 @@ const App: FC = () => {
             <Route path='training' element={<Training/>}/>
             {Array.from({length: idStage}, (_, i) => 
               <Route path={`training/stage-${i+1}`} 
-                element={<PassingBlock title={`stage ${i+1}`}/>} 
+                element={<TestTakingUnit title={`stage ${i+1}`}/>} 
                 key={i}/>
             )}
             <Route path='exam' element={<Exam/>}></Route>
