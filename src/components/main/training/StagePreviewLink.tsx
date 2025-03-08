@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import css from './stageLink.module.css'
+import css from './stagePreviewLink.module.css'
 import { Link } from 'react-router-dom';
 
 interface StageLinkProps {
@@ -8,7 +8,7 @@ interface StageLinkProps {
   totalNumQuest: number;
 }
 
-const StageLink: FC<StageLinkProps> = ({
+const StagePreviewLink: FC<StageLinkProps> = ({
   stageNumTitle,
   sectionAndNum,
   totalNumQuest
@@ -32,4 +32,4 @@ const StageLink: FC<StageLinkProps> = ({
   );
 }
 
-export default StageLink;
+export default StagePreviewLink;

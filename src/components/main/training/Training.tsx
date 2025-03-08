@@ -4,7 +4,7 @@ import { getListPageId } from '../../../store/slices';
 import contentQuest from '../../../data/allQuestions.json'
 import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
-import StageLink from './StageLink';
+import StagePreviewLink from './StagePreviewLink';
 import css from './training.module.css'
 
 type AnswersT = {
@@ -78,7 +78,7 @@ const Training: FC = () => {
 
       <div className={css.stageBlock}>
         {getAllStageLink().map((qa, i) => 
-          <StageLink stageNumTitle={i+1}
+          <StagePreviewLink stageNumTitle={i+1}
           sectionAndNum={getSectionAndNumber(qa)}
           totalNumQuest={qa.length}
           key={i}/>

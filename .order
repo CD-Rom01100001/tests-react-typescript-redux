@@ -29,8 +29,8 @@ src/components/main/questions/questionsSectionBlock.module.css
 src/components/main/training
 src/components/main/training/Training.tsx
 src/components/main/training/training.module.css
-src/components/main/training/StageLink.tsx
-src/components/main/training/stageLink.module.cssf
+src/components/main/training/StagePreviewLink.tsx
+src/components/main/training/stagePreviewLink.module.cssf
 src/components/main/exam
 src/components/main/TestTakingUnit
 src/components/main/TestTakingUnit/TestTakingUnit.tsx

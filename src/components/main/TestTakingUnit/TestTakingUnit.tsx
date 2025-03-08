@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import css from './testTakingUnit.module.css'
 import { Link } from 'react-router-dom';
+import Indicator from './Indicator';
 
 interface PassingBlockProps {
   title: string
@@ -21,7 +22,9 @@ const PassingBlock: FC<PassingBlockProps> = ({title}) => {
       </div>
 
       {/* блок с индикаторами */}
-      <div className={css.blockIndicators}></div>
+      <div className={css.blockIndicators}>
+        <Indicator number={1} />
+      </div>
 
       {/* блок показателей и описание теста */}
       <div className={css.blockInformation}>
