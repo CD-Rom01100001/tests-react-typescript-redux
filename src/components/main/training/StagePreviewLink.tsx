@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import css from './stagePreviewLink.module.css'
 import { Link } from 'react-router-dom';
 
@@ -13,6 +13,9 @@ const StagePreviewLink: FC<StageLinkProps> = ({
   sectionAndNum,
   totalNumQuest
 }) => {
+  useEffect(()=>{
+    console.log(sectionAndNum);
+  }, [])
   return (
     <Link to={`/training/stage-${stageNumTitle}`} className={css.stageLink}>
       <div className={css.previewBlock}>

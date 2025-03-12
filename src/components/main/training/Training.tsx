@@ -1,6 +1,6 @@
-import { FC, useEffect, } from 'react';
-import { useAppDispatch } from '../../../store/hooks';
-import { getListPageId } from '../../../store/slices';
+import { FC, /* useEffect, */ } from 'react';
+// import { useAppDispatch } from '../../../store/hooks';
+// import { getListPageId } from '../../../store/slices';
 import contentQuest from '../../../data/allQuestions.json'
 import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
@@ -49,7 +49,6 @@ const getAllStageLink = () => {
       inArr = []
     }
   }
-  console.log(newArr);
   return newArr
 }
 const getSectionAndNumber = (arr: AllQAT[]): [string, number][] => {
@@ -62,13 +61,12 @@ const getSectionAndNumber = (arr: AllQAT[]): [string, number][] => {
   return Object.entries(sectionAndNum)
 }
 
-
 const Training: FC = () => {
-  const identifiers = getAllStageLink().length
-  const dispatch = useAppDispatch()
-  useEffect(()=>{
-    dispatch(getListPageId(identifiers))
-  }, [dispatch, identifiers])
+  // const identifiers = getAllStageLink().length
+  // const dispatch = useAppDispatch()
+  // useEffect(()=>{
+  //   dispatch(getListPageId(identifiers))
+  // }, [dispatch, identifiers])
 
   return (
     <div className={css.training}>

@@ -9,7 +9,7 @@ const Footer: FC = () => {
 
   return (
     <footer className={css.footer}>
-      <span>&copy;{showDate()}</span>
+      <p className={css.copy}>&copy;{showDate()}</p>
     </footer>
   );
 }

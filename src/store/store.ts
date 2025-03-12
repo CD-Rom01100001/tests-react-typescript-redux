@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {themeReducer, idStageReducer} from './slices'
+import {themeReducer, /* idStageReducer */} from './slices'
 
 export const store = configureStore({
   reducer: {
     themeIndex: themeReducer,
-    idStageIndex: idStageReducer
+    // idStageIndex: idStageReducer
   },
 })
 
