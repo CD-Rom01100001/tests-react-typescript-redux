@@ -1,16 +1,21 @@
 import { FC } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Indicator from './Indicator';
+import { AllQAT } from '../../allStageLink';
 import css from './testTakingUnit.module.css'
 
-interface PassingBlockProps {
-  title: string
+interface TestTakingUnitProps {
+  title: number;
+  numberOfQuestions: AllQAT[];
+  sectionNum: number
 }
 
-const PassingBlock: FC<PassingBlockProps> = ({title}) => {
+const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionNum}) => {
+
+  console.log(numberOfQuestions);
 
   return (
-    <div className={css.passingBlock}>
+    <div className={css.testTakingUnit}>
       {/* заголовок */}
       <div className={css.blockTitle}>
         <h2 className={css.mainTitle}>Обучение</h2>
@@ -23,7 +28,9 @@ const PassingBlock: FC<PassingBlockProps> = ({title}) => {
 
       {/* блок с индикаторами */}
       <div className={css.blockIndicators}>
-        <Indicator numName={1} numLink={1} />
+        {numberOfQuestions.map((indicator, i) => {
+          return <Indicator key={i} numName={i+1} numLink={i+1} sectionNum={sectionNum}/>
+        })}
       </div>
 
       {/* блок показателей и описание теста */}
@@ -32,7 +39,7 @@ const PassingBlock: FC<PassingBlockProps> = ({title}) => {
           <p className={css.currentQuest}></p>
         </div>
         <div className={css.questionSummary}>
-          <h3 className={css.stageTitle}>{title}</h3>
+          <h3 className={css.stageTitle}>{`${title}-й этап`}</h3>
           <p>из раздела:</p>
           <ul className={css.sectionList}>
             <li className={css.section}></li>
@@ -48,4 +55,4 @@ const PassingBlock: FC<PassingBlockProps> = ({title}) => {
   );
 }
 
-export default PassingBlock;
+export default TestTakingUnit;

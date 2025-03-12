@@ -48,5 +48,7 @@ src/components/App.tsx
 src/components/app.css
 src/components/Layout.tsx
 src/components/layout.module.css
+src/components/NotFoundPage.tsx
+src/components/allStageLink.ts
 
 (regex)*.json

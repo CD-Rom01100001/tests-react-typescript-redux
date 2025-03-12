@@ -3,15 +3,16 @@ import css from './indicator.module.css'
 import { NavLink } from 'react-router-dom';
 
 interface IndicatorProps {
-  numName: number
-  numLink: number
+  numName: number;
+  numLink: number;
+  sectionNum: number
 }
 
-const Indicator: FC<IndicatorProps> = ({numName, numLink}) => {
+const Indicator: FC<IndicatorProps> = ({numName, numLink, sectionNum}) => {
 
   return (
     <li className={css.wrap}>
-      <NavLink to={`/training/stage-1/${numLink}`} className={css.link}>
+      <NavLink to={`/training/stage-${sectionNum}/${numLink}`} className={css.link}>
         {numName}
       </NavLink>
     </li>

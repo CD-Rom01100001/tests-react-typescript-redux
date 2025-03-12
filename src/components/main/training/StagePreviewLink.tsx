@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import css from './stagePreviewLink.module.css'
 import { Link } from 'react-router-dom';
 
@@ -13,17 +13,18 @@ const StagePreviewLink: FC<StageLinkProps> = ({
   sectionAndNum,
   totalNumQuest
 }) => {
-  useEffect(()=>{
-    console.log(sectionAndNum);
-  }, [])
+
+  console.log();
+
   return (
     <Link to={`/training/stage-${stageNumTitle}`} className={css.stageLink}>
       <div className={css.previewBlock}>
         <h3 className={css.title}>{`${stageNumTitle}-й этап`}</h3>
         <ul className={css.stageNameBlock}>
-          {sectionAndNum.map((elem, i) => 
-              <li className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</li>
-          )}
+          {sectionAndNum.map((elem, i) => {
+              console.log(elem[1]);
+              return <li className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</li>
+          })}
         </ul>
         <ul className={css.blockResults}>
           <li>{`последний результат:`}</li>
