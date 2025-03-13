@@ -12,6 +12,7 @@ import Exam from './main/exam/Exam';
 import NotFoundPage from './NotFoundPage';
 import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
 import {getAllStageLink} from './allStageLink'
+import { getSectionAndNumber } from './sectionAndNumber';
 import './app.css';
 
 const questArray = Object.entries(contentQuest)
@@ -40,7 +41,13 @@ const App: FC = () => {
             {getAllStageLink().map((elem, sectionId) => 
               <Route 
               path={`training/stage-${sectionId+1}`} 
-              element={<TestTakingUnit title={sectionId+1} sectionNum={sectionId+1} numberOfQuestions={elem}/>} 
+              element={
+                <TestTakingUnit 
+                  title={sectionId+1} 
+                  sectionNum={sectionId+1} 
+                  numberOfQuestions={elem}
+                  sectionAndNum={getSectionAndNumber(elem)}/>
+              } 
               key={sectionId}>
                 {elem.map((_, questId) => {
                   return <Route path={`${questId+1}`} element={<h1>{`${questId+1}`}</h1>} key={questId}/>

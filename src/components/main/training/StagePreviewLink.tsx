@@ -22,7 +22,7 @@ const StagePreviewLink: FC<StageLinkProps> = ({
         <h3 className={css.title}>{`${stageNumTitle}-й этап`}</h3>
         <ul className={css.stageNameBlock}>
           {sectionAndNum.map((elem, i) => {
-              console.log(elem[1]);
+              // console.log(elem[1]);
               return <li className={css.stageName} key={i}>{`${elem[0]} ${elem[1]}`}</li>
           })}
         </ul>

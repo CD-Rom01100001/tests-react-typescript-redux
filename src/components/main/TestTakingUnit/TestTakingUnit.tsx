@@ -1,18 +1,22 @@
 import { FC } from 'react';
-import { Link, Outlet } from 'react-router-dom';
 import Indicator from './Indicator';
+import { Link, Outlet } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
+// import { getAllStageLink } from '../../allStageLink';
+// import { getSectionAndNumber } from '../../sectionAndNumber';
 import css from './testTakingUnit.module.css'
+
 
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
-  sectionNum: number
+  sectionNum: number;
+  sectionAndNum: [string, number][]
 }
 
-const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionNum}) => {
+const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionNum, sectionAndNum}) => {
 
-  console.log(numberOfQuestions);
+  console.log(sectionAndNum);
 
   return (
     <div className={css.testTakingUnit}>
@@ -28,7 +32,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
 
       {/* блок с индикаторами */}
       <div className={css.blockIndicators}>
-        {numberOfQuestions.map((indicator, i) => {
+        {numberOfQuestions.map((_, i) => {
           return <Indicator key={i} numName={i+1} numLink={i+1} sectionNum={sectionNum}/>
         })}
       </div>
@@ -42,7 +46,11 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
           <h3 className={css.stageTitle}>{`${title}-й этап`}</h3>
           <p>из раздела:</p>
           <ul className={css.sectionList}>
-            <li className={css.section}></li>
+            {sectionAndNum.map((elem, i) => {
+              console.log(elem);
+              console.log(i);
+              return <li className={css.section} key={i}>{`${elem[0]} - ${elem[1]}`}</li>
+            })}
           </ul>
         </div>
         <div className={css.blockTime}></div>

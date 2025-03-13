@@ -38,3 +38,13 @@
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+.questionSummary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  list-style-type: disc;
+}
