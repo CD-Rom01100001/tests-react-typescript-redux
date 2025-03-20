@@ -1,12 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Indicator from './Indicator';
-import { Link, Outlet, Route, Routes } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { getCurrentQuestion } from '../../../store/slices';
 // import { getAllStageLink } from '../../allStageLink';
 // import { getSectionAndNumber } from '../../sectionAndNumber';
 import css from './testTakingUnit.module.css'
-
-
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
@@ -15,6 +15,8 @@ interface TestTakingUnitProps {
 }
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionNum, sectionAndNum}) => {
+  const dispatch = useAppDispatch()
+  const currentQuestion = useAppSelector(state => state.currentQuestionIndex.currentQuestionSlice)
 
   return (
     <div className={css.testTakingUnit}>
@@ -25,7 +27,9 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
 
       {/* кнопка выхода */}
       <div className={css.blockBtnExit}>
-        <Link to='/training' className={css.btnExit}>выход</Link>
+        <Link to='/training' 
+        className={css.btnExit} 
+        onClick={()=>dispatch(getCurrentQuestion(1))}>выход</Link>
       </div>
 
       {/* блок с индикаторами */}
@@ -38,7 +42,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
       {/* блок показателей и описание теста */}
       <div className={css.blockInformation}>
         <div className={css.blockCurrentQest}>
-          <p className={css.currentQuest}></p>
+          <p className={css.currentQuest}>{currentQuestion}</p>
         </div>
         <div className={css.questionSummary}>
           <h3 className={css.stageTitle}>{`${title}-й этап`}</h3>

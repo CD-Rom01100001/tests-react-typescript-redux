@@ -1,12 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TInitialState = {
   themeSlice: string;
+  currentQuestionSlice: number;
   // idStageSlice: number;
 }
 
 const initialState: TInitialState = {
   themeSlice: 'Dark',
+  currentQuestionSlice: 1,
   // idStageSlice: 0,
 }
 
@@ -31,26 +33,22 @@ const themeSlice = createSlice({
   }
 })
 
-const timeSlice = createSlice({
-  name: 'time',
+const currentQuestionSlice = createSlice({
+  name: 'question',
   initialState,
   reducers: {
-   //
+    getCurrentQuestion: (state, action: PayloadAction<number>) => {
+      // let x = state.currentQuestionSlice
+      // x = action.payload
+      // console.log(x);
+
+      state.currentQuestionSlice = action.payload
+    }
   }
 })
-
-// const idStageSlice = createSlice({
-//   name: 'pages',
-//   initialState,
-//   reducers: {
-//     getListPageId: (state, {payload}) => {
-//       state.idStageSlice = payload
-//     }
-//   }
-// })
 
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
 
-// export const {getListPageId} = idStageSlice.actions
-// export const idStageReducer = idStageSlice.reducer
+export const {getCurrentQuestion} = currentQuestionSlice.actions
+export const currentQuestionReducer = currentQuestionSlice.reducer
