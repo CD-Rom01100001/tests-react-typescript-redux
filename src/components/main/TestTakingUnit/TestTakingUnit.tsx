@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Indicator from './Indicator';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 // import { getAllStageLink } from '../../allStageLink';
 // import { getSectionAndNumber } from '../../sectionAndNumber';
@@ -15,8 +15,6 @@ interface TestTakingUnitProps {
 }
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionNum, sectionAndNum}) => {
-
-  console.log(sectionAndNum);
 
   return (
     <div className={css.testTakingUnit}>
@@ -47,13 +45,13 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
           <p>из раздела:</p>
           <ul className={css.sectionList}>
             {sectionAndNum.map((elem, i) => {
-              console.log(elem);
-              console.log(i);
               return <li className={css.section} key={i}>{`${elem[0]} - ${elem[1]}`}</li>
             })}
           </ul>
         </div>
-        <div className={css.blockTime}></div>
+        <div className={css.blockTime}>
+          <p></p>
+        </div>
       </div>
 
       {/* блок прохождения тестов */}

@@ -14,6 +14,7 @@ import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
 import {getAllStageLink} from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
 import './app.css';
+import QuestAndAnswers from './main/TestTakingUnit/QuestAndAnswers';
 
 const questArray = Object.entries(contentQuest)
 
@@ -25,7 +26,10 @@ const App: FC = () => {
       <div className={`${'app'} ${theme.toLowerCase()}`}>
         <Routes>
           <Route path='/' element={<Layout/>}>
+            {/* главная */}
             <Route index element={<Home/>}/>
+
+            {/* блок "Вопросы" */}
             <Route path='questions' element={<Questions/>}>
               {questArray.map((array, i) => 
                 <Route path={array[0]} 
@@ -37,23 +41,31 @@ const App: FC = () => {
                 key={i}/>
               )}
             </Route>
+
+            {/* блок "Обучение" */}
             <Route path='training' element={<Training/>}/>
-            {getAllStageLink().map((elem, sectionId) => 
-              <Route 
-              path={`training/stage-${sectionId+1}`} 
-              element={
-                <TestTakingUnit 
-                  title={sectionId+1} 
-                  sectionNum={sectionId+1} 
-                  numberOfQuestions={elem}
-                  sectionAndNum={getSectionAndNumber(elem)}/>
+
+            {/* блок прохождения тестов */}
+            {getAllStageLink().map((elem, sectionId) => {
+              return <Route 
+                path={`training/stage-${sectionId+1}`} 
+                element={
+                  <TestTakingUnit 
+                    title={sectionId+1} 
+                    sectionNum={sectionId+1} 
+                    numberOfQuestions={elem}
+                    sectionAndNum={getSectionAndNumber(elem)}/>
               } 
               key={sectionId}>
-                {elem.map((_, questId) => {
-                  return <Route path={`${questId+1}`} element={<h1>{`${questId+1}`}</h1>} key={questId}/>
+                {/* прохождение тестов */}
+                {elem.map((QA, questId) => {
+                  return <Route 
+                  path={`${questId+1}`} 
+                  element={<QuestAndAnswers QA={QA}/>} 
+                  key={questId}/>
                 })}
               </Route>
-            )}
+            })}
             <Route path='exam' element={<Exam/>}></Route>
             <Route path='*' element={<NotFoundPage/>}></Route>
           </Route>

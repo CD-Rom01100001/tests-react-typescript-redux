@@ -2,13 +2,36 @@
   list-style: none;
 }
 
-.link {
+.wrap a {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 3rem;
   height: 3rem;
+  color: #000;
   background: #e6e6e6;
   border-radius: 0.3rem;
-  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1), inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), inset 1px 1px 1px 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1), 
+  inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset 1px 1px 1px 1px rgba(255, 255, 255, 0.6);
 }
+
+.wrap a:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.wrap a:active {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2), 
+  inset 1px 1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset -1px -1px 1px 1px rgba(255, 255, 255, 0.349);
+}
+
+.wrap a.active {
+  transform: scale(1.05);
+  box-shadow: -0.5px -0.5px 2px 2px rgb(102, 165, 238), 
+  inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset 1px 1px 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+
