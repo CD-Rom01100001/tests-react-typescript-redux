@@ -7,6 +7,7 @@ interface QuestAndAnswersProps {
 }
 
 const QuestAndAnswers: FC<QuestAndAnswersProps> = ({QA}) => {
+  console.log(QA);
 
   return (
     <div className={css.questAndAnswers}>

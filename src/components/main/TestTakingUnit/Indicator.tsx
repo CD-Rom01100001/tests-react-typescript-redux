@@ -1,28 +1,42 @@
-import { FC } from 'react';
+import { FC, RefObject, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../store/hooks';
-import { getCurrentQuestion } from '../../../store/slices';
+import { getCurrentQuestionId } from '../../../store/slices';
 import css from './indicator.module.css'
 interface IndicatorProps {
   numName: number;
-  numLink: number;
-  sectionNum: number
 }
 
-const Indicator: FC<IndicatorProps> = ({numName, numLink, sectionNum}) => {
-  type ActiveType = {
-    isActive: boolean
-  }
-  const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
+const Indicator: FC<IndicatorProps> = ({numName}) => {
+  // type ActiveType = {
+  //   isActive: boolean
+  // }
+  // const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
   const dispatch = useAppDispatch()
 
+  const currentQuest = useRef<HTMLLIElement>(null)
+
+  // const getCurrentNumQuest = () => {
+  //   const x = currentQuest.current?.innerHTML
+  //   console.log(x);
+  // }
+
   return (
-    <li className={css.wrap}>
-      <NavLink to={`/training/stage-${sectionNum}/${numLink}`} className={setActive} onClick={()=>{
-        dispatch(getCurrentQuestion(numLink))
+    // <li className={css.wrap}>
+    //   <NavLink 
+    //   to={`/training/stage-${sectionNum}/${numLink}`} 
+    //   className={setActive} 
+    //   onClick={()=>{
+    //     dispatch(getCurrentQuestion(numLink))
+    //   }}>
+    //     {numName}
+    //   </NavLink>
+    // </li>
+    <li className={css.indicator} ref={currentQuest} onClick={()=>{
+      const num = Number(currentQuest.current?.innerHTML)
+      dispatch(getCurrentQuestionId(num-1))
       }}>
-        {numName}
-      </NavLink>
+      {numName}
     </li>
   );
 }

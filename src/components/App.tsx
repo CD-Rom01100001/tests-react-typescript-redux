@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
 import contentQuest from '../data/allQuestions.json'
 
@@ -19,6 +19,7 @@ import QuestAndAnswers from './main/TestTakingUnit/QuestAndAnswers';
 const questArray = Object.entries(contentQuest)
 
 const App: FC = () => {
+
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
 
   return (
@@ -30,7 +31,7 @@ const App: FC = () => {
             <Route index element={<Home/>}/>
 
             {/* блок "Вопросы" */}
-            <Route path='questions' element={<Questions/>}>
+            <Route  path='questions' element={<Questions/>}>
               {questArray.map((array, i) => 
                 <Route path={array[0]} 
                   element={
@@ -43,31 +44,23 @@ const App: FC = () => {
             </Route>
 
             {/* блок "Обучение" */}
-            <Route path='training' element={<Training/>}/>
+            <Route  path='training' element={<Training/>}/>
 
             {/* блок прохождения тестов */}
-            {getAllStageLink().map((elem, sectionId) => {
-              return <Route 
-                path={`training/stage-${sectionId+1}`} 
-                element={
-                  <TestTakingUnit 
-                    title={sectionId+1} 
-                    sectionNum={sectionId+1} 
-                    numberOfQuestions={elem}
-                    sectionAndNum={getSectionAndNumber(elem)}/>
+            {getAllStageLink().map((elem, sectionId) => 
+            <Route  
+              path={`training/stage-${sectionId+1}`} 
+              element={
+                <TestTakingUnit 
+                  title={sectionId+1} 
+                  sectionNum={sectionId+1} 
+                  numberOfQuestions={elem}
+                  sectionAndNum={getSectionAndNumber(elem)}/>
               } 
-              key={sectionId}>
-                {/* прохождение тестов */}
-                {elem.map((QA, questId) => {
-                  return <Route 
-                  path={`${questId+1}`} 
-                  element={<QuestAndAnswers QA={QA}/>} 
-                  key={questId}/>
-                })}
-              </Route>
-            })}
-            <Route path='exam' element={<Exam/>}></Route>
-            <Route path='*' element={<NotFoundPage/>}></Route>
+              key={sectionId}
+            />)}
+            <Route  path='exam' element={<Exam/>}></Route>
+            <Route  path='*' element={<NotFoundPage/>}></Route>
           </Route>
         </Routes>
       </div>

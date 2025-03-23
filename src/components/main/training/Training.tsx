@@ -9,14 +9,7 @@ import { getAllStageLink } from '../../allStageLink';
 import { getSectionAndNumber } from '../../sectionAndNumber';
 import css from './training.module.css'
 
-// console.log(getAllStageLink());
-
 const Training: FC = () => {
-  // const identifiers = getAllStageLink().length
-  // const dispatch = useAppDispatch()
-  // useEffect(()=>{
-  //   dispatch(getListPageId(identifiers))
-  // }, [dispatch, identifiers])
 
   return (
     <div className={css.training}>
@@ -26,8 +19,7 @@ const Training: FC = () => {
 
       <div className={css.stageBlock}>
         {getAllStageLink().map((qa, i) => {
-          // console.log(qa);
-          return <StagePreviewLink /* allStageLink={getAllStageLink()} */
+          return <StagePreviewLink
           stageNumTitle={i+1}
           sectionAndNum={getSectionAndNumber(qa)}
           totalNumQuest={qa.length}

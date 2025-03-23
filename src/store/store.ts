@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {themeReducer, currentQuestionReducer} from './slices'
+import {themeReducer, currentQuestionIdReducer, sectionNumReducer} from './slices'
 
 export const store = configureStore({
   reducer: {
     themeIndex: themeReducer,
-    currentQuestionIndex: currentQuestionReducer
+    currentQuestionIdIndex: currentQuestionIdReducer,
+    sectionNumIndex: sectionNumReducer,
   },
 })
 

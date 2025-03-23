@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TInitialState = {
   themeSlice: string;
-  currentQuestionSlice: number;
-  // idStageSlice: number;
+  currentQuestionIdSlice: number;
+  currentSectionNum: number;
 }
 
 const initialState: TInitialState = {
   themeSlice: 'Dark',
-  currentQuestionSlice: 1,
-  // idStageSlice: 0,
+  currentQuestionIdSlice: 0,
+  currentSectionNum: 0,
 }
 
 const themeSlice = createSlice({
@@ -33,16 +33,22 @@ const themeSlice = createSlice({
   }
 })
 
-const currentQuestionSlice = createSlice({
+const currentQuestionIdSlice = createSlice({
   name: 'question',
   initialState,
   reducers: {
-    getCurrentQuestion: (state, action: PayloadAction<number>) => {
-      // let x = state.currentQuestionSlice
-      // x = action.payload
-      // console.log(x);
+    getCurrentQuestionId: (state, action: PayloadAction<number>) => {
+      state.currentQuestionIdSlice = action.payload
+    }
+  }
+})
 
-      state.currentQuestionSlice = action.payload
+const sectionNum = createSlice({
+  name: 'sectionNumber',
+  initialState,
+  reducers: {
+    getSectionNum: (state, action: PayloadAction<number>) => {
+      state.currentSectionNum = action.payload
     }
   }
 })
@@ -50,5 +56,8 @@ const currentQuestionSlice = createSlice({
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
 
-export const {getCurrentQuestion} = currentQuestionSlice.actions
-export const currentQuestionReducer = currentQuestionSlice.reducer
+export const {getCurrentQuestionId} = currentQuestionIdSlice.actions
+export const currentQuestionIdReducer = currentQuestionIdSlice.reducer
+
+export const {getSectionNum} = sectionNum.actions
+export const sectionNumReducer = sectionNum.reducer
