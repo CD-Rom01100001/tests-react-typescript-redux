@@ -52,8 +52,7 @@ const App: FC = () => {
               path={`training/stage-${sectionId+1}`} 
               element={
                 <TestTakingUnit 
-                  title={sectionId+1} 
-                  sectionNum={sectionId+1} 
+                  title={sectionId+1}
                   numberOfQuestions={elem}
                   sectionAndNum={getSectionAndNumber(elem)}/>
               } 

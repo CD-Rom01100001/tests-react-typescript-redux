@@ -1,24 +1,22 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 import Indicator from './Indicator';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
-import { useAppSelector, useAppDispatch } from '../../../store/hooks';
-import { getCurrentQuestionId } from '../../../store/slices';
-// import { getAllStageLink } from '../../allStageLink';
-// import { getSectionAndNumber } from '../../sectionAndNumber';
 import css from './testTakingUnit.module.css'
 import QuestAndAnswers from './QuestAndAnswers';
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
-  sectionNum: number;
   sectionAndNum: [string, number][]
 }
 
-const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionNum, sectionAndNum}) => {
+const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionAndNum}) => {
 
-  const dispatch = useAppDispatch()
-  const currentQuestionId = useAppSelector(state => state.currentQuestionIdIndex.currentQuestionIdSlice)
+  const [questId, setQuestId] = useState(0)
+
+  const getButtonName = (event: {target: {name: string}}) => {
+    setQuestId(Number(event.target.name)-1)
+  };
   
   return (
     <div className={css.testTakingUnit}>
@@ -32,21 +30,17 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
         <Link to='/training' 
         className={css.btnExit} 
         onClick={()=>{
-          dispatch(getCurrentQuestionId(0))
+          setQuestId(0)
           }}>выход</Link>
       </div>
 
       {/* блок с индикаторами */}
-      <div className={css.blockIndicators}>
-        {numberOfQuestions.map((_, i) => {
-          return <Indicator  numName={i+1} key={i}/>
-        })}
-      </div>
+      <Indicator listQuestions={numberOfQuestions} doAfterClick={getButtonName}/>
 
       {/* блок показателей и описание теста */}
       <div className={css.blockInformation}>
         <div className={css.blockCurrentQest}>
-          <p className={css.currentQuest}>{`${currentQuestionId+1}/${sectionAndNum[0][1]}`}</p>
+          <p className={css.currentQuest}>{`${questId+1}/${sectionAndNum[0][1]}`}</p>
         </div>
         <div className={css.questionSummary}>
           <h3 className={css.stageTitle}>{`${title}-й этап`}</h3>
@@ -61,9 +55,9 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
           <p></p>
         </div>
       </div>
-      <QuestAndAnswers QA={numberOfQuestions[currentQuestionId]}/>
+
       {/* блок прохождения тестов */}
-      {/* <Outlet/> */}
+      <QuestAndAnswers QA={numberOfQuestions[questId]}/>
 
     </div>
   );

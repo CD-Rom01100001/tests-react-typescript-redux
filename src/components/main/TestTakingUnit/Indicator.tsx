@@ -1,43 +1,30 @@
-import { FC, RefObject, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { useAppDispatch } from '../../../store/hooks';
-import { getCurrentQuestionId } from '../../../store/slices';
+import { FC, MouseEvent, SetStateAction, useState } from 'react';
+import { AllQAT } from '../../allStageLink';
 import css from './indicator.module.css'
 interface IndicatorProps {
-  numName: number;
+  listQuestions: AllQAT[];
+  doAfterClick: (event: { target: { name: string; }; }) => void
 }
 
-const Indicator: FC<IndicatorProps> = ({numName}) => {
-  // type ActiveType = {
-  //   isActive: boolean
-  // }
-  // const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
-  const dispatch = useAppDispatch()
+const Indicator: FC<IndicatorProps> = ({listQuestions, doAfterClick }) => {
+  const [clickedId, setClickedId] = useState(0);
 
-  const currentQuest = useRef<HTMLLIElement>(null)
-
-  // const getCurrentNumQuest = () => {
-  //   const x = currentQuest.current?.innerHTML
-  //   console.log(x);
-  // }
+  const handleClick = (event: {target: {name: string}}, id: SetStateAction<number>) => {
+    setClickedId(id);
+    doAfterClick(event);
+  };
 
   return (
-    // <li className={css.wrap}>
-    //   <NavLink 
-    //   to={`/training/stage-${sectionNum}/${numLink}`} 
-    //   className={setActive} 
-    //   onClick={()=>{
-    //     dispatch(getCurrentQuestion(numLink))
-    //   }}>
-    //     {numName}
-    //   </NavLink>
-    // </li>
-    <li className={css.indicator} ref={currentQuest} onClick={()=>{
-      const num = Number(currentQuest.current?.innerHTML)
-      dispatch(getCurrentQuestionId(num-1))
-      }}>
-      {numName}
-    </li>
+    <div className={css.blockIndicators}>
+      {listQuestions.map((_, numName) => {
+        return (
+        <button name={`${numName+1}`} onClick={(event)=>handleClick(event, numName)}
+          className={numName === clickedId ? css.active : css.indicator}
+          key={numName}>
+          {numName+1}
+        </button>)
+      })}
+    </div>
   );
 }
 
