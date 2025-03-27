@@ -7,6 +7,7 @@ import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
 import Alert from './Alert';
 import { useAppSelector } from '../../../store/hooks';
+import sound from '../../../assets/sounds/end_or_pass.mp3'
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
@@ -24,6 +25,10 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
   };
   const stopTest = () => {
     setQuestId(0)
+  }
+  const openAlert = (): JSX.Element => {
+    new Audio(sound).play()
+    return <Alert/>
   }
 
   return (
@@ -62,7 +67,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
           <TestTime/>
         </div>
         {/* окно предупреждения */}
-        {alert === 'open' ? <Alert/> : ''}
+        {alert === 'open' ? openAlert() : ''}
         {/* <Alert/> */}
       </div>
 
