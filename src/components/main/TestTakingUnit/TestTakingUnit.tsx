@@ -1,10 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import Indicator from './Indicator';
 import { Link } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './testTakingUnit.module.css'
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
+import Alert from './Alert';
+import { useAppSelector } from '../../../store/hooks';
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
@@ -13,52 +15,17 @@ interface TestTakingUnitProps {
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionAndNum}) => {
 
-  const [questId, setQuestId] = useState(0)
+  const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
 
-  // const [isRunning, setIsRunning] = useState(false)
-  // const [time, setTime] = useState(0)
-  // const [intervalId, setIntervalId] = useState<number | undefined>(undefined);
+  const [questId, setQuestId] = useState(0)
 
   const getButtonName = (event: string) => {
     setQuestId(Number(event)-1)
   };
-  const startTest = () => {
-    if (title) {
-      console.log('start');
-    }
-  }
   const stopTest = () => {
     setQuestId(0)
   }
 
-  // useEffect(()=>{
-  //  if (isRunning) {
-  //   setIntervalId(
-  //     setInterval(()=>{
-  //       setTime(prev => prev + 1)
-  //     }, 1000)
-  //   )
-  //  } else {
-  //   clearInterval(intervalId)
-  //  }
-  //  return () => clearInterval(intervalId)
-  // }, [isRunning])
-
-  // useEffect(()=>{
-  //   setIsRunning(true)
-  // }, [])
-
-  // useEffect(()=>{
-  //   let num = 0
-  //   console.log(time);
-  //   if(time === 5) {
-  //     num = time
-  //     setIsRunning(false)
-  //     alert('alarm')
-  //   }    
-  // }, [time])
-
-    
   return (
     <div className={css.testTakingUnit}>
       {/* заголовок */}
@@ -94,11 +61,13 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
         <div className={css.blockTime}>
           <TestTime/>
         </div>
+        {/* окно предупреждения */}
+        {alert === 'open' ? <Alert/> : ''}
+        {/* <Alert/> */}
       </div>
 
       {/* блок прохождения тестов */}
       <QuestAndAnswers QA={numberOfQuestions[questId]}/>
-
     </div>
   );
 }

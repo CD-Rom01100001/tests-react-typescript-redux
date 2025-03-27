@@ -4,12 +4,14 @@ type TInitialState = {
   themeSlice: string;
   currentQuestionIdSlice: number;
   currentSectionNum: number;
+  stateAlert: string;
 }
 
 const initialState: TInitialState = {
   themeSlice: 'Dark',
   currentQuestionIdSlice: 0,
   currentSectionNum: 0,
+  stateAlert: 'close',
 }
 
 const themeSlice = createSlice({
@@ -53,6 +55,16 @@ const sectionNum = createSlice({
   }
 })
 
+const alertTraining = createSlice({
+  name: 'alertTraining',
+  initialState,
+  reducers: {
+    setStateAlert: (state, action: PayloadAction<string>) => {
+      state.stateAlert = action.payload
+    }
+  }
+})
+
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
 
@@ -61,3 +73,6 @@ export const currentQuestionIdReducer = currentQuestionIdSlice.reducer
 
 export const {getSectionNum} = sectionNum.actions
 export const sectionNumReducer = sectionNum.reducer
+
+export const {setStateAlert} = alertTraining.actions
+export const alertTrainingReducer = alertTraining.reducer

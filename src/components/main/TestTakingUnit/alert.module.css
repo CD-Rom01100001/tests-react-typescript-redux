@@ -1,0 +1,52 @@
+.alert {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #4242425d;
+  backdrop-filter: blur(1px)
+}
+
+.alertWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 35rem;
+  max-height: 30rem;
+  padding: 2rem;
+  color: #1d1d1e;
+  background: #fff;
+  border: 1px solid #E2E2E2;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 0px 1px rgba(131, 130, 130, 0.1921568627);
+}
+
+.alertText {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 0 2rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0.3rem 0.5rem;
+  color: #000;
+  background: #e6e6e6;
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1), inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), inset 1px 1px 1px 1px rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}

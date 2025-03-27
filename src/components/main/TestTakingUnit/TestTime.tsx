@@ -1,7 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 import css from './testTime.module.css'
+import { useAppDispatch } from '../../../store/hooks';
+import { setStateAlert } from '../../../store/slices';
 
 const TestTime: FC = () => {
+
+  const dispatch = useAppDispatch()
+
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);  
 
@@ -12,6 +17,7 @@ const TestTime: FC = () => {
   useEffect(() => {
     if (Math.floor((time / 60) % 60) === 60) {
       setRunning(false)
+      dispatch(setStateAlert('open'))
     }
   }, [time])
 
