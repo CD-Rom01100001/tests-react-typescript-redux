@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Indicator from './Indicator';
 import { Link } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './testTakingUnit.module.css'
 import QuestAndAnswers from './QuestAndAnswers';
+import TestTime from './TestTime';
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
@@ -14,10 +15,50 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
 
   const [questId, setQuestId] = useState(0)
 
-  const getButtonName = (event: {target: {name: string}}) => {
-    setQuestId(Number(event.target.name)-1)
+  // const [isRunning, setIsRunning] = useState(false)
+  // const [time, setTime] = useState(0)
+  // const [intervalId, setIntervalId] = useState<number | undefined>(undefined);
+
+  const getButtonName = (event: string) => {
+    setQuestId(Number(event)-1)
   };
-  
+  const startTest = () => {
+    if (title) {
+      console.log('start');
+    }
+  }
+  const stopTest = () => {
+    setQuestId(0)
+  }
+
+  // useEffect(()=>{
+  //  if (isRunning) {
+  //   setIntervalId(
+  //     setInterval(()=>{
+  //       setTime(prev => prev + 1)
+  //     }, 1000)
+  //   )
+  //  } else {
+  //   clearInterval(intervalId)
+  //  }
+  //  return () => clearInterval(intervalId)
+  // }, [isRunning])
+
+  // useEffect(()=>{
+  //   setIsRunning(true)
+  // }, [])
+
+  // useEffect(()=>{
+  //   let num = 0
+  //   console.log(time);
+  //   if(time === 5) {
+  //     num = time
+  //     setIsRunning(false)
+  //     alert('alarm')
+  //   }    
+  // }, [time])
+
+    
   return (
     <div className={css.testTakingUnit}>
       {/* заголовок */}
@@ -27,11 +68,10 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
 
       {/* кнопка выхода */}
       <div className={css.blockBtnExit}>
-        <Link to='/training' 
-        className={css.btnExit} 
-        onClick={()=>{
-          setQuestId(0)
-          }}>выход</Link>
+        <Link 
+          to='/training' 
+          className={css.btnExit} 
+          onClick={stopTest}>выход</Link>
       </div>
 
       {/* блок с индикаторами */}
@@ -52,7 +92,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
           </ul>
         </div>
         <div className={css.blockTime}>
-          <p></p>
+          <TestTime/>
         </div>
       </div>
 
