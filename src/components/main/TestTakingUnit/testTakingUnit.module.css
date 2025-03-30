@@ -37,6 +37,7 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
+  margin: 5rem 0 4rem 0;
 }
 
 .questionSummary {

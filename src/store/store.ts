@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {themeReducer, currentQuestionIdReducer, sectionNumReducer, alertTrainingReducer} from './slices'
+import {
+  themeReducer, 
+  currentQuestionIdReducer, 
+  sectionNumReducer, 
+  alertTrainingReducer,
+  indicatorIdReducer,
+} from './slices'
 
 export const store = configureStore({
   reducer: {
@@ -7,6 +13,7 @@ export const store = configureStore({
     currentQuestionIdIndex: currentQuestionIdReducer,
     sectionNumIndex: sectionNumReducer,
     alertTrainingIndex: alertTrainingReducer,
+    indicatorIdIndex: indicatorIdReducer,
   },
 })
 

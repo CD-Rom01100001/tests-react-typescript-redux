@@ -5,6 +5,7 @@ type TInitialState = {
   currentQuestionIdSlice: number;
   currentSectionNum: number;
   stateAlert: string;
+  currentIndicatorId: number;
 }
 
 const initialState: TInitialState = {
@@ -12,6 +13,7 @@ const initialState: TInitialState = {
   currentQuestionIdSlice: 0,
   currentSectionNum: 0,
   stateAlert: 'close',
+  currentIndicatorId: 0,
 }
 
 const themeSlice = createSlice({
@@ -64,6 +66,16 @@ const alertTraining = createSlice({
     }
   }
 })
+/* ID индикатора */
+const indicatorId = createSlice({
+  name: 'indicator ID',
+  initialState,
+  reducers: {
+    getIndicatorId: (state, action: PayloadAction<number>) => {
+      state.currentIndicatorId = action.payload
+    } 
+  }
+})
 
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
@@ -76,3 +88,7 @@ export const sectionNumReducer = sectionNum.reducer
 
 export const {setStateAlert} = alertTraining.actions
 export const alertTrainingReducer = alertTraining.reducer
+
+/* ID индикатора */
+export const {getIndicatorId} = indicatorId.actions
+export const indicatorIdReducer = indicatorId.reducer

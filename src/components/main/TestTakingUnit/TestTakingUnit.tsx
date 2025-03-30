@@ -68,7 +68,6 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
         </div>
         {/* окно предупреждения */}
         {alert === 'open' ? openAlert() : ''}
-        {/* <Alert/> */}
       </div>
 
       {/* блок прохождения тестов */}
