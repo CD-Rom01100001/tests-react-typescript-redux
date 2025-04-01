@@ -19,10 +19,9 @@ const TestTime: FC = () => {
       setRunning(false)
       dispatch(setStateAlert('open'))
     }
-  }, [time])
+  }, [dispatch, time])
 
   useEffect(() => {
-    console.log('run');
     let interval: number | undefined;
     if (running) {
       interval = setInterval(() => {

@@ -6,8 +6,10 @@ import css from './testTakingUnit.module.css'
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
 import Alert from './Alert';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import sound from '../../../assets/sounds/end_or_pass.mp3'
+import Buttons from './Buttons';
+import { getIndicatorId } from '../../../store/slices';
 interface TestTakingUnitProps {
   title: number;
   numberOfQuestions: AllQAT[];
@@ -16,21 +18,18 @@ interface TestTakingUnitProps {
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionAndNum}) => {
 
+  const dispatch = useAppDispatch()
+  const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
-
   const [questId, setQuestId] = useState(0)
 
-  const getButtonName = (event: string) => {
-    setQuestId(Number(event)-1)
-  };
   const stopTest = () => {
-    setQuestId(0)
+    dispatch(getIndicatorId(0))
   }
   const openAlert = (): JSX.Element => {
     new Audio(sound).play()
     return <Alert/>
   }
-
   return (
     <div className={css.testTakingUnit}>
       {/* заголовок */}
@@ -43,16 +42,17 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
         <Link 
           to='/training' 
           className={css.btnExit} 
-          onClick={stopTest}>выход</Link>
+          onClick={stopTest}>Выход</Link>
       </div>
 
       {/* блок с индикаторами */}
-      <Indicator listQuestions={numberOfQuestions} doAfterClick={getButtonName}/>
+      <Indicator 
+        listQuestions={numberOfQuestions}/>
 
       {/* блок показателей и описание теста */}
       <div className={css.blockInformation}>
         <div className={css.blockCurrentQest}>
-          <p className={css.currentQuest}>{`${questId+1}/${sectionAndNum[0][1]}`}</p>
+          <p className={css.currentQuest}>{`${indicatorId+1}/${sectionAndNum[0][1]}`}</p>
         </div>
         <div className={css.questionSummary}>
           <h3 className={css.stageTitle}>{`${title}-й этап`}</h3>
@@ -71,7 +71,11 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
       </div>
 
       {/* блок прохождения тестов */}
-      <QuestAndAnswers QA={numberOfQuestions[questId]}/>
+      <QuestAndAnswers QA={numberOfQuestions[indicatorId]}/>
+
+      {/* навигация с помощью кнопок */}
+      <Buttons 
+        numberOfQuestions={numberOfQuestions}/>
     </div>
   );
 }

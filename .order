@@ -43,6 +43,8 @@ src/components/main/TestTakingUnit/Alert.tsx
 src/components/main/TestTakingUnit/alert.module.css
 src/components/main/TestTakingUnit/QuestAndAnswers.tsx
 src/components/main/TestTakingUnit/questAndAnswers.module.css
+src/components/main/TestTakingUnit/Buttons.tsx
+src/components/main/TestTakingUnit/buttons.module.css
 src/components/main/Description.tsx
 src/components/main/description.module.css
 

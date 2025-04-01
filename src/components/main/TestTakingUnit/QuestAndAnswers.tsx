@@ -1,4 +1,4 @@
-import { FC, SetStateAction, useState } from 'react';
+import { FC, useState, useRef, useEffect } from 'react';
 import { AllQAT } from '../../allStageLink'
 import css from './questAndAnswers.module.css'
 import { useAppSelector } from '../../../store/hooks';
@@ -16,6 +16,13 @@ const answerArray: ObjInfoSelectedAnswerType[] = []
 const QuestAndAnswers: FC<QuestAndAnswersProps> = ({QA}) => {
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const [clickedId, setClickedId] = useState<null | number>(null)
+  const focusBlock = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if(focusBlock.current) {
+      focusBlock.current.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }, [])
 
   const objInfoSelectedAnswer: ObjInfoSelectedAnswerType = {
     questionId: null,
@@ -25,7 +32,7 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({QA}) => {
 
   return (
     <div className={css.questAndAnswers}>
-      <p className={css.question}>{QA.question}</p>
+      <p className={css.question} ref={focusBlock}>{QA.question}</p>
       {QA.answers.map((answer, id) => 
         <button 
           className={id === clickedId ? css.active : css.answer}
@@ -36,11 +43,6 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({QA}) => {
             objInfoSelectedAnswer.questionId = indicatorId
             objInfoSelectedAnswer.correct = answer.correct
             answerArray[indicatorId] = objInfoSelectedAnswer;
-            
-            console.log(indicatorId + ' + ' + event.currentTarget.name);
-            console.log(objInfoSelectedAnswer);
-            console.log(answerArray);
-            console.log(objInfoSelectedAnswer.answerId);
           }}
           key={answer.id}
         >
