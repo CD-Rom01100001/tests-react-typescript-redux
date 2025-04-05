@@ -87,9 +87,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
       </div>
 
       {/* блок прохождения тестов */}
-      {shuffledQuestions.length > 0 && (
       <QuestAndAnswers qA={shuffledQuestions}/>
-      )}
 
       {/* навигация с помощью кнопок */}
       <Buttons 

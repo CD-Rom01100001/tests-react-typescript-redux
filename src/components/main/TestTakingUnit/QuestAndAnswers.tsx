@@ -13,15 +13,9 @@ type ObjInfoSelectedAnswerType = {
   correct: boolean | null;
 }
 
-const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
-  /* redux */
-  const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
-  const arrayAnswers = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
-  const dispatch = useAppDispatch()
+// const answerArray: (ObjInfoSelectedAnswerType | null)[] = []
 
-  /* states */
-  const [clickedId, setClickedId] = useState<number|null>(null)
-  const focusBlock = useRef<HTMLDivElement>(null)
+const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
 
   /* при открытии тестов, центр старницы смещается к блоку с вопросом */
   useEffect(() => {
@@ -29,6 +23,15 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
       focusBlock.current.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }, [])
+
+  /* redux */
+  const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
+  const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
+  const dispatch = useAppDispatch()
+
+  /* states */
+  // const [clickedId, setClickedId] = useState<number|null>(null)
+  const focusBlock = useRef<HTMLDivElement>(null)
 
   /* макет объекта с ответами */
   const objInfoSelectedAnswer: ObjInfoSelectedAnswerType = {
@@ -46,30 +49,37 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
     )
   }
 
+  // useEffect(() => {
+  //   dispatch(
+  //     initAnswers(new Array(qA.length).fill(null))
+  //   )
+  // }, [qA])
+
   return (
     <div className={css.questAndAnswers}>
-      <p className={css.question} ref={focusBlock}>{qA[indicatorId].question}</p>
-      {qA[indicatorId].answers.map((answer, id) => {
-        return (
-          <button 
-            className={`${css.answer} ${clickedId === id ? css.active : ''}`}
-            onClick={()=>{
-              setClickedId(id)
+      <p className={css.question} ref={focusBlock}>{qA[indicatorId]?.question}</p>
+      {qA[indicatorId]?.answers.map((answer, id) => {
+        const suffled = arrayAnswersSlice[indicatorId]?.answerId === id
+        return (<button 
+          className={`${css.answer} ${suffled ? css.active : css.answer}`}
+          onClick={()=>{
+            // setClickedId(id)
 
-              /* формируем объект в выбраными ответами */
-              objInfoSelectedAnswer.answerId = id
-              objInfoSelectedAnswer.questionId = indicatorId
-              objInfoSelectedAnswer.correct = answer.correct
-              console.log(objInfoSelectedAnswer);
+            /* формируем объект в выбраными ответами */
+            objInfoSelectedAnswer.answerId = id
+            objInfoSelectedAnswer.questionId = indicatorId
+            objInfoSelectedAnswer.correct = answer.correct
+            console.log(objInfoSelectedAnswer);
 
-              answerCreateArray()
-              // console.log(answerArray);
-            }}
-            key={answer.id}
-          >
-            {answer.value}
-          </button>
-      )})}
+            /* помещает объект в массив */
+            answerCreateArray()
+            console.log(arrayAnswersSlice);
+          }}
+          key={answer.id}
+        >
+          {answer.value}
+        </button>)
+      })}
     </div>
   );
 }

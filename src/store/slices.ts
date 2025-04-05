@@ -88,7 +88,7 @@ const indicatorId = createSlice({
 const arrayAnswers = createSlice({
   name: 'array answers',
   initialState,
-  reducers: {
+  reducers: { 
     setAnswers: (
       state, 
       action: PayloadAction<{index: number; value: ObjInfoSelectedAnswerType}>
@@ -97,14 +97,17 @@ const arrayAnswers = createSlice({
       // Создаём новый массив на основе текущего состояния
       const newAnswers = [...state.arrayAnswers]
       // Заполняем пропущенные элементы null
-      while (newAnswers.length < index) {
+      while (newAnswers.length <= index) {
         newAnswers.push(null)
       }
       // Вставляем новое значение
       newAnswers[index] = value
       // Обновляем состояние
       state.arrayAnswers = newAnswers
-    } 
+    },
+    setFullAnswers: (state, action: PayloadAction<(ObjInfoSelectedAnswerType | null)[]>) => {
+      state.arrayAnswers = action.payload
+    }
   }
 })
 
@@ -125,5 +128,5 @@ export const {getIndicatorId} = indicatorId.actions
 export const indicatorIdReducer = indicatorId.reducer
 
 /* массив ответов */
-export const {setAnswers} = arrayAnswers.actions
+export const {setAnswers, setFullAnswers} = arrayAnswers.actions
 export const setAnswersReducer = arrayAnswers.reducer

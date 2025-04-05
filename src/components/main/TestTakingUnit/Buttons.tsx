@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId } from '../../../store/slices';
+import { getIndicatorId, setFullAnswers } from '../../../store/slices';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -15,10 +15,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
   const dispatch = useAppDispatch()
 
   /* states */
-  /* при каждой рендеренге selectedAnswer пушится объект из Redux selectedAnswer в массив answerArray */
-  // useEffect(() => {
-  //   console.log(arrayAnswersSlice)
-  // }, [arrayAnswersSlice])
   const [end, setEnd] = useState<boolean>(false)
   const [resultText, setResultText] = useState<string>('')
   const [righttAnswers, setRightAnswers] = useState<number>(0)
@@ -26,24 +22,38 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
 
   const result = () => {
     setEnd(true)
-    console.log(arrayAnswersSlice);
+    const newArray = [...arrayAnswersSlice]
+    if (newArray.length < numberOfQuestions.length) {
+      while (newArray.length < numberOfQuestions.length) {
+        newArray.push(null);
+      }
+      // Прямого сеттера массива нет — добавим новый экшен
+      dispatch(setFullAnswers(newArray));
+    }
+    console.log(newArray);
 
     /* если не выбрал не один из ответов */
-    if (arrayAnswersSlice.length === 0) {
-      console.log(0);
+    if (newArray.length === 0) {
       setWrongAnswers(numberOfQuestions.length)
+      setResultText('Вы не прошли этап!');
+      return;
     }
 
-    arrayAnswersSlice.forEach(elem => {
+    let right = 0;
+    let wrong = 0;
+
+    newArray.forEach(elem => {
       /* если выбрал правельный ответ, то +1 к правельным ответам */
-      if (elem && elem.correct === true) 
-        setRightAnswers((righttAnswers)=>righttAnswers+1)
-      /* если выбрал не правельный ответ, то +1 к не ошибкам */
-      if (elem === null || elem.correct === false) 
-        setWrongAnswers((wrongAnswers)=>wrongAnswers+1) 
+      if (elem && elem.correct === true) right++
+      /* если выбрал не правельный ответ, то +1 к ошибкам */
+      if (elem === null || elem.correct === false) wrong++ 
     })
+
+    setRightAnswers(right);
+    setWrongAnswers(wrong);
+
     /* если меньше трех ошибок то прошли */
-    if (righttAnswers > numberOfQuestions.length-3) {
+    if (right > numberOfQuestions.length-3) {
       setResultText('Вы прошли этап!')
     } else {
       setResultText('Вы не прошли этап!')
