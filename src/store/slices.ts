@@ -1,11 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type ObjInfoSelectedAnswerType = {
+  questionId: number | null;
+  answerId: number | null;
+  correct: boolean | null;
+}
+
 type TInitialState = {
   themeSlice: string;
   currentQuestionIdSlice: number;
   currentSectionNum: number;
   stateAlert: string;
   currentIndicatorId: number;
+  arrayAnswers: (ObjInfoSelectedAnswerType | null)[]
 }
 
 const initialState: TInitialState = {
@@ -14,6 +21,7 @@ const initialState: TInitialState = {
   currentSectionNum: 0,
   stateAlert: 'close',
   currentIndicatorId: 0,
+  arrayAnswers: []
 }
 
 const themeSlice = createSlice({
@@ -76,6 +84,29 @@ const indicatorId = createSlice({
     } 
   }
 })
+/* массив ответов */
+const arrayAnswers = createSlice({
+  name: 'array answers',
+  initialState,
+  reducers: {
+    setAnswers: (
+      state, 
+      action: PayloadAction<{index: number; value: ObjInfoSelectedAnswerType}>
+    ) => {
+      const {index, value} = action.payload
+      // Создаём новый массив на основе текущего состояния
+      const newAnswers = [...state.arrayAnswers]
+      // Заполняем пропущенные элементы null
+      while (newAnswers.length < index) {
+        newAnswers.push(null)
+      }
+      // Вставляем новое значение
+      newAnswers[index] = value
+      // Обновляем состояние
+      state.arrayAnswers = newAnswers
+    } 
+  }
+})
 
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
@@ -92,3 +123,7 @@ export const alertTrainingReducer = alertTraining.reducer
 /* ID индикатора */
 export const {getIndicatorId} = indicatorId.actions
 export const indicatorIdReducer = indicatorId.reducer
+
+/* массив ответов */
+export const {setAnswers} = arrayAnswers.actions
+export const setAnswersReducer = arrayAnswers.reducer

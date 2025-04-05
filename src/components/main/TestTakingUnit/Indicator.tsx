@@ -20,6 +20,7 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
   /* навигация при нажитии на индикатор */
   useEffect(()=>{
     dispatch(getIndicatorId(indicatorId))
+    console.log(indicatorId);
   }, [dispatch, indicatorId])
 
   /* навигация при нажатии на кнопки клавиатуры */
@@ -27,13 +28,11 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
     const handleKeyDown = (event: {key: string}) => {
       if (event.key === "ArrowRight") {
         if (indicatorId >= listQuestions.length-1) return 
-        console.log('right - ' + clickedEvent);
         dispatch(getIndicatorId(indicatorId+1))
         setClickEvent(`${+clickedEvent + 1}`)
       }
       if (event.key === "ArrowLeft") {
         if (indicatorId <= 0) return
-        console.log('left - ' + clickedEvent);
         dispatch(getIndicatorId(indicatorId-1))
         setClickEvent(`${+clickedEvent - 1}`)
       }

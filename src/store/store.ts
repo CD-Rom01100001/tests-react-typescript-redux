@@ -5,6 +5,7 @@ import {
   sectionNumReducer, 
   alertTrainingReducer,
   indicatorIdReducer,
+  setAnswersReducer,
 } from './slices'
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     sectionNumIndex: sectionNumReducer,
     alertTrainingIndex: alertTrainingReducer,
     indicatorIdIndex: indicatorIdReducer,
+    arrayAnswersIndex: setAnswersReducer,
   },
 })
 
