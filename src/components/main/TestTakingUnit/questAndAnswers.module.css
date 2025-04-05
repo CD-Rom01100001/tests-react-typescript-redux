@@ -25,17 +25,6 @@
 }
 
 .active {
-  display: flex;
-  justify-content: start;
-  align-items: start;
-  width: 100%;
-  margin: 0 0 1rem 0;
-  padding: 0.5rem;
-  text-align: left;
-  font-weight: 400;
-  color: #29292b;
   background: rgba(0, 100, 177, 0.1529411765);
-  border: 0.2rem solid rgba(138, 138, 138, 0.2470588235);
-  border-radius: 0.5rem;
   pointer-events: none;
 }

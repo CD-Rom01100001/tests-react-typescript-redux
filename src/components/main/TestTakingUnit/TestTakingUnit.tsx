@@ -16,8 +16,9 @@ interface TestTakingUnitProps {
   sectionAndNum: [string, number][]
 }
 
-/* перемешивает вопросы */
+// /* перемешивает вопросы */
 const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
+  // const shuffled = [...array]
   for (let i = array.length-1; i > 0; i--) {
     const randomIndex: number = Math.floor(Math.random() * (i+1));// случайный индекс от 0 до i
     [array[i], array[randomIndex]] = [array[randomIndex], array[i]]// меняет местами
@@ -27,13 +28,16 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionAndNum}) => {
 
-  shuffleQuestionArray(numberOfQuestions)
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
-  // const [questId, setQuestId] = useState(0)
 
-  
+  const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
+  useEffect(() => {
+    const shuffled = shuffleQuestionArray(numberOfQuestions);
+    setShuffledQuestions(shuffled);
+  }, [numberOfQuestions]);
+ 
 
   const stopTest = () => {
     dispatch(getIndicatorId(0))
@@ -59,7 +63,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
 
       {/* блок с индикаторами */}
       <Indicator 
-        listQuestions={numberOfQuestions}/>
+        listQuestions={shuffledQuestions}/>
 
       {/* блок показателей и описание теста */}
       <div className={css.blockInformation}>
@@ -83,11 +87,13 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
       </div>
 
       {/* блок прохождения тестов */}
-      <QuestAndAnswers qA={numberOfQuestions}/>
+      {shuffledQuestions.length > 0 && (
+      <QuestAndAnswers qA={shuffledQuestions}/>
+      )}
 
       {/* навигация с помощью кнопок */}
       <Buttons 
-        numberOfQuestions={numberOfQuestions}/>
+        numberOfQuestions={shuffledQuestions}/>
     </div>
   );
 }

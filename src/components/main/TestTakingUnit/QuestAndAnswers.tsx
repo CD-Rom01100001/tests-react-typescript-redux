@@ -13,11 +13,10 @@ type ObjInfoSelectedAnswerType = {
   correct: boolean | null;
 }
 
-// const answerArray: (ObjInfoSelectedAnswerType | null)[] = []
-
 const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
+  const arrayAnswers = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const dispatch = useAppDispatch()
 
   /* states */
@@ -38,16 +37,6 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
     correct: null,
   }
 
-  // const insertWithNulls = (
-  //   arr: (ObjInfoSelectedAnswerType | null)[], 
-  //   index: number, 
-  //   value: ObjInfoSelectedAnswerType): void => {
-  //   while (arr.length < index) {
-  //       arr.push(null); // Заполняем пустые индексы null
-  //   }
-  //   arr[index] = value; // Вставляем значение на нужный индекс
-  // }
-
   const answerCreateArray = () => {
     dispatch(
       setAnswers({
@@ -60,28 +49,27 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
   return (
     <div className={css.questAndAnswers}>
       <p className={css.question} ref={focusBlock}>{qA[indicatorId].question}</p>
-      {qA[indicatorId].answers.map((answer, id) => 
-        <button 
-          className={id === clickedId ? css.active : css.answer}
-          onClick={()=>{
-            setClickedId(id)
+      {qA[indicatorId].answers.map((answer, id) => {
+        return (
+          <button 
+            className={`${css.answer} ${clickedId === id ? css.active : ''}`}
+            onClick={()=>{
+              setClickedId(id)
 
-            /* формируем объект в выбраными ответами */
-            objInfoSelectedAnswer.answerId = id
-            objInfoSelectedAnswer.questionId = indicatorId
-            objInfoSelectedAnswer.correct = answer.correct
-            // console.log(objInfoSelectedAnswer);
-            
-            // answerArray[indicatorId] = objInfoSelectedAnswer
-            // insertWithNulls(answerArray, indicatorId, objInfoSelectedAnswer);
-            answerCreateArray()
-            // console.log(answerArray);
-          }}
-          key={answer.id}
-        >
-          {answer.value}
-        </button>
-      )}
+              /* формируем объект в выбраными ответами */
+              objInfoSelectedAnswer.answerId = id
+              objInfoSelectedAnswer.questionId = indicatorId
+              objInfoSelectedAnswer.correct = answer.correct
+              console.log(objInfoSelectedAnswer);
+
+              answerCreateArray()
+              // console.log(answerArray);
+            }}
+            key={answer.id}
+          >
+            {answer.value}
+          </button>
+      )})}
     </div>
   );
 }
