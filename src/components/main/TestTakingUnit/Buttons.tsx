@@ -3,7 +3,6 @@ import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId } from '../../../store/slices';
-
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
 }
