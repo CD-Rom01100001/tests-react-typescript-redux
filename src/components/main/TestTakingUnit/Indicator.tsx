@@ -12,7 +12,12 @@ interface IndicatorProps {
 const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
+  const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const dispatch = useAppDispatch();
+  
+  useEffect(() => {
+    console.log(arrayAnswersSlice);
+  }, [arrayAnswersSlice])
 
   /* states */
   const [clickedEvent, setClickEvent] = useState('1');
@@ -51,7 +56,11 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
           onClick={(event)=>{
             dispatch(getIndicatorId(Number(event.currentTarget.name)-1))
           }}
-          className={numName === indicatorId ? css.active : css.indicator}
+          className={`
+            ${css.indicator} 
+            ${numName === indicatorId ? css.active : css.indicator}
+            ${numName === arrayAnswersSlice[numName]?.questionId ? css.selectAnswer : css.indicator}
+          `}
           key={numName}>
           {numName+1}
         </button>)

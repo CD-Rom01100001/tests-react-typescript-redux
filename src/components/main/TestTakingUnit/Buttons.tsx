@@ -99,7 +99,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
           Результат
         </button>
       )}
-
       
       {end === true && (
         <div className={css.resultBlock}>
