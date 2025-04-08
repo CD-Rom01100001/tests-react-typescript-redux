@@ -50,14 +50,8 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
     )
   }
 
-  useEffect(() => {
-    console.log(defineEndTestSlice);
-  }, [defineEndTestSlice])
-
   return (
-    <div className={`
-      ${css.questAndAnswers} 
-      ${defineEndTestSlice ? 
+    <div className={`${css.questAndAnswers} ${defineEndTestSlice ? 
       css.questAndAnswersEnd : 
       css.questAndAnswers}`}>
       <p className={css.question} ref={focusBlock}>{qA[indicatorId]?.question}</p>

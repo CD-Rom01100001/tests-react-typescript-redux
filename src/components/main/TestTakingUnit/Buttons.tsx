@@ -22,6 +22,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
 
   const result = () => {
     setEnd(true)
+    dispatch(defineEndTest(true))
     const newArray = [...arrayAnswersSlice]// создал копию массива arrayAnswersSlice для того, что-бы этот массив был имутабельным
 
     /* заполняет массив null */
@@ -61,10 +62,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
       setResultText('Вы не прошли этап!')
     }
   }
-
-  useEffect(() => {
-    dispatch(defineEndTest(end))
-  }, [end, dispatch])
 
   const restart = () => {
     window.location.reload()
