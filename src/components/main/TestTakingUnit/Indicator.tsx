@@ -13,6 +13,7 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
+  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const dispatch = useAppDispatch();
   
   useEffect(() => {
@@ -42,10 +43,37 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
         setClickEvent(`${+clickedEvent - 1}`)
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [clickedEvent, dispatch, indicatorId, listQuestions.length]);
+
+  /* устанавливает стили в зависимости от прохождения теста */
+  const setClassName = (numName: number): string => {
+    const answer = arrayAnswersSlice[numName]
+    const arrayClasses: string[] = [css.indicator]// добавили базовый класс в начало массива/строки класса
+
+    /* если индекс индикатора совпадает с айдишником индикатора то присваивает класс active */
+    if (numName === indicatorId) {
+      arrayClasses.push(css.active)
+    }
+    /* если тест не закончен и индекс выбраного вопроса совпадает с индексом индикатора, то индикатор стилизуется */
+    if (defineEndTestSlice === false && answer?.questionId === numName) {
+      arrayClasses.push(css.selectAnswer)
+    }
+    /* если тест закончен и индекс выбраного вопроса совпадает с индексом индикатора то переходим к дальнейшему условию */
+    if (defineEndTestSlice === true && answer?.questionId === numName) {
+      /* если в ключе correct выбраного вопроса true то срабатывает соответствующий стиль */
+      if (answer.correct) {
+        arrayClasses.push(css.redAnswer)
+      }
+      /* если в ключе correct выбраного вопроса false то срабатывает соответствующий стиль */
+      else {
+        arrayClasses.push(css.wrongAnswer)
+      }
+    }
+    /* делаем из массива строку для класса */
+    return arrayClasses.join(' ')
+  }
   
   return (
     <div className={css.blockIndicators}>
@@ -56,11 +84,7 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
           onClick={(event)=>{
             dispatch(getIndicatorId(Number(event.currentTarget.name)-1))
           }}
-          className={`
-            ${css.indicator} 
-            ${numName === indicatorId ? css.active : css.indicator}
-            ${numName === arrayAnswersSlice[numName]?.questionId ? css.selectAnswer : css.indicator}
-          `}
+          className={setClassName(numName)}
           key={numName}>
           {numName+1}
         </button>)

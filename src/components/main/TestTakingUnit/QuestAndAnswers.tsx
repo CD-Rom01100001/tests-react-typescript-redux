@@ -68,8 +68,7 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
             objInfoSelectedAnswer.correct = answer.correct
             console.log(objInfoSelectedAnswer);
 
-            /* помещает объект в массив */
-            answerCreateArray()
+            answerCreateArray()// помещает объект в массив Slice
             console.log(arrayAnswersSlice);
           }}
           key={answer.id}

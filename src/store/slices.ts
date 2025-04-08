@@ -113,6 +113,7 @@ const arrayAnswers = createSlice({
     }
   }
 })
+/* определяет закончин ли тест или нет (нжата кнопка "результат" или нет) */
 const qAEnd = createSlice({
   name: 'defines the end of the test',
   initialState,

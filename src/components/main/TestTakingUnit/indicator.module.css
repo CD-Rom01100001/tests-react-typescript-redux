@@ -51,6 +51,14 @@
   background: rgba(0, 100, 177, 0.1529411765);
 }
 
+.redAnswer {
+  background: rgba(40, 197, 25, 0.153)
+}
+
+.wrongAnswer {
+  background: rgba(197, 25, 25, 0.153)
+}
+
 .active:hover {
   cursor: pointer;
 }
