@@ -6,6 +6,7 @@ import {
   alertTrainingReducer,
   indicatorIdReducer,
   setAnswersReducer,
+  defineEndTestReducer,
 } from './slices'
 
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
     alertTrainingIndex: alertTrainingReducer,
     indicatorIdIndex: indicatorIdReducer,
     arrayAnswersIndex: setAnswersReducer,
+    defineEndTestIndex: defineEndTestReducer,
   },
 })
 

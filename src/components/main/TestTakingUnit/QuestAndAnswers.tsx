@@ -27,6 +27,7 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
+  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const dispatch = useAppDispatch()
 
   /* states */
@@ -49,14 +50,16 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
     )
   }
 
-  // useEffect(() => {
-  //   dispatch(
-  //     initAnswers(new Array(qA.length).fill(null))
-  //   )
-  // }, [qA])
+  useEffect(() => {
+    console.log(defineEndTestSlice);
+  }, [defineEndTestSlice])
 
   return (
-    <div className={css.questAndAnswers}>
+    <div className={`
+      ${css.questAndAnswers} 
+      ${defineEndTestSlice ? 
+      css.questAndAnswersEnd : 
+      css.questAndAnswers}`}>
       <p className={css.question} ref={focusBlock}>{qA[indicatorId]?.question}</p>
       {qA[indicatorId]?.answers.map((answer, id) => {
         const suffled = arrayAnswersSlice[indicatorId]?.answerId === id

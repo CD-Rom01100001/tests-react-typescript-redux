@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId, setFullAnswers } from '../../../store/slices';
+import { getIndicatorId, setFullAnswers, defineEndTest } from '../../../store/slices';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -61,6 +61,10 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
       setResultText('Вы не прошли этап!')
     }
   }
+
+  useEffect(() => {
+    dispatch(defineEndTest(end))
+  }, [end, dispatch])
 
   const restart = () => {
     window.location.reload()

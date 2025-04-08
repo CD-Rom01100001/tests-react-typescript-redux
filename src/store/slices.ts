@@ -1,3 +1,4 @@
+import { defineConfig } from 'vite';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type ObjInfoSelectedAnswerType = {
@@ -12,7 +13,8 @@ type TInitialState = {
   currentSectionNum: number;
   stateAlert: string;
   currentIndicatorId: number;
-  arrayAnswers: (ObjInfoSelectedAnswerType | null)[]
+  arrayAnswers: (ObjInfoSelectedAnswerType | null)[];
+  defineEnd: boolean
 }
 
 const initialState: TInitialState = {
@@ -21,7 +23,8 @@ const initialState: TInitialState = {
   currentSectionNum: 0,
   stateAlert: 'close',
   currentIndicatorId: 0,
-  arrayAnswers: []
+  arrayAnswers: [],
+  defineEnd: false
 }
 
 const themeSlice = createSlice({
@@ -110,6 +113,15 @@ const arrayAnswers = createSlice({
     }
   }
 })
+const qAEnd = createSlice({
+  name: 'defines the end of the test',
+  initialState,
+  reducers: {
+    defineEndTest: (state, action: PayloadAction<boolean>) => {
+      state.defineEnd = action.payload;
+    }
+  }
+})
 
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
@@ -130,3 +142,6 @@ export const indicatorIdReducer = indicatorId.reducer
 /* массив ответов */
 export const {setAnswers, setFullAnswers} = arrayAnswers.actions
 export const setAnswersReducer = arrayAnswers.reducer
+
+export const {defineEndTest} = qAEnd.actions
+export const defineEndTestReducer = qAEnd.reducer

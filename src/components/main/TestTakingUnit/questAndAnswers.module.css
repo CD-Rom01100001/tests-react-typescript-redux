@@ -3,6 +3,10 @@
   overflow: auto;
 }
 
+.questAndAnswersEnd {
+  pointer-events: none;
+}
+
 .answer {
   display: flex;
   justify-content: start;
