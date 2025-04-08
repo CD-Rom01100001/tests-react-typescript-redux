@@ -22,7 +22,9 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
 
   const result = () => {
     setEnd(true)
-    const newArray = [...arrayAnswersSlice]
+    const newArray = [...arrayAnswersSlice]// создал копию массива arrayAnswersSlice для того, что-бы этот массив был имутабельным
+
+    /* заполняет массив null */
     if (newArray.length < numberOfQuestions.length) {
       while (newArray.length < numberOfQuestions.length) {
         newArray.push(null);
@@ -66,7 +68,8 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
 
   return (
     <div className={css.buttons}>
-      {indicatorId >= 1 && end === false && (
+      {indicatorId >= 1 && 
+      end === false && (
         <button 
           className={css.buttonNav}
           onClick={()=>{
@@ -77,7 +80,9 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
           Назад
         </button>
       )}
-      {indicatorId >= 0 && indicatorId < numberOfQuestions.length-1 && (
+      {indicatorId >= 0 && 
+      indicatorId < numberOfQuestions.length-1 && 
+      end === false && (
         <button 
           className={css.buttonNav}
           onClick={()=>{
@@ -88,7 +93,8 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
           Вперед
         </button>
       )}
-      {indicatorId === numberOfQuestions.length-1 && end === false && (
+      {indicatorId === numberOfQuestions.length-1 && 
+      end === false && (
         <button className={css.buttonNav} onClick={result}>
           Результат
         </button>
