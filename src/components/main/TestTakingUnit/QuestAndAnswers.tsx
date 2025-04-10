@@ -1,8 +1,8 @@
 import { FC, useState, useRef, useEffect } from 'react';
 import { AllQAT } from '../../allStageLink'
-import css from './questAndAnswers.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, setAnswers } from '../../../store/slices';
+import css from './questAndAnswers.module.css'
 
 interface QuestAndAnswersProps {
   qA: AllQAT[]
@@ -12,11 +12,14 @@ type ObjInfoSelectedAnswerType = {
   answerId: number | null;
   correct: boolean | null;
 }
-
-// const answerArray: (ObjInfoSelectedAnswerType | null)[] = []
+type AnswerType = {
+  correct: boolean;
+  id: string;
+  section: string;
+  value: string;
+}
 
 const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
-
   /* при открытии тестов, центр старницы смещается к блоку с вопросом */
   useEffect(() => {
     if(focusBlock.current) {
@@ -31,7 +34,6 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
   const dispatch = useAppDispatch()
 
   /* states */
-  // const [clickedId, setClickedId] = useState<number|null>(null)
   const focusBlock = useRef<HTMLDivElement>(null)
 
   /* макет объекта с ответами */
@@ -50,32 +52,97 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
     )
   }
 
+  const createObjInfoSelectedAnswer = (id: number, answerCorrect: boolean) => {
+    objInfoSelectedAnswer.answerId = id
+    objInfoSelectedAnswer.questionId = indicatorId
+    objInfoSelectedAnswer.correct = answerCorrect
+  }
+
+  const setClassName = (shuffled: boolean, answerCorrect: boolean): string => {
+    const arrayClasses: string[] = [css.answer];
+  
+    /* если тест НЕ ЗАКОНЧЕН */
+    if (shuffled === true) {
+      arrayClasses.push(css.active);
+    }
+  
+    /* если тест ЗАКОНЧЕН */
+    if (defineEndTestSlice) {
+
+      /* блокирует возможность выбора ответа */
+      arrayClasses.push(css.questAndAnswersEnd)
+  
+      // Если правильный ответ
+      if (shuffled && answerCorrect) {
+        arrayClasses.push(css.rightAnswer);
+      }
+  
+      // Если неправильный ответ
+      if (shuffled && !answerCorrect) {
+        arrayClasses.push(css.wrongAnswer);
+      }
+  
+      // Всегда показываем правильный ответ
+      if (answerCorrect && !shuffled) {
+        arrayClasses.push(css.active);
+      }
+    }
+  
+    return arrayClasses.join(' ');
+  }
+  
+  const setAnswerFooter = (shuffled: boolean, answerCorrect: boolean/* , userSelected: boolean */): string => {
+    if (!defineEndTestSlice) return ''; // Если тест не завершен, текст не показываем
+  
+    const answerWrongOrRight = arrayAnswersSlice[indicatorId]?.correct;
+    const userSelected = shuffled && arrayAnswersSlice[indicatorId]?.correct !== answerCorrect;// если был выбран ответ и значение ключа correct из объекта arrayAnswersSlice не совпадает со значением ключа correct объекта answer
+  
+    // Если тест завершен
+    if (defineEndTestSlice) {
+
+      if (shuffled && answerWrongOrRight) {
+        return 'Ваш ответ верный ✅';  // Текст для правильного ответа
+      }
+  
+      if (shuffled && !answerWrongOrRight) {
+        return 'Ваш ответ неверный ❌';  // Текст для неправильного ответа
+      }
+  
+      // Если ответ был правильный и не выбран, показываем правильный ответ
+      if (answerCorrect && !userSelected) {
+        return `правильный ответ ✔️`; // Показываем правильный ответ
+      }
+
+    }
+  
+    return '';
+  }
+  
   return (
-    <div className={`${css.questAndAnswers} ${defineEndTestSlice ? 
-      css.questAndAnswersEnd : 
-      css.questAndAnswers}`}>
+    <div className={css.questAndAnswers}>
       <p className={css.question} ref={focusBlock}>{qA[indicatorId]?.question}</p>
+
       {qA[indicatorId]?.answers.map((answer, id) => {
-        const suffled = arrayAnswersSlice[indicatorId]?.answerId === id
-        return (<button 
-          className={`${css.answer} ${suffled ? css.active : css.answer}`}
-          onClick={()=>{
-            // setClickedId(id)
-
-            /* формируем объект в выбраными ответами */
-            objInfoSelectedAnswer.answerId = id
-            objInfoSelectedAnswer.questionId = indicatorId
-            objInfoSelectedAnswer.correct = answer.correct
-            console.log(objInfoSelectedAnswer);
-
-            answerCreateArray()// помещает объект в массив Slice
-            console.log(arrayAnswersSlice);
-          }}
-          key={answer.id}
-        >
-          {answer.value}
-        </button>)
+        const shuffled = arrayAnswersSlice[indicatorId]?.answerId === id;  // Проверка, был ли выбран этот ответ
+        const answerCorrect = answer.correct;  // Проверка, является ли ответ правильным
+        return (
+          <button 
+            className={setClassName(shuffled, answerCorrect)}
+            onClick={()=>{
+              console.log(answerCorrect);
+              createObjInfoSelectedAnswer(id, answerCorrect)
+              answerCreateArray()// помещает объект в массив Slice
+            }}
+            key={answer.id}
+          >
+            {answer.value}
+            <span className={css.answerFooter}>
+              {setAnswerFooter(shuffled, answerCorrect)}
+            </span>
+          </button>
+        )
       })}
+
     </div>
   );
 }

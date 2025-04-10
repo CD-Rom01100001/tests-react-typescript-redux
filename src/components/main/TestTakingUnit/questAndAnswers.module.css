@@ -9,10 +9,10 @@
 
 .answer {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  flex-direction: column;
+  gap: 0.5rem 0;
   width: 100%;
-  margin: 0 0 1rem 0;
+  margin: 0 0 2rem 0;
   padding: 0.5rem;
   text-align: left;
   font-weight: 400;
@@ -31,4 +31,16 @@
 .active {
   background: rgba(0, 100, 177, 0.1529411765);
   pointer-events: none;
+}
+
+.rightAnswer {
+  background: rgba(40, 197, 25, 0.153);
+}
+
+.wrongAnswer {
+  background: rgba(197, 25, 25, 0.153);
+}
+
+.answerFooter {
+  font-weight: bold;
 }

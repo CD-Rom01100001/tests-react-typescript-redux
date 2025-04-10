@@ -26,7 +26,7 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
   /* навигация при нажитии на индикатор */
   useEffect(()=>{
     dispatch(getIndicatorId(indicatorId))
-    console.log(indicatorId);
+    // console.log(indicatorId);
   }, [dispatch, indicatorId])
 
   /* навигация при нажатии на кнопки клавиатуры */
@@ -64,7 +64,7 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
     if (defineEndTestSlice === true && answer?.questionId === numName) {
       /* если в ключе correct выбраного вопроса true то срабатывает соответствующий стиль */
       if (answer.correct) {
-        arrayClasses.push(css.redAnswer)
+        arrayClasses.push(css.rightAnswer)
       }
       /* если в ключе correct выбраного вопроса false то срабатывает соответствующий стиль */
       else {
