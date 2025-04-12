@@ -1,5 +1,6 @@
 import { AllQAT } from "./allStageLink";
 
+/*  */
 export const getSectionAndNumber = (arr: AllQAT[]): [string, number][] => {
   const sectionNameArray: string[] = [];
   arr.forEach(qa => sectionNameArray.push(qa.answers[0].section))

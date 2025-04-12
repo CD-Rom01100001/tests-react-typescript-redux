@@ -10,6 +10,8 @@ const Exam: FC = () => {
       <Description 
       title={contentDescr.exam.title} 
       description={contentDescr.exam.description}/>
+
+      .
     </div>
   );
 }

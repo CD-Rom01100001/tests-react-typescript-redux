@@ -11,7 +11,8 @@ import sound from '../../../assets/sounds/end_or_pass.mp3'
 import Buttons from './Buttons';
 import { getIndicatorId } from '../../../store/slices';
 interface TestTakingUnitProps {
-  title: number;
+  title: string;
+  stageNumber?: number;
   numberOfQuestions: AllQAT[];
   sectionAndNum: [string, number][]
 }
@@ -26,7 +27,8 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
   return array
 }
 
-const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sectionAndNum}) => {
+const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
+  console.log('TestTakingUnit');
 
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
@@ -50,7 +52,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
     <div className={css.testTakingUnit}>
       {/* заголовок */}
       <div className={css.blockTitle}>
-        <h2 className={css.mainTitle}>Обучение</h2>
+        <h2 className={css.mainTitle}>{title}</h2>
       </div>
 
       {/* кнопка выхода */}
@@ -71,7 +73,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, numberOfQuestions, sect
           <p className={css.currentQuest}>{`${indicatorId+1}/${sectionAndNum[0][1]}`}</p>
         </div>
         <div className={css.questionSummary}>
-          <h3 className={css.stageTitle}>{`${title}-й этап`}</h3>
+          <h3 className={css.stageTitle}>{`${stageNumber}-й этап`}</h3>
           <p>из раздела:</p>
           <ul className={css.sectionList}>
             {sectionAndNum.map((elem, i) => {

@@ -11,10 +11,11 @@ import Training from './main/training/Training';
 import Exam from './main/exam/Exam';
 import NotFoundPage from './NotFoundPage';
 import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
-import {getAllStageLink} from './allStageLink'
+import { getAllStageLink } from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
-import './app.css';
+import { tenRandomQuestions } from './TenExamQuestion';
 import QuestAndAnswers from './main/TestTakingUnit/QuestAndAnswers';
+import './app.css';
 
 const questArray = Object.entries(contentQuest)
 
@@ -52,13 +53,23 @@ const App: FC = () => {
               path={`training/stage-${sectionId+1}`} 
               element={
                 <TestTakingUnit 
-                  title={sectionId+1}
+                  title={''}
+                  stageNumber={sectionId+1}
                   numberOfQuestions={elem}
                   sectionAndNum={getSectionAndNumber(elem)}/>
               } 
               key={sectionId}
             />)}
-            <Route  path='exam' element={<Exam/>}></Route>
+            <Route path='exam' element={<Exam/>}/>
+            {/* <Route 
+              path={`exam/passage`}
+              element={
+                <TestTakingUnit 
+                  title={'Экзамен'}
+                  numberOfQuestions={elem}
+                  sectionAndNum={getSectionAndNumber(elem)}/>
+              }
+            /> */}
             <Route  path='*' element={<NotFoundPage/>}></Route>
           </Route>
         </Routes>
