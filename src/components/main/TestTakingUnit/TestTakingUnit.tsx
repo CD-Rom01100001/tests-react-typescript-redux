@@ -1,15 +1,20 @@
 import { FC, useState, useEffect} from 'react';
-import Indicator from './Indicator';
 import { Link, useLocation } from 'react-router-dom';
+
 import { AllQAT } from '../../allStageLink';
-import css from './testTakingUnit.module.css'
+
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { getIndicatorId, clearAnswers } from '../../../store/slices';
+
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
 import Alert from './Alert';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import Indicator from './Indicator';
 import sound from '../../../assets/sounds/end_or_pass.mp3'
 import Buttons from './Buttons';
-import { getIndicatorId } from '../../../store/slices';
+
+import css from './testTakingUnit.module.css'
+
 interface TestTakingUnitProps {
   title: string;
   stageNumber?: number;
@@ -30,7 +35,11 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
+  const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
+
+  console.log(indicatorId);
+  console.log(arrayAnswersSlice);
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
@@ -42,6 +51,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   /* пра нажатии на кнопку ВЫХОД */
   const stopTest = () => {
     dispatch(getIndicatorId(0))
+    dispatch(clearAnswers())// очищает объект с товетами
   }
 
   /* показывает окно предупреждения */
@@ -72,7 +82,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
       {/* кнопка выхода */}
       <div className={css.blockBtnExit}>
         <Link 
-          to='/training' 
+          to={location ? '/training' : '/'}
           className={css.btnExit} 
           onClick={stopTest}>Выход</Link>
       </div>

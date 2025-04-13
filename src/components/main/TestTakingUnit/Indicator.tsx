@@ -16,9 +16,9 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const dispatch = useAppDispatch();
   
-  useEffect(() => {
-    console.log(arrayAnswersSlice);
-  }, [arrayAnswersSlice])
+  // useEffect(() => {
+  //   console.log(arrayAnswersSlice);
+  // }, [arrayAnswersSlice])
 
   /* states */
   const [clickedEvent, setClickEvent] = useState('1');

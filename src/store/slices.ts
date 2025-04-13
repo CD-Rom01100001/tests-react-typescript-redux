@@ -110,6 +110,10 @@ const arrayAnswers = createSlice({
     },
     setFullAnswers: (state, action: PayloadAction<(ObjInfoSelectedAnswerType | null)[]>) => {
       state.arrayAnswers = action.payload
+    },
+    /* очищает массив с ответами */
+    clearAnswers: (state) => {
+      state.arrayAnswers = []
     }
   }
 })
@@ -141,7 +145,7 @@ export const {getIndicatorId} = indicatorId.actions
 export const indicatorIdReducer = indicatorId.reducer
 
 /* массив ответов */
-export const {setAnswers, setFullAnswers} = arrayAnswers.actions
+export const {setAnswers, setFullAnswers, clearAnswers} = arrayAnswers.actions
 export const setAnswersReducer = arrayAnswers.reducer
 
 export const {defineEndTest} = qAEnd.actions

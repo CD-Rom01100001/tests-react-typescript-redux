@@ -11,7 +11,7 @@ const TestTime: FC = () => {
   const dispatch = useAppDispatch()
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
-  const [time, setTime] = useState(location ? 0 : 600);
+  const [time, setTime] = useState(location ? 0 : 900);
   const [running, setRunning] = useState(false);
 
   useEffect(() => {
