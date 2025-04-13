@@ -1,3 +1,7 @@
+.testTakingUnit {
+  width: 100%;
+}
+
 .mainTitle {
   margin-bottom: 3rem;
   text-align: center;
@@ -50,6 +54,10 @@
   align-items: center;
 }
 
-.section {
+.sectionLi {
   list-style-type: disc;
+}
+
+.section {
+  font-weight: bold;
 }

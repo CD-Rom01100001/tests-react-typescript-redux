@@ -14,7 +14,7 @@ const Alert: FC = () => {
         <p className={css.alertText}>Прохождение обучения заняло слишком много времени!</p>
         <p className={css.alertText}>Процесс будет прерван!</p>
         <div className={css.buttons}>
-          <NavLink to='/training' className={css.button} onClick={()=>dispatch(setStateAlert('close'))}>В "Обучение"</NavLink>
+          <NavLink to='/' className={css.button} onClick={()=>dispatch(setStateAlert('close'))}>на главную</NavLink>
           <button className={css.button} onClick={()=>window.location.reload()}>Заново</button>
         </div>
       </div>

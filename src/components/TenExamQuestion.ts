@@ -1,13 +1,11 @@
-type AnswersT = {
-  correct: boolean;
-  id: string;
-  section: string;
-  value: string
-}
-type AllQAT = {
-  answers: AnswersT[];
-  question: string
-}
+import contentQuest from '../data/allQuestions.json'
+import type { AllQAT } from './allStageLink';
+
+const questArray: AllQAT[][] = 
+Object.entries(contentQuest).
+map(elem => 
+  elem[1].map(qa => qa)
+)
 
 const shuffle = (array: AllQAT[]) => {
   const arr = [...array]; // копия
@@ -18,12 +16,12 @@ const shuffle = (array: AllQAT[]) => {
   return arr;
 }
 
-export const tenRandomQuestions = (questions: AllQAT[][]) => {
+export const tenRandomQuestions = () => {
   /* новый массив */
   const newArr: AllQAT[] = []
   /* рандомно вытаскивает два вопросса из каждого раздела и помещается в новый массив */
-  Object.entries(questions).forEach(elem => {
-    elem[1].
+  questArray.forEach(elem => {
+    elem.
       sort(()=>
         Math.random()-0.5).
         slice(0, 2).

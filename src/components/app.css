@@ -12,17 +12,13 @@ h1, h2, h3, h4, h5, h6, p, a, span, li, button {
   color: #1d1d1e;
 }
 
-body {
-  padding: 2rem;
-}
-
 .app {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   max-width: 102.4rem;
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
 }
 
 .clear-block {

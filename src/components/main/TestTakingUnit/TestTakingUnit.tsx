@@ -1,6 +1,6 @@
 import { FC, useState, useEffect} from 'react';
 import Indicator from './Indicator';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './testTakingUnit.module.css'
 import QuestAndAnswers from './QuestAndAnswers';
@@ -28,26 +28,40 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
 }
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
-  console.log('TestTakingUnit');
-
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
 
+  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
   useEffect(() => {
     const shuffled = shuffleQuestionArray(numberOfQuestions);
     setShuffledQuestions(shuffled);
   }, [numberOfQuestions]);
- 
 
+  /* пра нажатии на кнопку ВЫХОД */
   const stopTest = () => {
     dispatch(getIndicatorId(0))
   }
+
+  /* показывает окно предупреждения */
   const openAlert = (): JSX.Element => {
     new Audio(sound).play()
     return <Alert/>
   }
+  
+  /* в зависимости от адреса устанавливает разделы */
+  const getCurrentSection = () => {
+    if (location) {
+      return <ul className={css.sectionList}>
+        {sectionAndNum.map((elem, i) => {
+          return <li className={css.sectionLi} key={i}>{`${elem[0]} - ${elem[1]}`}</li>
+        })}
+      </ul>
+    }
+    return <p className={css.section}>{numberOfQuestions[indicatorId].answers[0].section}</p>
+  }
+
   return (
     <div className={css.testTakingUnit}>
       {/* заголовок */}
@@ -69,18 +83,21 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
       {/* блок показателей и описание теста */}
       <div className={css.blockInformation}>
+
         <div className={css.blockCurrentQest}>
-          <p className={css.currentQuest}>{`${indicatorId+1}/${sectionAndNum[0][1]}`}</p>
+          {/* контент будет в зависимости от адреса */}
+          <p className={css.currentQuest}>{`${indicatorId+1}/${location ? sectionAndNum[0][1] : numberOfQuestions.length}`}</p>
         </div>
+
         <div className={css.questionSummary}>
-          <h3 className={css.stageTitle}>{`${stageNumber}-й этап`}</h3>
+          {/* контент будет в зависимости от адреса */}
+          {location &&
+            <h3 className={css.stageTitle}>{`${stageNumber}-й этап`}</h3>
+          }
           <p>из раздела:</p>
-          <ul className={css.sectionList}>
-            {sectionAndNum.map((elem, i) => {
-              return <li className={css.section} key={i}>{`${elem[0]} - ${elem[1]}`}</li>
-            })}
-          </ul>
+          {getCurrentSection()}
         </div>
+
         <div className={css.blockTime}>
           <TestTime/>
         </div>

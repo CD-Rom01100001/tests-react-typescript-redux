@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import { useAppDispatch } from '../../../store/hooks';
 import { setStateAlert } from '../../../store/slices';
@@ -9,7 +10,8 @@ const TestTime: FC = () => {
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const dispatch = useAppDispatch()
 
-  const [time, setTime] = useState(0);
+  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+  const [time, setTime] = useState(location ? 0 : 600);
   const [running, setRunning] = useState(false);
 
   useEffect(() => {
@@ -18,26 +20,44 @@ const TestTime: FC = () => {
 
   /* условия для остановки времени */
   useEffect(() => {
-    if (Math.floor((time / 60) % 60) === 60) {
-      setRunning(false)
-      dispatch(setStateAlert('open'))
+    if (location) {
+      if (Math.floor((time / 60) % 60) === 60) {
+        setRunning(false)
+        dispatch(setStateAlert('open'))
+      }
+    } 
+    else {
+      if (time === 0) {
+        setRunning(false);
+        dispatch(setStateAlert('open'));
+      }
     }
     if (defineEndTestSlice === true) {
       setRunning(false)
     }
-  }, [dispatch, time, defineEndTestSlice])
+  }, [dispatch, time, defineEndTestSlice, location])
 
   useEffect(() => {
     let interval: number | undefined;
-    if (running) {
-      interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
-      }, 1000);
-    } else if (!running) {
-      clearInterval(interval);
+    if (location) {
+      if (running) {
+        interval = setInterval(() => {
+          setTime((prevTime) => prevTime + 1);
+        }, 1000);
+      } else if (!running) {
+        clearInterval(interval);
+      }
+    }
+    else {
+      if (running && time > 0) {
+        interval = setInterval(() => {
+          setTime((prevTime) => prevTime - 1);
+          console.log(time);
+        }, 1000);
+      }
     }
     return () => clearInterval(interval);
-  }, [running]);
+  }, [location, running, time]);
 
   return (
     <div className={css.stopwatch}>

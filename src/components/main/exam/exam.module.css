@@ -1,0 +1,35 @@
+.buttonBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.examTestButton {
+  display: inline-block;
+  padding: 0 1rem;
+  height: 3.5rem;
+  background: #e6e6e6;
+  border: none;
+  border-radius: 0.5rem;
+  color: #1d1d1e;
+  font-weight: 500;
+  line-height: 3.5rem;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1), 
+  inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset 1px 1px 1px 1px rgb(255, 255, 255);
+  transition: all 0.1s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.examTestButton:hover {
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3), 
+  inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset 1px 1px 1px 1px rgb(255, 255, 255);
+}
+
+.examTestButton:active {
+  background: #e4e4e4;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1), 
+  inset 1px 1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset -1px -1px 1px 1px rgba(255, 255, 255, 0.349);
+}

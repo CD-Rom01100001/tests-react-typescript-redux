@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
 import contentQuest from '../data/allQuestions.json'
-
 import Layout from './Layout';
 import Home from './main/home/Home';
 import Questions from './main/questions/Questions';
@@ -15,12 +14,12 @@ import { getAllStageLink } from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
 import { tenRandomQuestions } from './TenExamQuestion';
 import QuestAndAnswers from './main/TestTakingUnit/QuestAndAnswers';
+
 import './app.css';
 
 const questArray = Object.entries(contentQuest)
 
 const App: FC = () => {
-
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
 
   return (
@@ -48,28 +47,28 @@ const App: FC = () => {
             <Route  path='training' element={<Training/>}/>
 
             {/* блок прохождения тестов */}
-            {getAllStageLink().map((elem, sectionId) => 
-            <Route  
+            {getAllStageLink().map((elem, sectionId) => {
+            return <Route  
               path={`training/stage-${sectionId+1}`} 
               element={
                 <TestTakingUnit 
-                  title={''}
+                  title={'Обучение'}
                   stageNumber={sectionId+1}
                   numberOfQuestions={elem}
                   sectionAndNum={getSectionAndNumber(elem)}/>
               } 
               key={sectionId}
-            />)}
+            />})}
             <Route path='exam' element={<Exam/>}/>
-            {/* <Route 
-              path={`exam/passage`}
+            <Route  
+              path={`exam/test`} 
               element={
                 <TestTakingUnit 
                   title={'Экзамен'}
-                  numberOfQuestions={elem}
-                  sectionAndNum={getSectionAndNumber(elem)}/>
-              }
-            /> */}
+                  numberOfQuestions={tenRandomQuestions()}
+                  sectionAndNum={getSectionAndNumber(tenRandomQuestions())}/>
+              } 
+            />
             <Route  path='*' element={<NotFoundPage/>}></Route>
           </Route>
         </Routes>
