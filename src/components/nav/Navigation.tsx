@@ -1,8 +1,21 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { useAppDispatch } from '../../store/hooks';
+import { getIndicatorId, clearAnswers } from '../../store/slices';
+
 import css from './navigation.module.css'
 
 const Navigation: FC = () => {
+
+
+  const dispatch = useAppDispatch()
+  /* пра нажатии на кнопку ВЫХОД */
+  const stopTest = () => {
+    dispatch(getIndicatorId(0))
+    dispatch(clearAnswers())// очищает объект с товетами
+  }
+
   type ActiveType = {
     isActive: boolean
   }
@@ -13,16 +26,16 @@ const Navigation: FC = () => {
     <nav className={css.navigation}>
       <ul className={css.unList}>
       <li className={css.li}>
-          <NavLink className={setActive} to='/'>Главная</NavLink>
+          <NavLink className={setActive} to='/' onClick={stopTest}>Главная</NavLink>
         </li>
         <li className={css.li}>
-          <NavLink className={setActive} to='/questions'>Вопросы</NavLink>
+          <NavLink className={setActive} to='/questions' onClick={stopTest}>Вопросы</NavLink>
         </li>
         <li className={css.li}>
-          <NavLink className={setActive} to='/training'>Обучение</NavLink>
+          <NavLink className={setActive} to='/training' onClick={stopTest}>Обучение</NavLink>
         </li>
         <li className={css.li}>
-          <NavLink className={setActive} to='/exam'>Экзамен</NavLink>
+          <NavLink className={setActive} to='/exam' onClick={stopTest}>Экзамен</NavLink>
         </li>
       </ul>
     </nav>
