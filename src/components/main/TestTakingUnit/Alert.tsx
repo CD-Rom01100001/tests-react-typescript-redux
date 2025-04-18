@@ -1,12 +1,15 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch } from '../../../store/hooks';
+
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { setStateAlert, } from '../../../store/slices';
+
 import css from './alert.module.css'
-import { setStateAlert } from '../../../store/slices';
 
 const Alert: FC = () => {
 
   const dispatch = useAppDispatch()
+  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
 
   return (
     <div className={css.alert}>

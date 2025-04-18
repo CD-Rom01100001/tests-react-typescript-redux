@@ -22,6 +22,14 @@ const questArray = Object.entries(contentQuest)
 const App: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
 
+  // const url = 'http://localhost:5000/api/users/'
+  // const getData = async () => {
+  //   const response = await fetch(url)
+  //   const data = await response.json()
+  //   console.log(data);
+  // }
+  // getData()
+
   return (
     <BrowserRouter>
       <div className={`${'app'} ${theme.toLowerCase()}`}>

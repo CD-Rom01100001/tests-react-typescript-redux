@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId, clearAnswers } from '../../../store/slices';
+import { getIndicatorId, clearAnswers, defineEndTest } from '../../../store/slices';
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
@@ -37,6 +37,8 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
+  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
+  console.log(defineEndTestSlice);
 
   console.log(indicatorId);
   console.log(arrayAnswersSlice);
@@ -51,7 +53,8 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   /* пра нажатии на кнопку ВЫХОД */
   const stopTest = () => {
     dispatch(getIndicatorId(0))
-    dispatch(clearAnswers())// очищает объект с товетами
+    dispatch(clearAnswers())// очищает объект с оветами
+    dispatch(defineEndTest(false))
   }
 
   /* показывает окно предупреждения */

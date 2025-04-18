@@ -14,7 +14,8 @@ type TInitialState = {
   stateAlert: string;
   currentIndicatorId: number;
   arrayAnswers: (ObjInfoSelectedAnswerType | null)[];
-  defineEnd: boolean
+  defineEnd: boolean;
+  registration: boolean;
 }
 
 const initialState: TInitialState = {
@@ -24,7 +25,8 @@ const initialState: TInitialState = {
   stateAlert: 'close',
   currentIndicatorId: 0,
   arrayAnswers: [],
-  defineEnd: false
+  defineEnd: false,
+  registration: true,
 }
 
 const themeSlice = createSlice({
@@ -127,6 +129,16 @@ const qAEnd = createSlice({
     }
   }
 })
+/* зарегистрирован или нет */
+const registration = createSlice({
+  name: 'registration',
+  initialState,
+  reducers: {
+    registeredOrNot: (state, action: PayloadAction<boolean>) => {
+      state.registration = action.payload;
+    }
+  }
+})
 
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
@@ -150,3 +162,6 @@ export const setAnswersReducer = arrayAnswers.reducer
 
 export const {defineEndTest} = qAEnd.actions
 export const defineEndTestReducer = qAEnd.reducer
+
+export const {registeredOrNot} = registration.actions
+export const registeredOrNotReducer = registration.reducer

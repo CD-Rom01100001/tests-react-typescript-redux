@@ -1,0 +1,8 @@
+.registrationButtons{
+  display: flex;
+  gap: 0 2rem;
+}
+
+.registrationButtons button:hover {
+  cursor: pointer;
+}

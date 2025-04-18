@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch } from '../../store/hooks';
-import { getIndicatorId, clearAnswers } from '../../store/slices';
+import { getIndicatorId, clearAnswers, defineEndTest } from '../../store/slices';
 
 import css from './navigation.module.css'
 
@@ -14,6 +14,7 @@ const Navigation: FC = () => {
   const stopTest = () => {
     dispatch(getIndicatorId(0))
     dispatch(clearAnswers())// очищает объект с товетами
+    dispatch(defineEndTest(false))
   }
 
   type ActiveType = {

@@ -5,6 +5,8 @@ import css from './header.module.css'
 import Label from './Label';
 import ButtonTheme from './ButtonTheme';
 import Weather from './Weather';
+import RegistrationButtons from './RegistrationButtons';
+import RegistrationForm from './RegistrationForm';
 
 const Header: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
@@ -15,8 +17,10 @@ const Header: FC = () => {
 
       <div className={css.blockTop}>
         <Label/>
+        <RegistrationButtons/>
         <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} />
         <Weather/>
+        <RegistrationForm/>
       </div>
 
       <div className={css.blockTitle}>

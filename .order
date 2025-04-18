@@ -1,11 +1,14 @@
 src/components
 
-
 src/components/header
 src/components/header/Header.tsx
 src/components/header/header.module.css
 src/components/header/Label.tsx
 src/components/header/Label.module.css
+src/components/header/RegistrationButtons.tsx
+src/components/header/registrationButtons.module.css
+src/components/header/RegistrationForm.tsx
+src/components/header/registrationForm.module.css
 src/components/header/ButtonTheme.tsx
 src/components/header/ButtonTheme.css
 src/components/header/Weather.tsx

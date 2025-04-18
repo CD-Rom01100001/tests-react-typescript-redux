@@ -52,7 +52,6 @@ const TestTime: FC = () => {
       if (running && time > 0) {
         interval = setInterval(() => {
           setTime((prevTime) => prevTime - 1);
-          console.log(time);
         }, 1000);
       }
     }
