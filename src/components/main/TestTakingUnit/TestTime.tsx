@@ -21,7 +21,7 @@ const TestTime: FC = () => {
   /* условия для остановки времени */
   useEffect(() => {
     if (location) {
-      if (/* Math.floor((time / 60) % 60) === 60 */((time / 1) % 60) === 2) {
+      if (Math.floor((time / 60) % 60) === 60) {
         setRunning(false)
         dispatch(setStateAlert('open'))
       }

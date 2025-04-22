@@ -1,6 +1,11 @@
 import { FC } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
+import { getAllStageLink } from './allStageLink'
+import { getSectionAndNumber } from './sectionAndNumber';
+import { tenRandomQuestions } from './TenExamQuestion';
+import sound from '../assets/sounds/end_or_pass.mp3'
+
 import contentQuest from '../data/allQuestions.json'
 import Layout from './Layout';
 import Home from './main/home/Home';
@@ -10,9 +15,7 @@ import Training from './main/training/Training';
 import Exam from './main/exam/Exam';
 import NotFoundPage from './NotFoundPage';
 import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
-import { getAllStageLink } from './allStageLink'
-import { getSectionAndNumber } from './sectionAndNumber';
-import { tenRandomQuestions } from './TenExamQuestion';
+import Alert from '../components/Alert';
 import QuestAndAnswers from './main/TestTakingUnit/QuestAndAnswers';
 
 import './app.css';
@@ -21,19 +24,19 @@ const questArray = Object.entries(contentQuest)
 
 const App: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
+  const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
 
-  // const url = 'http://localhost:5000/api/users/'
-  // const getData = async () => {
-  //   const response = await fetch(url)
-  //   const data = await response.json()
-  //   console.log(data);
-  // }
-  // getData()
+   /* показывает окно предупреждения */
+   const openAlert = (): JSX.Element => {
+    new Audio(sound).play()
+    return <Alert/>
+  }
 
   return (
     <BrowserRouter>
       <div className={`${'app'} ${theme.toLowerCase()}`}>
-        
+        {/* окно предупреждения */}
+        {alert === 'open' ? openAlert() : ''}
         <Routes>
           <Route path='/' element={<Layout/>}>
             {/* главная */}

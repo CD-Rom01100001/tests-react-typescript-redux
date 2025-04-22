@@ -8,9 +8,9 @@ import { getIndicatorId, clearAnswers, defineEndTest } from '../../../store/slic
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
-import Alert from '../../Alert';
+// import Alert from '../../Alert';
 import Indicator from './Indicator';
-import sound from '../../../assets/sounds/end_or_pass.mp3'
+// import sound from '../../../assets/sounds/end_or_pass.mp3'
 import Buttons from './Buttons';
 
 import css from './testTakingUnit.module.css'
@@ -36,7 +36,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
-  const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
+  // const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   console.log(defineEndTestSlice);
 
@@ -58,10 +58,10 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   }
 
   /* показывает окно предупреждения */
-  const openAlert = (): JSX.Element => {
-    new Audio(sound).play()
-    return <Alert/>
-  }
+  // const openAlert = (): JSX.Element => {
+  //   new Audio(sound).play()
+  //   return <Alert/>
+  // }
   
   /* в зависимости от адреса устанавливает разделы */
   const getCurrentSection = () => {
@@ -115,7 +115,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
           <TestTime/>
         </div>
         {/* окно предупреждения */}
-        {alert === 'open' ? openAlert() : ''}
+        {/* {alert === 'open' ? openAlert() : ''} */}
       </div>
 
       {/* блок прохождения тестов */}
