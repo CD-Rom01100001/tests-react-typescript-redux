@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
@@ -19,6 +20,9 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
   const [resultText, setResultText] = useState<string>('')
   const [righttAnswers, setRightAnswers] = useState<number>(0)
   const [wrongAnswers, setWrongAnswers] = useState<number>(0)
+
+  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+  console.log('location - '+location)
 
   const result = () => {
     setEnd(true)
@@ -55,12 +59,16 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
     setRightAnswers(right);
     setWrongAnswers(wrong);
 
-    /* если меньше трех ошибок то прошли */
-    if (right > numberOfQuestions.length-3) {
+    /* определим на какой странице мы находимся и в зависимости от этого определим условие */
+    const setTheCondition = location ? numberOfQuestions.length-3 : numberOfQuestions.length-1
+    console.log(setTheCondition)
+    console.log(right)
+    if (right >= setTheCondition) {
       setResultText('Вы прошли этап!')
     } else {
       setResultText('Вы не прошли этап!')
     }
+    
   }
 
   const restart = () => {

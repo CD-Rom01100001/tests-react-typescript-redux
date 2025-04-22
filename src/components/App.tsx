@@ -4,6 +4,7 @@ import { useAppSelector } from '../store/hooks';
 import { getAllStageLink } from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
 import { tenRandomQuestions } from './TenExamQuestion';
+
 import sound from '../assets/sounds/end_or_pass.mp3'
 
 import contentQuest from '../data/allQuestions.json'

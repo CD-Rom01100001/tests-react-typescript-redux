@@ -8,9 +8,7 @@ import { getIndicatorId, clearAnswers, defineEndTest } from '../../../store/slic
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
-// import Alert from '../../Alert';
 import Indicator from './Indicator';
-// import sound from '../../../assets/sounds/end_or_pass.mp3'
 import Buttons from './Buttons';
 
 import css from './testTakingUnit.module.css'
@@ -36,12 +34,11 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
-  // const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   console.log(defineEndTestSlice);
 
   console.log(indicatorId);
-  console.log(arrayAnswersSlice);
+  console.log(arrayAnswersSlice[indicatorId]?.correct);
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
@@ -56,12 +53,6 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
     dispatch(clearAnswers())// очищает объект с оветами
     dispatch(defineEndTest(false))
   }
-
-  /* показывает окно предупреждения */
-  // const openAlert = (): JSX.Element => {
-  //   new Audio(sound).play()
-  //   return <Alert/>
-  // }
   
   /* в зависимости от адреса устанавливает разделы */
   const getCurrentSection = () => {
@@ -114,8 +105,6 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
         <div className={css.blockTime}>
           <TestTime/>
         </div>
-        {/* окно предупреждения */}
-        {/* {alert === 'open' ? openAlert() : ''} */}
       </div>
 
       {/* блок прохождения тестов */}
