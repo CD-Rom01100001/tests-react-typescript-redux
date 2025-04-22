@@ -42,8 +42,6 @@ src/components/main/TestTakingUnit/Indicator.tsx
 src/components/main/TestTakingUnit/indicator.module.css
 src/components/main/TestTakingUnit/TestTime.tsx
 src/components/main/TestTakingUnit/testTime.module.css
-src/components/main/TestTakingUnit/Alert.tsx
-src/components/main/TestTakingUnit/alert.module.css
 src/components/main/TestTakingUnit/QuestAndAnswers.tsx
 src/components/main/TestTakingUnit/questAndAnswers.module.css
 src/components/main/TestTakingUnit/Buttons.tsx
@@ -59,6 +57,8 @@ src/components/App.tsx
 src/components/app.css
 src/components/Layout.tsx
 src/components/layout.module.css
+src/components/Alert.tsx
+src/components/alert.module.css
 src/components/NotFoundPage.tsx
 src/components/allStageLink.ts
 

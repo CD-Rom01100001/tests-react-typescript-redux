@@ -16,17 +16,19 @@ type TInitialState = {
   arrayAnswers: (ObjInfoSelectedAnswerType | null)[];
   defineEnd: boolean;
   registration: boolean;
+  openWindow: boolean;
 }
 
 const initialState: TInitialState = {
   themeSlice: 'Dark',
   currentQuestionIdSlice: 0,
   currentSectionNum: 0,
-  stateAlert: 'close',
+  stateAlert: 'close',//open/close
   currentIndicatorId: 0,
   arrayAnswers: [],
   defineEnd: false,
   registration: true,
+  openWindow: false,
 }
 
 const themeSlice = createSlice({
@@ -136,6 +138,9 @@ const registration = createSlice({
   reducers: {
     registeredOrNot: (state, action: PayloadAction<boolean>) => {
       state.registration = action.payload;
+    },
+    openEntryWindow: (state, action: PayloadAction<boolean>) => {
+      state.openWindow = action.payload
     }
   }
 })
@@ -163,5 +168,5 @@ export const setAnswersReducer = arrayAnswers.reducer
 export const {defineEndTest} = qAEnd.actions
 export const defineEndTestReducer = qAEnd.reducer
 
-export const {registeredOrNot} = registration.actions
+export const {registeredOrNot, openEntryWindow} = registration.actions
 export const registeredOrNotReducer = registration.reducer

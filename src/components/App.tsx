@@ -33,6 +33,7 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <div className={`${'app'} ${theme.toLowerCase()}`}>
+        
         <Routes>
           <Route path='/' element={<Layout/>}>
             {/* главная */}

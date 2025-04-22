@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { setStateAlert, } from '../../../store/slices';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { setStateAlert, } from '../store/slices';
 
 import css from './alert.module.css'
 

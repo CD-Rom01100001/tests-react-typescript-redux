@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import css from './registrationButtons.module.css'
 import { useAppDispatch } from '../../store/hooks';
-import { registeredOrNot } from '../../store/slices';
+import { openEntryWindow, registeredOrNot } from '../../store/slices';
 
 const RegistrationButtons: FC = () => {
 
@@ -9,8 +9,22 @@ const RegistrationButtons: FC = () => {
 
   return (
     <div className={css.registrationButtons}>
-      <button className={css.logIn} onClick={()=>dispatch(registeredOrNot(false))}>Вход</button>
-      <button className={css.signIn} onClick={()=>dispatch(registeredOrNot(true))}>Регистрация</button>
+      <button className={css.logIn} 
+        onClick={()=>{
+          dispatch(registeredOrNot(false))
+          dispatch(openEntryWindow(true))
+        }}
+      >
+        Вход
+      </button>
+      <button className={css.signIn} 
+        onClick={()=>{
+          dispatch(registeredOrNot(true))
+          dispatch(openEntryWindow(true))
+        }}
+      >
+        Регистрация
+      </button>
     </div>
   );
 }

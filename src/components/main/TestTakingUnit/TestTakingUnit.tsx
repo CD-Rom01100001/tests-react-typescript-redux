@@ -8,7 +8,7 @@ import { getIndicatorId, clearAnswers, defineEndTest } from '../../../store/slic
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
-import Alert from './Alert';
+import Alert from '../../Alert';
 import Indicator from './Indicator';
 import sound from '../../../assets/sounds/end_or_pass.mp3'
 import Buttons from './Buttons';
