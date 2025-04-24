@@ -7,10 +7,10 @@
 }
 
 .main {
-  z-index: 1;
   display: flex;
   justify-content: center;
   flex-grow: 1;
+  margin-top: -1px;
   padding: 3rem 2rem;
   background: #F6F6F6;
   border: 1px solid #E6E6E6;

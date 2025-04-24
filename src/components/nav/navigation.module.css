@@ -1,6 +1,5 @@
 .navigation {
-  z-index: 2;
-  margin-bottom: -0.1rem;
+  position: relative;
 }
 
 .unList {
