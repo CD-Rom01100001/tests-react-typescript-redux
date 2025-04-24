@@ -1,24 +1,65 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setStateAlert, } from '../store/slices';
+import { setStateAlert, getIndicatorId, clearAnswers, defineEndTest, setEndTime } from '../store/slices';
 
 import css from './alert.module.css'
 
 const Alert: FC = () => {
 
   const dispatch = useAppDispatch()
-  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
+  const endTime = useAppSelector(state => state.alertTrainingIndex.endTime)
+  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+
+  const setPath = (): string => {
+    return location ? '/training' : '/exam'
+  }
+
+  const resetEndExit = () => {
+    dispatch(getIndicatorId(0))
+    dispatch(clearAnswers())// очищает объект с ответами
+    dispatch(defineEndTest(false))
+    dispatch(setEndTime(false))
+    dispatch(setStateAlert('close'))
+  }
+
+  const returnAgainOrNo = () => {
+    return endTime ? 
+    window.location.reload() :
+    dispatch(setStateAlert('close'))
+  }
 
   return (
     <div className={css.alert}>
       <div className={css.alertWindow}>
-        <p className={css.alertText}>Прохождение обучения заняло слишком много времени!</p>
-        <p className={css.alertText}>Процесс будет прерван!</p>
+        <p className={css.alertText}>
+          {endTime ? 
+          'Прохождение обучения заняло слишком много времени!' : 
+          'Если вы покините тест, то все результаты будут сброшены!'}
+        </p>
+        <p className={css.alertText}>
+          {endTime ? 
+          'Процесс будет прерван!' : 
+          'Хотите выйти?'}
+        </p>
         <div className={css.buttons}>
-          <NavLink to='/' className={css.button} onClick={()=>dispatch(setStateAlert('close'))}>на главную</NavLink>
-          <button className={css.button} onClick={()=>window.location.reload()}>Заново</button>
+          <NavLink 
+            to={setPath()} 
+            className={css.button} 
+            onClick={resetEndExit}>
+            {endTime ? 
+            'Выход' :
+            'Да'}
+          </NavLink>
+
+          <button 
+            className={css.button} 
+            onClick={returnAgainOrNo}>
+            {endTime ? 
+            'Заново' :
+            'Нет'}
+          </button>
         </div>
       </div>
     </div>

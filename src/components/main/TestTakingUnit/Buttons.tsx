@@ -22,7 +22,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
   const [wrongAnswers, setWrongAnswers] = useState<number>(0)
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
-  console.log('location - '+location)
 
   const result = () => {
     setEnd(true)
@@ -37,7 +36,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
       // Прямого сеттера массива нет — добавим новый экшен
       dispatch(setFullAnswers(newArray));
     }
-    console.log(newArray);
 
     /* если не выбрал не один из ответов */
     if (newArray.length === 0) {
@@ -61,8 +59,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
 
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
     const setTheCondition = location ? numberOfQuestions.length-3 : numberOfQuestions.length-1
-    console.log(setTheCondition)
-    console.log(right)
     if (right >= setTheCondition) {
       setResultText('Вы прошли этап!')
     } else {
@@ -99,7 +95,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
             dispatch(getIndicatorId(indicatorId+1))
           }}
         >
-          Вперед
+          Далее
         </button>
       )}
       {indicatorId === numberOfQuestions.length-1 && 

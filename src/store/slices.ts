@@ -1,4 +1,3 @@
-import { defineConfig } from 'vite';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type ObjInfoSelectedAnswerType = {
@@ -12,6 +11,8 @@ type TInitialState = {
   currentQuestionIdSlice: number;
   currentSectionNum: number;
   stateAlert: string;
+  endTime: boolean;
+  stateExitAlert: string;
   currentIndicatorId: number;
   arrayAnswers: (ObjInfoSelectedAnswerType | null)[];
   defineEnd: boolean;
@@ -24,6 +25,8 @@ const initialState: TInitialState = {
   currentQuestionIdSlice: 0,
   currentSectionNum: 0,
   stateAlert: 'close',//open/close
+  endTime: false,
+  stateExitAlert: 'close',//open/close
   currentIndicatorId: 0,
   arrayAnswers: [],
   defineEnd: false,
@@ -78,7 +81,10 @@ const alertTraining = createSlice({
   reducers: {
     setStateAlert: (state, action: PayloadAction<string>) => {
       state.stateAlert = action.payload
-    }
+    },
+    setEndTime: (state, action: PayloadAction<boolean>) => {
+      state.endTime = action.payload
+    },
   }
 })
 /* ID индикатора */
@@ -154,7 +160,7 @@ export const currentQuestionIdReducer = currentQuestionIdSlice.reducer
 export const {getSectionNum} = sectionNum.actions
 export const sectionNumReducer = sectionNum.reducer
 
-export const {setStateAlert} = alertTraining.actions
+export const {setStateAlert, setEndTime} = alertTraining.actions
 export const alertTrainingReducer = alertTraining.reducer
 
 /* ID индикатора */

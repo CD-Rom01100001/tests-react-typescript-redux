@@ -11,7 +11,6 @@ import RegistrationForm from './RegistrationForm';
 const Header: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const registrationWindow = useAppSelector(state => state.registeredOrNotIndex.openWindow)
-  console.log(registrationWindow)
   const dispatch = useAppDispatch();
 
   return (

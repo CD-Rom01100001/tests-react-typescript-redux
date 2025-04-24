@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../store/hooks';
 import { useAppDispatch } from '../../../store/hooks';
-import { setStateAlert } from '../../../store/slices';
+import { setEndTime, setStateAlert } from '../../../store/slices';
 import css from './testTime.module.css'
 
 const TestTime: FC = () => {
@@ -23,12 +23,14 @@ const TestTime: FC = () => {
     if (location) {
       if (Math.floor((time / 60) % 60) === 60) {
         setRunning(false)
+        dispatch(setEndTime(true))
         dispatch(setStateAlert('open'))
       }
     } 
     else {
-      if (time === 0) {
-        setRunning(false);
+      if (time === 895) {
+        setRunning(false)
+        dispatch(setEndTime(true))
         dispatch(setStateAlert('open'));
       }
     }

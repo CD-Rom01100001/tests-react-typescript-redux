@@ -2,16 +2,19 @@ import { FC, useState, useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { AllQAT } from '../../allStageLink';
+import sound from '../../../assets/sounds/end_or_pass.mp3'
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId, clearAnswers, defineEndTest } from '../../../store/slices';
+import { getIndicatorId, clearAnswers, defineEndTest, setStateAlert } from '../../../store/slices';
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
 import Indicator from './Indicator';
 import Buttons from './Buttons';
+import Alert from '../../Alert';
 
 import css from './testTakingUnit.module.css'
+// import Alert from '../../Alert';
 
 interface TestTakingUnitProps {
   title: string;
@@ -33,12 +36,9 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
-  const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
-  console.log(defineEndTestSlice);
-
-  console.log(indicatorId);
-  console.log(arrayAnswersSlice[indicatorId]?.correct);
+  const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
+  console.log('defineEndTestSlice - '+defineEndTestSlice);
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
@@ -48,9 +48,9 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   }, [numberOfQuestions]);
 
   /* пра нажатии на кнопку ВЫХОД */
-  const stopTest = () => {
+  const exitTest = () => {
     dispatch(getIndicatorId(0))
-    dispatch(clearAnswers())// очищает объект с оветами
+    dispatch(clearAnswers())// очищает объект с ответами
     dispatch(defineEndTest(false))
   }
   
@@ -66,8 +66,14 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
     return <p className={css.section}>{numberOfQuestions[indicatorId].answers[0].section}</p>
   }
 
+  const openExitAlert = (): JSX.Element => {
+    new Audio(sound).play()
+    return <Alert/>
+  }
+
   return (
     <div className={css.testTakingUnit}>
+      {alert === 'open' ? openExitAlert() : ''}
       {/* заголовок */}
       <div className={css.blockTitle}>
         <h2 className={css.mainTitle}>{title}</h2>
@@ -75,10 +81,17 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
       {/* кнопка выхода */}
       <div className={css.blockBtnExit}>
-        <Link 
-          to={location ? '/training' : '/'}
-          className={css.btnExit} 
-          onClick={stopTest}>Выход</Link>
+        {/* если тест не завершон, то обычная кнопка, иначе ссылка */}
+        {defineEndTestSlice ? 
+          <Link 
+            onClick={exitTest}
+            to={location ? '/training' : '/exam'}
+            className={css.btnExit}>Выход</Link> :
+          <button 
+            onClick={()=>dispatch(setStateAlert('open'))}
+            className={css.btnExit}>Выход</button>
+        }
+
       </div>
 
       {/* блок с индикаторами */}
