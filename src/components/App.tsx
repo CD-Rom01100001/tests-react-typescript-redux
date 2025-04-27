@@ -20,6 +20,7 @@ import './app.css';
 const questArray = Object.entries(contentQuest)
 
 const App: FC = () => {
+  /* test commit */
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
 
   return (
