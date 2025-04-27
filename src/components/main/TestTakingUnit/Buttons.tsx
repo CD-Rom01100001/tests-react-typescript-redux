@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'

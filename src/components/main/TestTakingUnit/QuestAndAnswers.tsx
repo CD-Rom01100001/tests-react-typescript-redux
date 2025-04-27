@@ -1,7 +1,7 @@
-import { FC, useState, useRef, useEffect } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import { AllQAT } from '../../allStageLink'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId, setAnswers } from '../../../store/slices';
+import { setAnswers } from '../../../store/slices';
 import css from './questAndAnswers.module.css'
 
 interface QuestAndAnswersProps {
@@ -11,12 +11,6 @@ type ObjInfoSelectedAnswerType = {
   questionId: number | null;
   answerId: number | null;
   correct: boolean | null;
-}
-type AnswerType = {
-  correct: boolean;
-  id: string;
-  section: string;
-  value: string;
 }
 
 const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
