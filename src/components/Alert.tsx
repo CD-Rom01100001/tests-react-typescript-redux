@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setStateAlert, getIndicatorId, clearAnswers, defineEndTest, setEndTime } from '../store/slices';
@@ -11,13 +11,13 @@ const Alert: FC = () => {
   const dispatch = useAppDispatch()
   const path = useAppSelector(state => state.alertTrainingIndex.path)
   const endTime = useAppSelector(state => state.alertTrainingIndex.endTime)
-  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+  // const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
 
   console.log(path)
 
-  const setPath = (): string => {
-    return location ? '/training' : '/exam'
-  }
+  // const setPath = (): string => {
+  //   return location ? '/training' : '/exam'
+  // }
 
   const resetEndExit = () => {
     dispatch(getIndicatorId(0))

@@ -10,7 +10,6 @@ const Navigation: FC = () => {
 
   const dispatch = useAppDispatch()
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
-  const path = useAppSelector(state => state.alertTrainingIndex.path)
 
   /* пра нажатии на кнопку ВЫХОД */
   const stopTest = (e: React.MouseEvent<HTMLAnchorElement>) => {
