@@ -32,3 +32,36 @@
   inset 1px 1px 1px 1px rgba(0, 0, 0, 0.219), 
   inset -1px -1px 1px 1px rgba(255, 255, 255, 0.349);
 }
+
+.resultBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem 0;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 0.2rem solid rgba(138, 138, 138, 0.2470588235);
+  border-radius: 0.5rem;
+}
+
+.resultText {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.righttAnswers {
+  color: green;
+}
+
+.wrongAnswers {
+  color: red;
+}
+
+.procentPassed {
+  color: #0064B1;
+}

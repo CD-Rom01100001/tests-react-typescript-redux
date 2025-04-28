@@ -1,10 +1,19 @@
 .questAndAnswers {
   height: 30rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border: 0.2rem solid rgba(138, 138, 138, 0.2470588235);
+  border-radius: 0.5rem;
   overflow: auto;
 }
 
 .questAndAnswersEnd {
   pointer-events: none;
+}
+
+.question {
+  margin-bottom: 2rem;
+  font-weight: 500;
 }
 
 .answer {

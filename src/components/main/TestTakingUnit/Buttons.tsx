@@ -40,7 +40,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
     /* если не выбрал не один из ответов */
     if (newArray.length === 0) {
       setWrongAnswers(numberOfQuestions.length)
-      setResultText('Вы не прошли этап!');
+      setResultText('Вы не прошли этап! 🙁');
       return;
     }
 
@@ -60,9 +60,9 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
     const setTheCondition = location ? numberOfQuestions.length-3 : numberOfQuestions.length-1
     if (right >= setTheCondition) {
-      setResultText('Вы прошли этап!')
+      setResultText('Вы прошли этап! 🙂')
     } else {
-      setResultText('Вы не прошли этап!')
+      setResultText('Вы не прошли этап! 🙁')
     }
     
   }
@@ -115,13 +115,13 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
               {resultText}
             </p>
             <p className={css.righttAnswers}>
-              Правельных ответов: {righttAnswers}
+              Правильных ответов: {righttAnswers}
             </p>
             <p className={css.wrongAnswers}>
               Ошибок: {wrongAnswers}
             </p>
             <p className={css.procentPassed}>
-              Пройдено {Math.round((righttAnswers/numberOfQuestions.length)*100)}%
+              Пройдено: {Math.round((righttAnswers/numberOfQuestions.length)*100)}%
             </p>
             </div>
           </div>

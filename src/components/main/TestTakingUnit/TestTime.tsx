@@ -28,7 +28,7 @@ const TestTime: FC = () => {
       }
     } 
     else {
-      if (time === 895) {
+      if (time === 0) {
         setRunning(false)
         dispatch(setEndTime(true))
         dispatch(setStateAlert('open'));

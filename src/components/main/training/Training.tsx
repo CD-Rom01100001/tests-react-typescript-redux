@@ -1,7 +1,4 @@
-import { FC, /* useEffect, */ } from 'react';
-// import { useAppDispatch } from '../../../store/hooks';
-// import { getListPageId } from '../../../store/slices';
-// import contentQuest from '../../../data/allQuestions.json'
+import { FC } from 'react';
 import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
 import StagePreviewLink from './StagePreviewLink';
@@ -19,11 +16,13 @@ const Training: FC = () => {
 
       <div className={css.stageBlock}>
         {getAllStageLink().map((qa, i) => {
-          return <StagePreviewLink
-          stageNumTitle={i+1}
-          sectionAndNum={getSectionAndNumber(qa)}
-          totalNumQuest={qa.length}
-          key={i}/>
+          return (
+            <StagePreviewLink
+            stageNumTitle={i+1}
+            sectionAndNum={getSectionAndNumber(qa)}
+            totalNumQuest={qa.length}
+            key={i}/>
+          )
         })}
       </div>
     </div>

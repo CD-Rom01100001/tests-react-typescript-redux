@@ -77,18 +77,20 @@ const Indicator: FC<IndicatorProps> = ({ listQuestions }) => {
   
   return (
     <div className={css.blockIndicators}>
-      {listQuestions.map((_, numName) => {
-        return (
-        <button 
-          name={`${numName+1}`} 
-          onClick={(event)=>{
-            dispatch(getIndicatorId(Number(event.currentTarget.name)-1))
-          }}
-          className={setClassName(numName)}
-          key={numName}>
-          {numName+1}
-        </button>)
-      })}
+      <div className={css.indicatorsWrap}>
+        {listQuestions.map((_, numName) => {
+          return (
+          <button 
+            name={`${numName+1}`} 
+            onClick={(event)=>{
+              dispatch(getIndicatorId(Number(event.currentTarget.name)-1))
+            }}
+            className={setClassName(numName)}
+            key={numName}>
+            {numName+1}
+          </button>)
+        })}
+      </div>
     </div>
   );
 }
