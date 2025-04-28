@@ -9,8 +9,11 @@ import css from './alert.module.css'
 const Alert: FC = () => {
 
   const dispatch = useAppDispatch()
+  const path = useAppSelector(state => state.alertTrainingIndex.path)
   const endTime = useAppSelector(state => state.alertTrainingIndex.endTime)
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+
+  console.log(path)
 
   const setPath = (): string => {
     return location ? '/training' : '/exam'
@@ -45,7 +48,7 @@ const Alert: FC = () => {
         </p>
         <div className={css.buttons}>
           <NavLink 
-            to={setPath()} 
+            to={path} 
             className={css.button} 
             onClick={resetEndExit}>
             {endTime ? 

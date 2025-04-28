@@ -14,8 +14,7 @@
   border-bottom: 0;
 }
 
-.li a {
-
+.li a, .p {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +22,11 @@
   height: 4rem;
 }
 
-.li a.active {
+.p {
+  cursor: pointer;
+}
+
+.active {
   background: #F6F6F6;
 }
 

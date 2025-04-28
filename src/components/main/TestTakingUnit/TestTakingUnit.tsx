@@ -5,7 +5,7 @@ import { AllQAT } from '../../allStageLink';
 import sound from '../../../assets/sounds/end_or_pass.mp3'
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId, clearAnswers, defineEndTest, setStateAlert } from '../../../store/slices';
+import { getIndicatorId, clearAnswers, defineEndTest, setStateAlert, setPath } from '../../../store/slices';
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
@@ -38,7 +38,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
-  console.log('defineEndTestSlice - '+defineEndTestSlice);
+  const path = useAppSelector(state => state.alertTrainingIndex.path)
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
@@ -71,6 +71,12 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
     return <Alert/>
   }
 
+  /* что-бы будучи не на главной странице, при перезагрузке страницы текущий путь сохранялся. Иначе при нажатии на кнопку "Выход" и при нажатии на кнопку "да/выход" в модальном окне, путь будет вести на главную страницу поскольку путь в "slices - path: '/'" будет сбрасываться на дефолтный, т.е. '/' */
+  useEffect(() => {
+    const path = window.location.pathname; // сохраняем текущий путь
+    dispatch(setPath(`/${path.split('/')[1]}`));
+  }, [dispatch])
+
   return (
     <div className={css.testTakingUnit}>
       {alert === 'open' ? openExitAlert() : ''}
@@ -85,7 +91,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
         {defineEndTestSlice ? 
           <Link 
             onClick={exitTest}
-            to={location ? '/training' : '/exam'}
+            to={path}
             className={css.btnExit}>Выход</Link> :
           <button 
             onClick={()=>dispatch(setStateAlert('open'))}

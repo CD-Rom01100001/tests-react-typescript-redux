@@ -11,6 +11,7 @@ type TInitialState = {
   currentQuestionIdSlice: number;
   currentSectionNum: number;
   stateAlert: string;
+  path: string;
   endTime: boolean;
   stateExitAlert: string;
   currentIndicatorId: number;
@@ -25,6 +26,7 @@ const initialState: TInitialState = {
   currentQuestionIdSlice: 0,
   currentSectionNum: 0,
   stateAlert: 'close',//open/close
+  path: '/',
   endTime: false,
   stateExitAlert: 'close',//open/close
   currentIndicatorId: 0,
@@ -84,6 +86,9 @@ const alertTraining = createSlice({
     },
     setEndTime: (state, action: PayloadAction<boolean>) => {
       state.endTime = action.payload
+    },
+    setPath:  (state, action: PayloadAction<string>) => {
+      state.path = action.payload
     },
   }
 })
@@ -160,7 +165,7 @@ export const currentQuestionIdReducer = currentQuestionIdSlice.reducer
 export const {getSectionNum} = sectionNum.actions
 export const sectionNumReducer = sectionNum.reducer
 
-export const {setStateAlert, setEndTime} = alertTraining.actions
+export const {setStateAlert, setEndTime, setPath} = alertTraining.actions
 export const alertTrainingReducer = alertTraining.reducer
 
 /* ID индикатора */
