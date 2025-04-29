@@ -33,6 +33,9 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
 }
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
+
+  console.log(numberOfQuestions)
+  
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
@@ -41,6 +44,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
+  const [restartCounter, setRestartCounter] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
@@ -50,7 +54,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
     const shuffled = shuffleQuestionArray(numberOfQuestions);
     setShuffledQuestions(shuffled);
-  }, [numberOfQuestions]);
+  }, [numberOfQuestions, restartCounter]);
 
 
   /* пра нажатии на кнопку ВЫХОД */
@@ -68,6 +72,10 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
           return <li className={css.sectionLi} key={i}>{`${elem[0]} - ${elem[1]}`}</li>
         })}
       </ul>
+    }
+    /* в Buttons мы установили dispatch(getIndicatorId(-1)), хоть он сразу-же перерисовывается на dispatch(getIndicatorId(0)), лучше перестраховаться и написать проверку */
+    if (indicatorId < 0) {
+      return <h3>Загрузка вопроса...</h3>
     }
     return <p className={css.section}>{numberOfQuestions[indicatorId].answers[0].section}</p>
   }
@@ -137,7 +145,9 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
       {/* навигация с помощью кнопок */}
       <Buttons 
-        numberOfQuestions={shuffledQuestions}/>
+        numberOfQuestions={shuffledQuestions}
+        onRestart={() => setRestartCounter(prev => prev + 1)}
+      />
     </div>
   );
 }

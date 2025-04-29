@@ -8,6 +8,7 @@ import {
   setAnswersReducer,
   defineEndTestReducer,
   registeredOrNotReducer,
+  resetTimeReducer,
 } from './slices'
 
 export const store = configureStore({
@@ -19,7 +20,8 @@ export const store = configureStore({
     indicatorIdIndex: indicatorIdReducer,
     arrayAnswersIndex: setAnswersReducer,
     defineEndTestIndex: defineEndTestReducer,
-    registeredOrNotIndex: registeredOrNotReducer
+    registeredOrNotIndex: registeredOrNotReducer,
+    resetTimeIndex: resetTimeReducer,
   },
 })
 

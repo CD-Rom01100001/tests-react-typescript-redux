@@ -33,7 +33,6 @@ const Navigation: FC = () => {
 
   const locationTraining = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const locationExam = useLocation().pathname.match(/^\/exam\/test/)// проверка на соответствие шаблона адреса
-  console.log(location)
 
   type ActiveType = {
     isActive: boolean

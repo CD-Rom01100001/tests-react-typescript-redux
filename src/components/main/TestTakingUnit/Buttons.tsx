@@ -3,13 +3,14 @@ import { useLocation } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getIndicatorId, setFullAnswers, defineEndTest } from '../../../store/slices';
+import { getIndicatorId, setFullAnswers, defineEndTest, resetTime } from '../../../store/slices';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
+  onRestart: () => void;
 }
 
-const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
+const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
@@ -22,10 +23,6 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
   const [wrongAnswers, setWrongAnswers] = useState<number>(0)
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
-
-  const setDateToLocalStorage = () => {
-    
-  }
 
   const result = () => {
     setEnd(true)
@@ -62,7 +59,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
     setWrongAnswers(wrong);
 
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
-    const setTheCondition = location ? numberOfQuestions.length-3 : numberOfQuestions.length-1
+    const setTheCondition = location ? numberOfQuestions.length-34 : numberOfQuestions.length-1
     if (right >= setTheCondition) {
       setResultText('Вы прошли этап! 🙂')
     } else {
@@ -72,7 +69,16 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
   }
 
   const restart = () => {
-    window.location.reload()
+    dispatch(setFullAnswers([])); // очистить ответы
+    dispatch(getIndicatorId(-1))// Redux не вызывает обновление, если значение не изменилось. То есть если currentIndicatorId уже равен 0, и я снова диспатчю getIndicatorId(0), то state не меняется, и React не видит причины перерисовывать компонент. Поэтому вызовим сначало недействительное значение.
+    setTimeout(() => dispatch(getIndicatorId(0)), 0); // а затем вызовим действительное значение
+    dispatch(defineEndTest(false)); // сбросить завершённость теста
+    setEnd(false); // сбросить локальное состояние
+    dispatch(resetTime())// сброс времени
+    setRightAnswers(0);
+    setWrongAnswers(0);
+    setResultText('');
+    onRestart(); // для пересоздания массива вопросов
   }
 
   return (

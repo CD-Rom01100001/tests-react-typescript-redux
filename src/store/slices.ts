@@ -16,9 +16,11 @@ type TInitialState = {
   stateExitAlert: string;
   currentIndicatorId: number;
   arrayAnswers: (ObjInfoSelectedAnswerType | null)[];
+  openStages: number;
   defineEnd: boolean;
   registration: boolean;
   openWindow: boolean;
+  timeKey: number;
 }
 
 const initialState: TInitialState = {
@@ -31,9 +33,11 @@ const initialState: TInitialState = {
   stateExitAlert: 'close',//open/close
   currentIndicatorId: 0,
   arrayAnswers: [],
+  openStages: 1,
   defineEnd: false,
   registration: true,
   openWindow: false,
+  timeKey: 0
 }
 
 const themeSlice = createSlice({
@@ -129,6 +133,10 @@ const arrayAnswers = createSlice({
     /* очищает массив с ответами */
     clearAnswers: (state) => {
       state.arrayAnswers = []
+    },
+    /*  */
+    setOpenStages: (state, action: PayloadAction<number>) => {
+      state.openStages = action.payload
     }
   }
 })
@@ -155,6 +163,16 @@ const registration = createSlice({
     }
   }
 })
+/* управление временем */
+const timeSlice = createSlice({
+  name: 'time',
+  initialState,
+  reducers: {
+    resetTime: (state) => {
+      state.timeKey += 1;
+    },
+  },
+});
 
 export const {changeTheme} = themeSlice.actions
 export const themeReducer = themeSlice.reducer
@@ -173,7 +191,7 @@ export const {getIndicatorId} = indicatorId.actions
 export const indicatorIdReducer = indicatorId.reducer
 
 /* массив ответов */
-export const {setAnswers, setFullAnswers, clearAnswers} = arrayAnswers.actions
+export const {setAnswers, setFullAnswers, clearAnswers, setOpenStages} = arrayAnswers.actions
 export const setAnswersReducer = arrayAnswers.reducer
 
 export const {defineEndTest} = qAEnd.actions
@@ -181,3 +199,6 @@ export const defineEndTestReducer = qAEnd.reducer
 
 export const {registeredOrNot, openEntryWindow} = registration.actions
 export const registeredOrNotReducer = registration.reducer
+
+export const { resetTime } = timeSlice.actions;
+export const resetTimeReducer = timeSlice.reducer;

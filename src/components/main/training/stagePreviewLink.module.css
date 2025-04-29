@@ -1,6 +1,25 @@
-.stageLink {
+.linkWrap {
+  position: relative;
   flex: 1 1 100%;
   max-width: 33rem;
+}
+
+.blur {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffffb4;
+  backdrop-filter: blur(1px)
+}
+
+.lock {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+  height: 4rem;
 }
 
 .previewBlock {

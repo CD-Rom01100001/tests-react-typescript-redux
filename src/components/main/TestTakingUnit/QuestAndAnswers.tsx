@@ -14,6 +14,12 @@ type ObjInfoSelectedAnswerType = {
 }
 
 const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
+  /* redux */
+  const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
+  const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
+  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
+  const dispatch = useAppDispatch()
+
   /* при открытии тестов, центр старницы смещается к блоку с вопросом */
   useEffect(() => {
     if(focusBlock.current) {
@@ -21,14 +27,12 @@ const QuestAndAnswers: FC<QuestAndAnswersProps> = ({qA}) => {
     }
   }, [])
 
-  /* redux */
-  const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
-  const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
-  const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
-  const dispatch = useAppDispatch()
-
-  /* states */
   const focusBlock = useRef<HTMLDivElement>(null)
+
+  /* в Buttons мы установили dispatch(getIndicatorId(-1)), хоть он сразу-же перерисовывается на dispatch(getIndicatorId(0)), лучше перестраховаться и написать проверку */
+  if (indicatorId < 0 || !qA[indicatorId]) {
+    return <h3>Загрузка вопроса...</h3>
+  }
 
   /* макет объекта с ответами */
   const objInfoSelectedAnswer: ObjInfoSelectedAnswerType = {
