@@ -23,6 +23,10 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions}) => {
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
 
+  const setDateToLocalStorage = () => {
+    
+  }
+
   const result = () => {
     setEnd(true)
     dispatch(defineEndTest(true))

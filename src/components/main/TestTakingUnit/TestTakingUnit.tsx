@@ -1,4 +1,4 @@
-import { FC, useState, useEffect} from 'react';
+import { FC, useState, useEffect, useRef} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { AllQAT } from '../../allStageLink';
@@ -14,7 +14,6 @@ import Buttons from './Buttons';
 import Alert from '../../Alert';
 
 import css from './testTakingUnit.module.css'
-// import Alert from '../../Alert';
 
 interface TestTakingUnitProps {
   title: string;
@@ -42,10 +41,17 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
   const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
   useEffect(() => {
+    // Предварительно нициализируем звук
+    audioRef.current = new Audio(sound)
+    audioRef.current.preload = 'auto'
+
     const shuffled = shuffleQuestionArray(numberOfQuestions);
     setShuffledQuestions(shuffled);
   }, [numberOfQuestions]);
+
 
   /* пра нажатии на кнопку ВЫХОД */
   const exitTest = () => {
@@ -67,7 +73,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   }
 
   const openExitAlert = (): JSX.Element => {
-    new Audio(sound).play()
+    audioRef.current?.play()
     return <Alert/>
   }
 
