@@ -10,6 +10,7 @@ import {
   registeredOrNotReducer,
   resetTimeReducer,
 } from './slices'
+import {resultsDataReducer} from './setResultsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     defineEndTestIndex: defineEndTestReducer,
     registeredOrNotIndex: registeredOrNotReducer,
     resetTimeIndex: resetTimeReducer,
+    resultsDataIndex: resultsDataReducer,
   },
 })
 

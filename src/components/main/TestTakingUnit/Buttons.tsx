@@ -4,6 +4,7 @@ import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, setFullAnswers, defineEndTest, resetTime } from '../../../store/slices';
+import { setResultsData, setOpenPreviewNumber } from '../../../store/setResultsSlice';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -14,6 +15,11 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
+  const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
+  const previewNumber = useAppSelector(state => state.resultsDataIndex.previewNumber)
+  console.log(numberOfQuestions)
+  console.log(resultsData.openPreview)
+  
   const dispatch = useAppDispatch()
 
   /* states */
@@ -59,8 +65,11 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
     setWrongAnswers(wrong);
 
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
-    const setTheCondition = location ? numberOfQuestions.length-34 : numberOfQuestions.length-1
+    const setTheCondition = location ? numberOfQuestions.length-34 : numberOfQuestions.length-1//! поменять на numberOfQuestions.length-3!!!!!!!!!!
     if (right >= setTheCondition) {
+      dispatch(setResultsData(previewNumber+1))
+      dispatch(setOpenPreviewNumber(previewNumber+1))
+      console.log(resultsData.openPreview)
       setResultText('Вы прошли этап! 🙂')
     } else {
       setResultText('Вы не прошли этап! 🙁')

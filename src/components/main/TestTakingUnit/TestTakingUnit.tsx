@@ -6,6 +6,7 @@ import sound from '../../../assets/sounds/end_or_pass.mp3'
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, clearAnswers, defineEndTest, setStateAlert, setPath } from '../../../store/slices';
+import { setOpenPreviewNumber } from '../../../store/setResultsSlice';
 
 import QuestAndAnswers from './QuestAndAnswers';
 import TestTime from './TestTime';
@@ -33,8 +34,7 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
 }
 
 const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
-
-  console.log(numberOfQuestions)
+  console.log(stageNumber)
   
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
@@ -47,6 +47,10 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   const [restartCounter, setRestartCounter] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  shuffledQuestions.forEach((elem, i) => {
+    console.log(`${i+1} - ${elem.answers.findIndex(elem => elem.correct === true)+1}`)
+  })
+
   useEffect(() => {
     // Предварительно нициализируем звук
     audioRef.current = new Audio(sound)
@@ -54,7 +58,9 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
 
     const shuffled = shuffleQuestionArray(numberOfQuestions);
     setShuffledQuestions(shuffled);
-  }, [numberOfQuestions, restartCounter]);
+
+    if (stageNumber !== undefined) dispatch(setOpenPreviewNumber(stageNumber))// добавляет в редакс номер этапа
+  }, [dispatch, numberOfQuestions, restartCounter, stageNumber]);
 
 
   /* пра нажатии на кнопку ВЫХОД */

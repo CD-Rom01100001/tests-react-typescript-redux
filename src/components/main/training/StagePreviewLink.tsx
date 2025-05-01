@@ -17,14 +17,17 @@ const StagePreviewLink: FC<StageLinkProps> = ({
 }) => {
 
   const openStages = useAppSelector(state => state.arrayAnswersIndex.openStages)
+  const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
 
   return (
     <div className={css.linkWrap}>
-      {(stageNumTitle > openStages) &&
+      {/* если соответствует условию то применяется блокировка превьюшки */}
+      {(resultsData.openPreview[stageNumTitle-1] !== stageNumTitle) &&
         <div className={css.blur}>
           <img src={lock} className={css.lock} alt="lock" />
         </div>
       }
+      {/* иначе превьюшка разблокируется */}
       <Link to={`/training/stage-${stageNumTitle}`} className={`${css.stageLink}`}>
         <div className={css.previewBlock}>
           <h3 className={css.title}>{`${stageNumTitle}-й этап`}</h3>

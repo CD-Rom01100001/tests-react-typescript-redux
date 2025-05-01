@@ -20,7 +20,6 @@ const TestTime: FC = () => {
 
   useEffect(() => {
     setTime(location ? 0 : 900)
-    console.log(timeKey)
     setRunning(true)
   }, [timeKey, location])
 
