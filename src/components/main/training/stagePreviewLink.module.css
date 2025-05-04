@@ -48,3 +48,11 @@
 .blockResults {
   width: 100%;
 }
+
+.resultTxt {
+  font-weight: 600;
+}
+
+.resultTxt span {
+  font-weight: normal;
+}

@@ -6,14 +6,13 @@ import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
 import StagePreviewLink from './StagePreviewLink';
 
-import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { useAppDispatch } from '../../../store/hooks';
 import { getTotalNumberPreview } from '../../../store/setResultsSlice';
 
 import css from './training.module.css'
 
 const Training: FC = () => {
 
-  const totalNumberPreview = useAppSelector(state => state.resultsDataIndex.totalNumberPreview)
   const dispatch = useAppDispatch()
 
   useEffect(() => {

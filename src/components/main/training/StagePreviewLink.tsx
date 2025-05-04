@@ -16,8 +16,25 @@ const StagePreviewLink: FC<StageLinkProps> = ({
   totalNumQuest
 }) => {
 
-  const openStages = useAppSelector(state => state.arrayAnswersIndex.openStages)
   const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
+  const date = new Date().toLocaleDateString()
+  console.log(resultsData)
+
+  const setResult = (result: string): string => {
+    const currPrevIndex = stageNumTitle-1
+    if (result === 'last') {
+      if (resultsData.lastResult[currPrevIndex] !== undefined) {
+        return `${resultsData.lastResult}% (${date})`
+      }
+    }
+    else if (result === 'best') {
+      if (resultsData.bestResult[currPrevIndex] !== undefined) {
+        return `${resultsData.bestResult}% (${date})`
+      }
+    }
+    return 'нет результата'
+  }
+
 
   return (
     <div className={css.linkWrap}>
@@ -37,8 +54,8 @@ const StagePreviewLink: FC<StageLinkProps> = ({
             })}
           </ul>
           <ul className={css.blockResults}>
-            <li>{`последний результат:`}</li>
-            <li>{`лучший результат:`}</li>
+            <li className={css.resultTxt}>последний результат: <span>{setResult('last')}</span></li>
+            <li className={css.resultTxt}>лучший результат: <span>{setResult('best')}</span></li>
           </ul>
           <p className={css.totalNumQuestStage}>{`всего ${totalNumQuest} вопросов`}</p>
         </div>

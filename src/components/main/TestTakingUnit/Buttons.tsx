@@ -4,7 +4,7 @@ import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, setFullAnswers, defineEndTest, resetTime } from '../../../store/slices';
-import { setResultsData, setOpenPreviewNumber } from '../../../store/setResultsSlice';
+import { setResultsData, setBestResult, setLastResult } from '../../../store/setResultsSlice';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -17,8 +17,10 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
   const previewNumber = useAppSelector(state => state.resultsDataIndex.previewNumber)
-  console.log(numberOfQuestions)
   console.log(resultsData.openPreview)
+  console.log('lastResult - ' + resultsData.lastResult)
+  console.log('bestResult - ' + resultsData.bestResult)
+  console.log(resultsData)
   
   const dispatch = useAppDispatch()
 
@@ -44,15 +46,21 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
       dispatch(setFullAnswers(newArray));
     }
 
+    let right = 0;
+    let wrong = 0;
+
     /* если не выбрал не один из ответов */
     if (newArray.length === 0) {
+      setResultsForPreview(0)
       setWrongAnswers(numberOfQuestions.length)
+      dispatch(setBestResult(Math.round((right/numberOfQuestions.length)*100)))// добавляет лучший результат
+      dispatch(setLastResult(Math.round((right/numberOfQuestions.length)*100)))// добавляет последний результат
       setResultText('Вы не прошли этап! 🙁');
       return;
     }
 
-    let right = 0;
-    let wrong = 0;
+    // let right = 0;
+    // let wrong = 0;
 
     newArray.forEach(elem => {
       /* если выбрал правельный ответ, то +1 к правельным ответам */
@@ -67,11 +75,15 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
     const setTheCondition = location ? numberOfQuestions.length-34 : numberOfQuestions.length-1//! поменять на numberOfQuestions.length-3!!!!!!!!!!
     if (right >= setTheCondition) {
-      dispatch(setResultsData(previewNumber+1))
-      dispatch(setOpenPreviewNumber(previewNumber+1))
-      console.log(resultsData.openPreview)
+      dispatch(setResultsData(previewNumber+1))// добавляет в массив номер разблокированного этапа
+      dispatch(setBestResult(Math.round((right/numberOfQuestions.length)*100)))// добавляет лучший результат
+      dispatch(setLastResult(Math.round((right/numberOfQuestions.length)*100)))// добавляет последний результат
+
       setResultText('Вы прошли этап! 🙂')
     } else {
+      setResultsForPreview(right)
+      dispatch(setBestResult(Math.round((right/numberOfQuestions.length)*100)))// добавляет лучший результат
+      dispatch(setLastResult(Math.round((right/numberOfQuestions.length)*100)))// добавляет последний результат
       setResultText('Вы не прошли этап! 🙁')
     }
     
@@ -88,6 +100,12 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
     setWrongAnswers(0);
     setResultText('');
     onRestart(); // для пересоздания массива вопросов
+  }
+
+  const setResultsForPreview = (x: number) => {
+    const lastResult = `${Math.round((x/numberOfQuestions.length)*100)}%`
+    console.log(lastResult)
+    return lastResult
   }
 
   return (

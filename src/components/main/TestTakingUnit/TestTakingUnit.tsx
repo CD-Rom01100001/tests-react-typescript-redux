@@ -59,7 +59,7 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
     const shuffled = shuffleQuestionArray(numberOfQuestions);
     setShuffledQuestions(shuffled);
 
-    if (stageNumber !== undefined) dispatch(setOpenPreviewNumber(stageNumber))// добавляет в редакс номер этапа
+    if (stageNumber !== undefined) dispatch(setOpenPreviewNumber(stageNumber))// добавляет в редьюсер номер разблокированного этапа
   }, [dispatch, numberOfQuestions, restartCounter, stageNumber]);
 
 
