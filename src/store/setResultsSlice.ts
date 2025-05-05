@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type ResultData = {
-  bestResult: number[],
-  lastResult: number[],
+  bestResult: string[],
+  lastResult: string[],
   openPreview: number[]
 }
 
@@ -32,7 +32,8 @@ const resultsDataSlice = createSlice({
     setOpenPreviewNumber: (state, action: PayloadAction<number>) => {
       state.previewNumber = action.payload
     },
-    setResultsData: (state, action: PayloadAction<number>) => {
+    /* заполняет массив с открытыми превьюшками "openPreview" */
+    setOpenPreview: (state, action: PayloadAction<number>) => {
       const currentArray = state.resultsData.openPreview
       /* если прилетает номер(action.payload) который уже есть в массиве(openPreview) то не добавляет номер в массив. Нужно это для того, что-бы при повторном прохождении этапа массив не заполнялся повторяющимеся числами. */
       if (!currentArray.includes(action.payload)) {
@@ -40,7 +41,8 @@ const resultsDataSlice = createSlice({
         currentArray.push(action.payload)
       }
     },
-    setBestResult: (state, action: PayloadAction<number>) => {
+    /* заполняет массив с лучшими результатами "bestResult" */
+    setBestResult: (state, action: PayloadAction<string>) => {
       const bestResult = state.resultsData.bestResult
       const curPrevNum = state.previewNumber-1
       console.log(bestResult[curPrevNum]);
@@ -49,13 +51,15 @@ const resultsDataSlice = createSlice({
       }
       return
     },
-    setLastResult: (state, action: PayloadAction<number>) => {
+    /* заполняет массив с лучшими результатами "lastResult" */
+    setLastResult: (state, action: PayloadAction<string>) => {
       const lastResult = state.resultsData.lastResult
       const curPrevNum = state.previewNumber-1
       lastResult.splice(curPrevNum, 1, action.payload)
+      localStorage.setItem('resultsData', JSON.stringify(state.resultsData))
     }
   }
 })
 
-export const {setResultsData, setOpenPreviewNumber, getTotalNumberPreview, setBestResult, setLastResult} = resultsDataSlice.actions
+export const {setOpenPreview, setOpenPreviewNumber, getTotalNumberPreview, setBestResult, setLastResult} = resultsDataSlice.actions
 export const resultsDataReducer = resultsDataSlice.reducer

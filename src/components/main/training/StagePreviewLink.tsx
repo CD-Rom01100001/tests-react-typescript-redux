@@ -17,33 +17,52 @@ const StagePreviewLink: FC<StageLinkProps> = ({
 }) => {
 
   const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
-  const date = new Date().toLocaleDateString()
+  const dataLocalStorage = localStorage.getItem('resultsData')
   console.log(resultsData)
 
-  const setResult = (result: string): string => {
+  const setResult = (result: 'last' | 'best'): string => {
+    const currPrevIndex = stageNumTitle - 1
+
+    /* если localStorage не пустой то в source из него парсится объект, 
+    а иначе объект берется из редбьюсера */
+    const source = dataLocalStorage ?
+      JSON.parse(dataLocalStorage) :
+      resultsData
+
+    const resultArray = source[`${result}Result`]// в зависимости от того что будет прописано в аргументе функции setResult динамически формируется имя ключа объекта lastResult или bestResult в которых соответственно хронятся свои массивы данных.
+
+    /* возвращает элемент по индексу, если элемента с таким индексом нет, то возвращает 'нет результата' */
+    return resultArray[currPrevIndex] ?? 'нет результата'
+    
+  }
+
+  const setPreviewLock = () => {
     const currPrevIndex = stageNumTitle-1
-    if (result === 'last') {
-      if (resultsData.lastResult[currPrevIndex] !== undefined) {
-        return `${resultsData.lastResult}% (${date})`
-      }
+
+    /* если localStorage не пустой то в source из него парсится объект, 
+    а иначе объект берется из редбьюсера */
+    const source = dataLocalStorage ?
+      JSON.parse(dataLocalStorage) :
+      resultsData
+
+    const isLocked = source.openPreview[currPrevIndex] !== stageNumTitle// true/false
+
+    if (isLocked) {
+      return (
+        <div className={css.blur}>
+          <img src={lock} className={css.lock} alt="lock" />
+        </div>
+      )
     }
-    else if (result === 'best') {
-      if (resultsData.bestResult[currPrevIndex] !== undefined) {
-        return `${resultsData.bestResult}% (${date})`
-      }
-    }
-    return 'нет результата'
+
+    return null
   }
 
 
   return (
     <div className={css.linkWrap}>
       {/* если соответствует условию то применяется блокировка превьюшки */}
-      {(resultsData.openPreview[stageNumTitle-1] !== stageNumTitle) &&
-        <div className={css.blur}>
-          <img src={lock} className={css.lock} alt="lock" />
-        </div>
-      }
+      {setPreviewLock()}
       {/* иначе превьюшка разблокируется */}
       <Link to={`/training/stage-${stageNumTitle}`} className={`${css.stageLink}`}>
         <div className={css.previewBlock}>
