@@ -1,10 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, setFullAnswers, defineEndTest, resetTime } from '../../../store/slices';
-import { setOpenPreview, setBestResult, setLastResult } from '../../../store/setResultsSlice';
+import { setOpenPreview, setBestResult, setLastResult, getTrainingLocate } from '../../../store/setResultsSlice';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -17,6 +17,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
   const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
   const previewNumber = useAppSelector(state => state.resultsDataIndex.previewNumber)
+  const trainingLocate = useAppSelector(state => state.resultsDataIndex.trainingLocate)
   console.log(resultsData.openPreview)
   console.log('lastResult - ' + resultsData.lastResult)
   console.log('bestResult - ' + resultsData.bestResult)
@@ -30,7 +31,14 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   const [righttAnswers, setRightAnswers] = useState<number>(0)
   const [wrongAnswers, setWrongAnswers] = useState<number>(0)
 
-  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+  const pathname = useLocation().pathname;
+  const location = useMemo(() => pathname.match(/^\/training\/stage-\d+$/), [pathname])
+ 
+  useEffect(() => {
+    /* определяет в редьюсер на какой странице мы находимся */
+    const mode = location ? 'training' : 'exam'
+    dispatch(getTrainingLocate(mode))
+  }, [dispatch, location])
 
   const result = () => {
     setEnd(true)
@@ -73,6 +81,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
       setResultText('Вы прошли этап! 🙂')
     } else {
       dispatch(setLastResult(resultString))// добавляет последний результат
+      dispatch(setBestResult(resultString))// добавляет лучший результат
       setResultText('Вы не прошли этап! 🙁')
     }
     

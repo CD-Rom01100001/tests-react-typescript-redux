@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef} from 'react';
+import { FC, useState, useEffect, useRef, useMemo} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { AllQAT } from '../../allStageLink';
@@ -42,7 +42,8 @@ const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQu
   const alert = useAppSelector(state => state.alertTrainingIndex.stateAlert)
   const path = useAppSelector(state => state.alertTrainingIndex.path)
 
-  const location = useLocation().pathname.match(/^\/training\/stage-\d+$/)// проверка на соответствие шаблона адреса
+  const pathname = useLocation().pathname;
+  const location = useMemo(() => pathname.match(/^\/training\/stage-\d+$/), [pathname])
   const [shuffledQuestions, setShuffledQuestions] = useState<AllQAT[]>([]);
   const [restartCounter, setRestartCounter] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null)
