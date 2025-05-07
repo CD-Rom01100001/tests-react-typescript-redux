@@ -35,6 +35,10 @@ src/components/main/training/training.module.css
 src/components/main/training/StagePreviewLink.tsx
 src/components/main/training/stagePreviewLink.module.cssf
 src/components/main/exam
+src/components/main/exam/Exam.tsx
+src/components/main/exam/exam.module.css
+src/components/main/exam/HistoryExam.tsx
+src/components/main/exam/historyExam.module.css
 src/components/main/TestTakingUnit
 src/components/main/TestTakingUnit/TestTakingUnit.tsx
 src/components/main/TestTakingUnit/testTakingUnit.module.css

@@ -4,7 +4,7 @@ import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, setFullAnswers, defineEndTest, resetTime } from '../../../store/slices';
-import { setOpenPreview, setBestResult, setLastResult, getTrainingLocate } from '../../../store/setResultsSlice';
+import { setOpenPreview, setBestResult, setLastResult, getTrainingLocate, setExamHistory } from '../../../store/setResultsSlice';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -15,13 +15,13 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
-  const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
+  const resultsTrainingData = useAppSelector(state => state.resultsDataIndex.resultsTrainingData)
   const previewNumber = useAppSelector(state => state.resultsDataIndex.previewNumber)
   const trainingLocate = useAppSelector(state => state.resultsDataIndex.trainingLocate)
-  console.log(resultsData.openPreview)
-  console.log('lastResult - ' + resultsData.lastResult)
-  console.log('bestResult - ' + resultsData.bestResult)
-  console.log(resultsData)
+  console.log(resultsTrainingData.openPreview)
+  console.log('lastResult - ' + resultsTrainingData.lastResult)
+  console.log('bestResult - ' + resultsTrainingData.bestResult)
+  console.log(resultsTrainingData)
   
   const dispatch = useAppDispatch()
 
@@ -46,6 +46,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
 
     const newArray = [...arrayAnswersSlice]// создал копию массива arrayAnswersSlice для того, что-бы этот массив был имутабельным
     const date = new Date().toLocaleDateString()
+    const time = new Date().toLocaleTimeString()
 
     /* заполняет массив null */
     if (newArray.length < numberOfQuestions.length) {
@@ -70,6 +71,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
     setWrongAnswers(wrong);
 
     const resultString = `${Math.round((right / numberOfQuestions.length) * 100)}% (${date})`;
+    const resultStringExam = `пройдено ${Math.round((right / numberOfQuestions.length) * 100)}% (${date} в ${time})`;
 
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
     const setTheCondition = location ? numberOfQuestions.length-34 : numberOfQuestions.length-1//! поменять на numberOfQuestions.length-3!!!!!!!!!!
@@ -78,10 +80,12 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
       dispatch(setOpenPreview(previewNumber+1))// добавляет в массив номер разблокированного этапа
       dispatch(setBestResult(resultString))// добавляет лучший результат
       dispatch(setLastResult(resultString))// добавляет последний результат
+      dispatch(setExamHistory(resultStringExam))// добавляет результат экзамена
       setResultText('Вы прошли этап! 🙂')
     } else {
       dispatch(setLastResult(resultString))// добавляет последний результат
       dispatch(setBestResult(resultString))// добавляет лучший результат
+      dispatch(setExamHistory(resultStringExam))// добавляет результат экзамена
       setResultText('Вы не прошли этап! 🙁')
     }
     

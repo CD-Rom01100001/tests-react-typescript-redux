@@ -16,9 +16,9 @@ const StagePreviewLink: FC<StageLinkProps> = ({
   totalNumQuest
 }) => {
 
-  const resultsData = useAppSelector(state => state.resultsDataIndex.resultsData)
-  const dataLocalStorage = localStorage.getItem('resultsData')
-  console.log(resultsData)
+  const resultsTrainingData = useAppSelector(state => state.resultsDataIndex.resultsTrainingData)
+  const dataLocalStorage = localStorage.getItem('resultsTrainingData')
+  console.log(resultsTrainingData)
 
   const setResult = (result: 'last' | 'best'): string => {
     const currPrevIndex = stageNumTitle - 1
@@ -27,7 +27,7 @@ const StagePreviewLink: FC<StageLinkProps> = ({
     а иначе объект берется из редбьюсера */
     const source = dataLocalStorage ?
       JSON.parse(dataLocalStorage) :
-      resultsData
+      resultsTrainingData
 
     const resultArray = source[`${result}Result`]// в зависимости от того что будет прописано в аргументе функции setResult динамически формируется имя ключа объекта lastResult или bestResult в которых соответственно хронятся свои массивы данных.
 
@@ -43,7 +43,7 @@ const StagePreviewLink: FC<StageLinkProps> = ({
     а иначе объект берется из редбьюсера */
     const source = dataLocalStorage ?
       JSON.parse(dataLocalStorage) :
-      resultsData
+      resultsTrainingData
 
     const isLocked = source.openPreview[currPrevIndex] !== stageNumTitle// true/false
 

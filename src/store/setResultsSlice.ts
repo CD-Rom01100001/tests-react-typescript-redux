@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { saveResultsToLocalStorage } from "./utils/saveResultsToLocslStorage";
+import { saveResultsTrainingToLocalStorage } from "./utils/saveResultsTrainingToLocalStorage";
+import { saveResultsExamToLocalStorage } from "./utils/saveResultsExamToLocalStorage";
 
 export type ResultData = {
   bestResult: string[],
@@ -11,18 +12,20 @@ interface InitialStateI {
   trainingLocate: null | 'training' | 'exam';
   totalNumberPreview: number;
   previewNumber: number;
-  resultsData: ResultData;
+  resultsTrainingData: ResultData;
+  resultsExamData: string[];
 }
 
 const initialState: InitialStateI = {
   trainingLocate: null,
   totalNumberPreview: 0,
   previewNumber: 1,
-  resultsData: {
+  resultsTrainingData: {
     bestResult: [],
     lastResult: [],
     openPreview: [1]
-  }
+  },
+  resultsExamData: []
 }
 
 const resultsDataSlice = createSlice({
@@ -42,7 +45,7 @@ const resultsDataSlice = createSlice({
     setOpenPreview: (state, action: PayloadAction<number>) => {
       if (state.trainingLocate !== 'training') return
 
-      const currentArray = state.resultsData.openPreview
+      const currentArray = state.resultsTrainingData.openPreview
       /* если прилетает номер(action.payload) который уже есть в массиве(openPreview) то не добавляет номер в массив. Нужно это для того, что-бы при повторном прохождении этапа массив не заполнялся повторяющимеся числами. */
       if (!currentArray.includes(action.payload)) {
         if (currentArray.length === state.totalNumberPreview) return// не дает превышать размер массива больше чем количество превьюшек
@@ -53,12 +56,12 @@ const resultsDataSlice = createSlice({
     setBestResult: (state, action: PayloadAction<string>) => {
       if (state.trainingLocate !== 'training') return
 
-      const bestResult = state.resultsData.bestResult
+      const bestResult = state.resultsTrainingData.bestResult
       const curPrevNum = state.previewNumber-1
 
       if (action.payload > bestResult[curPrevNum] || bestResult[curPrevNum] === undefined) {
         bestResult.splice(curPrevNum, 1, action.payload)
-        saveResultsToLocalStorage(state.resultsData)
+        saveResultsTrainingToLocalStorage(state.resultsTrainingData)
       }
       return
     },
@@ -66,11 +69,29 @@ const resultsDataSlice = createSlice({
     setLastResult: (state, action: PayloadAction<string>) => {
       if (state.trainingLocate !== 'training') return
 
-      const lastResult = state.resultsData.lastResult
+      const lastResult = state.resultsTrainingData.lastResult
       const curPrevNum = state.previewNumber-1
 
       lastResult.splice(curPrevNum, 1, action.payload)
-      saveResultsToLocalStorage(state.resultsData)
+      saveResultsTrainingToLocalStorage(state.resultsTrainingData)
+    },
+    /* заполняет массив "resultsExamData" результатами из секции "Экзамен" */
+    setExamHistory: (state, action: PayloadAction<string>) => {
+      if (state.trainingLocate === 'training') return
+
+      const currentResult = action.payload
+      const results = state.resultsExamData
+      const maxLength = 10
+      let index = 0
+
+      if (results.length < maxLength) {
+        results.push(currentResult)
+        saveResultsExamToLocalStorage(results)
+      } else {
+        results[index] = currentResult
+        index = (index + 1) % maxLength
+        saveResultsExamToLocalStorage(results)
+      }
     }
   }
 })
@@ -81,5 +102,7 @@ export const {
   setOpenPreviewNumber,
   getTotalNumberPreview,
   setBestResult,
-  setLastResult} = resultsDataSlice.actions
+  setLastResult,
+  setExamHistory
+} = resultsDataSlice.actions
 export const resultsDataReducer = resultsDataSlice.reducer
