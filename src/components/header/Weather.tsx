@@ -7,16 +7,11 @@ type TState = {
   name: string,
   temp: number,
   icon: string
-} 
+}
+
 const createFullDate = (): string => {
-  const tranceDate = (date: number): string => 
-    date < 10 ? `0${date}` : date.toString()
-  const date = new Date();
-  const year = date.getFullYear()
-  const mounth = tranceDate(date.getMonth())
-  const day = tranceDate(date.getDate())
-  const fullDate = `${day}.${mounth}.${year}г.` 
-  return fullDate
+  const date = new Date()
+  return `${date.toLocaleDateString()}г.`
 }
 const createTime = (): string => {
   const date = new Date();
