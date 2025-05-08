@@ -20,12 +20,18 @@ const initialState: InitialStateI = {
   trainingLocate: null,
   totalNumberPreview: 0,
   previewNumber: 1,
-  resultsTrainingData: {
+  resultsTrainingData: JSON.parse(localStorage.getItem('resultsTrainingData') || JSON.stringify({
     bestResult: [],
     lastResult: [],
     openPreview: [1]
-  },
-  resultsExamData: []
+  })),//! new
+  resultsExamData: JSON.parse(localStorage.getItem('resultsExamData') || '[]')//! new
+  // resultsTrainingData: {
+  //   bestResult: [],
+  //   lastResult: [],
+  //   openPreview: [1]
+  // },
+  // resultsExamData: []
 }
 
 const resultsDataSlice = createSlice({
