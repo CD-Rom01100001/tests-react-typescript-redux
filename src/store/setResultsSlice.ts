@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { saveResultsTrainingToLocalStorage } from "./utils/saveResultsTrainingToLocalStorage";
 import { saveResultsExamToLocalStorage } from "./utils/saveResultsExamToLocalStorage";
+import { saveExamIndex } from "./utils/saveExamIndex";
 
 export type ResultData = {
   bestResult: string[],
@@ -14,6 +15,7 @@ interface InitialStateI {
   previewNumber: number;
   resultsTrainingData: ResultData;
   resultsExamData: string[];
+  index: number;
 }
 
 const initialState: InitialStateI = {
@@ -24,14 +26,9 @@ const initialState: InitialStateI = {
     bestResult: [],
     lastResult: [],
     openPreview: [1]
-  })),//! new
-  resultsExamData: JSON.parse(localStorage.getItem('resultsExamData') || '[]')//! new
-  // resultsTrainingData: {
-  //   bestResult: [],
-  //   lastResult: [],
-  //   openPreview: [1]
-  // },
-  // resultsExamData: []
+  })),
+  resultsExamData: JSON.parse(localStorage.getItem('resultsExamData') || '[]'),
+  index: JSON.parse(localStorage.getItem('examIndex') || '0')
 }
 
 const resultsDataSlice = createSlice({
@@ -91,14 +88,14 @@ const resultsDataSlice = createSlice({
       const currentResult = action.payload
       const results = state.resultsExamData
       const maxLength = 10
-      let index = 0
 
       if (results.length < maxLength) {
         results.push(currentResult)
         saveResultsExamToLocalStorage(results)
       } else {
-        results[index] = currentResult
-        index = (index + 1) % maxLength
+        results[state.index] = currentResult
+        saveExamIndex(state.index+1)
+        state.index = (state.index + 1) % maxLength
         saveResultsExamToLocalStorage(results)
       }
     }

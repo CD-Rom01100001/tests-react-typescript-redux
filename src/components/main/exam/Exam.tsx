@@ -16,9 +16,9 @@ const Exam: FC = () => {
       title={contentDescr.exam.title} 
       description={contentDescr.exam.description}/>
 
-      {resultsExamDataLS ?
-        <HistoryExam data={JSON.parse(resultsExamDataLS)}/> :
-        <HistoryExam data={resultsExamDataState}/>
+      {resultsExamDataLS &&
+        <HistoryExam data={JSON.parse(resultsExamDataLS)}/>
+        // <HistoryExam data={resultsExamDataState}/>
       }
       
       <div className={css.buttonBlock}>
