@@ -61,11 +61,14 @@ const resultsDataSlice = createSlice({
     /* заполняет массив с лучшими результатами "bestResult" */
     setBestResult: (state, action: PayloadAction<string>) => {
       if (state.trainingLocate !== 'training') return
-
+    
       const bestResult = state.resultsTrainingData.bestResult
       const curPrevNum = state.previewNumber-1
+      const currentResult = +action.payload.split('%')[0]// вытаскивает только число из результата и превращает его в тип number
+      const oldResultRaw = bestResult[curPrevNum]?.split('%')[0]// вытаскивает только число из результата
+      const oldResult = oldResultRaw ? +oldResultRaw : 0// проверка на undefined, в любом случае вернет число
 
-      if (action.payload > bestResult[curPrevNum] || bestResult[curPrevNum] === undefined) {
+      if (currentResult > oldResult || bestResult[curPrevNum] === undefined) {
         bestResult.splice(curPrevNum, 1, action.payload)
         saveResultsTrainingToLocalStorage(state.resultsTrainingData)
       }
