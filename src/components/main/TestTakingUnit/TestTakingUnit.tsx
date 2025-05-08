@@ -33,9 +33,7 @@ const shuffleQuestionArray = (array: AllQAT[]): AllQAT[] => {
   return array
 }
 
-const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {
-  console.log(stageNumber)
-  
+const TestTakingUnit: FC<TestTakingUnitProps> = ({title, stageNumber, numberOfQuestions, sectionAndNum}) => {  
   const dispatch = useAppDispatch()
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)

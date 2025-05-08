@@ -15,13 +15,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
   /* redux */
   const indicatorId = useAppSelector(state => state.indicatorIdIndex.currentIndicatorId)
   const arrayAnswersSlice = useAppSelector(state => state.arrayAnswersIndex.arrayAnswers)
-  const resultsTrainingData = useAppSelector(state => state.resultsDataIndex.resultsTrainingData)
   const previewNumber = useAppSelector(state => state.resultsDataIndex.previewNumber)
-  const trainingLocate = useAppSelector(state => state.resultsDataIndex.trainingLocate)
-  console.log(resultsTrainingData.openPreview)
-  console.log('lastResult - ' + resultsTrainingData.lastResult)
-  console.log('bestResult - ' + resultsTrainingData.bestResult)
-  console.log(resultsTrainingData)
   
   const dispatch = useAppDispatch()
 

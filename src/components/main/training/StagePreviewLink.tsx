@@ -18,7 +18,6 @@ const StagePreviewLink: FC<StageLinkProps> = ({
 
   const resultsTrainingData = useAppSelector(state => state.resultsDataIndex.resultsTrainingData)
   const dataLocalStorage = localStorage.getItem('resultsTrainingData')
-  console.log(resultsTrainingData)
 
   const setResult = (result: 'last' | 'best'): string => {
     const currPrevIndex = stageNumTitle - 1
