@@ -9,8 +9,8 @@ const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch()
   console.log(registeredOrNot)
 
-  const exit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  const exit = (/* event: React.MouseEvent<HTMLButtonElement> */) => {
+    // event.preventDefault()
     dispatch(openEntryWindow(false))
   }
 
@@ -76,9 +76,7 @@ const RegistrationForm: FC = () => {
             <button type="submit" className={`${css.btnSubmit} ${css.btn}`} >
               {registeredOrNot ? 'Зарегистрировться' : 'Войти'}
             </button>
-            <button className={css.btn} onClick={(event)=>exit(event)}>
-              Выйти
-            </button>
+            <div className={`${css.btnExit} ${css.btn}`} onClick={(/* event */)=>exit(/* event */)}></div>
           </div>
         </form>
       </div>

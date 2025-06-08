@@ -13,6 +13,7 @@
 }
 
 .registrationForm {
+  position: relative;
   width: 40rem;
   padding: 1rem;
   background: #F6F6F6;
@@ -60,6 +61,31 @@
   transition: all 0.1s;
   cursor: pointer;
   user-select: none;
+}
+
+.btnExit {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin: 0;
+  width: 2rem;
+  height: 2rem;
+}
+
+.btnExit::before,
+.btnExit::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 60%;
+  background: #000;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.btnExit::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .btn:hover {
