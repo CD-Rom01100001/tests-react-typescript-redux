@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem 2rem 0 2rem;
 }
 
 .main {
   display: flex;
   justify-content: center;
-  flex-grow: 1;
+  flex: 1;
   margin-top: -1px;
   padding: 3rem 2rem;
   background: #F6F6F6;

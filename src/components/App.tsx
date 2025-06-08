@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../store/hooks';
 import { getAllStageLink } from './allStageLink'
@@ -16,6 +16,7 @@ import NotFoundPage from './NotFoundPage';
 import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
 
 import './app.css';
+import '../styles/themeStyles.css'
 
 const questArray = Object.entries(contentQuest)
 
@@ -23,9 +24,19 @@ const App: FC = () => {
   /* test commit */
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
 
+  useEffect(() => {
+    if (theme === 'Light') {
+      document.body.classList.add('light-theme');
+      document.body.classList.remove('dark-theme');
+    } else {
+      document.body.classList.add('dark-theme');
+      document.body.classList.remove('light-theme');
+    }
+  }, [theme]); // сработает при изменении theme
+
   return (
     <BrowserRouter>
-      <div className={`${'app'} ${theme.toLowerCase()}`}>
+      <div className={`${'app'} ${theme.toLowerCase()}-theme`}>
         {/* окно предупреждения */}
         {/* {alert === 'open' ? openAlert() : ''} */}
         <Routes>

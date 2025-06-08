@@ -24,7 +24,7 @@ type TInitialState = {
 }
 
 const initialState: TInitialState = {
-  themeSlice: 'Dark',
+  themeSlice: JSON.parse(localStorage.getItem('theme') || '"Dark"'),
   currentQuestionIdSlice: 0,
   currentSectionNum: 0,
   stateAlert: 'close',//open/close
@@ -50,11 +50,13 @@ const themeSlice = createSlice({
         state.themeSlice = 'Light'
         document.body.classList.add('light-theme');
         document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', JSON.stringify(state.themeSlice))
       }
       else {
         state.themeSlice = 'Dark'
         document.body.classList.remove('light-theme');
         document.body.classList.add('dark-theme');
+        localStorage.setItem('theme', JSON.stringify(state.themeSlice))
       }
       
     }

@@ -4,11 +4,11 @@ import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
 import css from './exam.module.css'
 import HistoryExam from './HistoryExam';
-import { useAppSelector } from '../../../store/hooks';
+// import { useAppSelector } from '../../../store/hooks';
 
 const Exam: FC = () => {
   const resultsExamDataLS = localStorage.getItem('resultsExamData')
-  const resultsExamDataState = useAppSelector(state => state.resultsDataIndex.resultsExamData)
+  // const resultsExamDataState = useAppSelector(state => state.resultsDataIndex.resultsExamData)
 
   return (
     <div className={css.exam}>

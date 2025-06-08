@@ -1,4 +1,4 @@
-.block-theme__button {
+.buttonDef {
   display: inline-block;
     padding: 0 1rem;
     height: 3.5rem;
@@ -16,14 +16,14 @@
     user-select: none;
 }
 
-.block-theme__button:active {
+.buttonDef:active {
   background: #e4e4e4;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1), 
   inset 1px 1px 1px 1px rgba(0, 0, 0, 0.219), 
   inset -1px -1px 1px 1px rgba(255, 255, 255, 0.349);
 }
 
-.block-theme__button_dark {
+.dark {
   color: #363549;
   background: #e6e6e6;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1),
@@ -31,7 +31,7 @@
     inset 1px 1px 1px 1px rgb(255, 255, 255);
 }
 
-.block-theme__button_light {
+.light {
   color: #e6e6e6;
   background: #363549;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1),
@@ -39,7 +39,7 @@
     inset 1px 1px 1px 1px rgb(82, 80, 110);
 }
 
-.block-theme__button_light:active {
+.light:active {
   background: #333144;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1), 
   inset 1px 1px 1px 1px rgba(0, 0, 0, 0.486), 

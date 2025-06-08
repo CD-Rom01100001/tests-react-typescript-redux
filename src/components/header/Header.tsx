@@ -12,6 +12,7 @@ const Header: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const registrationWindow = useAppSelector(state => state.registeredOrNotIndex.openWindow)
   const dispatch = useAppDispatch();
+  console.log(theme)
 
   return (
     <header className={css.header}>

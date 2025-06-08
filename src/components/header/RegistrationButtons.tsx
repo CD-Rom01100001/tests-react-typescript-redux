@@ -1,15 +1,19 @@
 import { FC } from 'react';
-import css from './registrationButtons.module.css'
-import { useAppDispatch } from '../../store/hooks';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { openEntryWindow, registeredOrNot } from '../../store/slices';
 
+import css from './registrationButtons.module.css'
+import '../../styles/themeStyles.css'
+
 const RegistrationButtons: FC = () => {
+  const theme = useAppSelector(state => state.themeIndex.themeSlice).toLocaleLowerCase();
 
   const dispatch = useAppDispatch()
 
   return (
     <div className={css.registrationButtons}>
-      <button className={css.logIn} 
+      <button className={`${css.logIn} buttonDef ${theme}`} 
         onClick={()=>{
           dispatch(registeredOrNot(false))
           dispatch(openEntryWindow(true))
@@ -17,7 +21,7 @@ const RegistrationButtons: FC = () => {
       >
         Вход
       </button>
-      <button className={css.signIn} 
+      <button className={`${css.signIn} buttonDef ${theme}`} 
         onClick={()=>{
           dispatch(registeredOrNot(true))
           dispatch(openEntryWindow(true))
