@@ -9,15 +9,46 @@ const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch()
   console.log(registeredOrNot)
 
-  const exit = (/* event: React.MouseEvent<HTMLButtonElement> */) => {
-    // event.preventDefault()
+  const exit = () => {
     dispatch(openEntryWindow(false))
   }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const user = {
+      lastName: formData.get('lastName') as string,
+      firstName: formData.get('firstName') as string,
+      middleName: formData.get('middleName') as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+    };
+
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      alert('Регистрация прошла успешно');
+      form.reset();
+      exit()
+    } catch (error) {
+      console.error('Ошибка регистрации:', error);
+      alert('Ошибка при регистрации');
+    }
+  };
 
   return (
     <div className={css.wrap}>
       <div className={css.registrationForm}>
-        <form className={css.form}>
+        <form className={css.form} onSubmit={handleSubmit}>
           <div className={css.blockTitle}>
             <h2 className={css.title}>
               {registeredOrNot ? 'Регистрация' : 'Вход'}
@@ -76,7 +107,7 @@ const RegistrationForm: FC = () => {
             <button type="submit" className={`${css.btnSubmit} ${css.btn}`} >
               {registeredOrNot ? 'Зарегистрировться' : 'Войти'}
             </button>
-            <div className={`${css.btnExit} ${css.btn}`} onClick={(/* event */)=>exit(/* event */)}></div>
+            <div className={`${css.btnExit} ${css.btn}`} onClick={exit}></div>
           </div>
         </form>
       </div>
