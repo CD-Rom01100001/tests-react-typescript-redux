@@ -13,7 +13,20 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ firstName, lastName, middleName, email, password: hashedPassword });
     await user.save();
-    res.status(201).json({ message: "Пользователь зарегистрирован" });
+
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+
+    res.status(201).json({ 
+      message: "Пользователь зарегистрирован",
+      token,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        middleName: user.middleName,
+        email: user.email,
+      }
+    });
   } catch (err: unknown) {
     if (
       typeof err === "object" &&
@@ -24,6 +37,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       res.status(409).json({
         err: "Пользователь с таким email уже существует",
       });
+      return
     }
     // console.error('Ошибка регистрации:', err);
     res.status(500).json({ err: "Ошибка регистрации", details: err });

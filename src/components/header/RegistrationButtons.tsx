@@ -33,12 +33,14 @@ const RegistrationButtons: FC = () => {
           Выход
         </button>
       }
-      
-      <button className={`${css.signIn} buttonDef ${theme}`} 
+      {!user && 
+        <button className={`${css.signIn} buttonDef ${theme}`} 
         onClick={()=>dispatch(registrationWindow('open'))}
-      >
-        Регистрация
-      </button>
+        >
+          Регистрация
+        </button>
+      }
+
     </div>
   );
 }

@@ -38,7 +38,8 @@ const LoginForm: FC = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', formData)
       alert('Вход выполнен')
-      localStorage.setItem("token", response.data.token); // Сохраняем токен
+      localStorage.setItem("token", response.data.token)// Сохраняем токен
+      localStorage.setItem("user", JSON.stringify(response.data.user))
       console.log("Пользователь:", response.data.user);
       setFormData(formDataShema)// очищает форму
       exit()// закрывается окно входа

@@ -3,6 +3,7 @@ import axios, { AxiosError } from "axios";
 import css from './registrationForm.module.css'
 import { useAppDispatch } from '../../store/hooks';
 import { registrationWindow } from '../../store/slices';
+import { getUserDate } from "../../store/userSlice";
 
 type UserDataType = Partial<{
   firstName: string;
@@ -47,7 +48,10 @@ const RegistrationForm: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/users/register', formData)
+      const response = await axios.post('http://localhost:5000/api/users/register', formData)
+      localStorage.setItem("token", response.data.token)
+      localStorage.setItem("user", JSON.stringify(response.data.user))
+      dispatch(getUserDate(response.data.user))
       alert('Регистрация пользователя прошла успешно!')
       setFormData(userData)// очищает форму
       exit()
