@@ -2,6 +2,7 @@ import { FC, useState, ChangeEvent, FormEvent } from 'react';
 import axios, { AxiosError } from "axios";
 import { useAppDispatch } from '../../store/hooks';
 import { loginWindow } from '../../store/slices';
+import { getUserDate } from '../../store/userSlice';
 
 import css from './registrationForm.module.css'
 
@@ -11,6 +12,8 @@ type LoginFormData = {
 };
 
 const LoginForm: FC = () => {
+
+  const dispatch = useAppDispatch()
 
   const formDataShema = {
     email: '',
@@ -26,7 +29,6 @@ const LoginForm: FC = () => {
     setFormData(newObj)
   }
 
-  const dispatch = useAppDispatch()
   const exit = () => {
     dispatch(loginWindow('close'))
   }
@@ -39,7 +41,8 @@ const LoginForm: FC = () => {
       localStorage.setItem("token", response.data.token); // Сохраняем токен
       console.log("Пользователь:", response.data.user);
       setFormData(formDataShema)// очищает форму
-      exit()
+      exit()// закрывается окно входа
+      dispatch(getUserDate(response.data.user))
     } catch (error) {
       const err = error as AxiosError<{ error: string }>;
       alert(err.response?.data?.error || "Ошибка входа");
