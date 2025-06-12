@@ -5,7 +5,14 @@
 .blockTop {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.blockControl {
+  display: flex;
+  justify-content: end;
   align-items: start;
+  gap: 0 2rem;
 }
 
 .blockTitle {

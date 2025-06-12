@@ -8,11 +8,13 @@ import Weather from './Weather';
 import RegistrationButtons from './RegistrationButtons';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
+import IconUser from './IconUser';
 
 const Header: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const registrationWindowState = useAppSelector(state => state.registrationWindowIndex.registrationWindowState)
   const loginWindowState = useAppSelector(state => state.loginWindowReducerIndex.loginWindowState)
+  const user = useAppSelector(state => state.userDataIndex.user)
   const dispatch = useAppDispatch();
 
   return (
@@ -20,6 +22,10 @@ const Header: FC = () => {
 
       <div className={css.blockTop}>
         <Label/>
+        {user && <IconUser/>}
+      </div>
+
+      <div className={css.blockControl}>
         <RegistrationButtons/>
         <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} />
         <Weather/>

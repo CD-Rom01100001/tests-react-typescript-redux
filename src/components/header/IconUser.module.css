@@ -1,0 +1,12 @@
+.iconUser {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #29396F;
+  width: 3rem;
+  height: 3rem;
+  font-size: 2rem;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}

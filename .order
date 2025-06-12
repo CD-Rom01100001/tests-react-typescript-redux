@@ -9,10 +9,13 @@ src/components/header/RegistrationButtons.tsx
 src/components/header/registrationButtons.module.css
 src/components/header/RegistrationForm.tsx
 src/components/header/registrationForm.module.css
+src/components/header/LoginForm.tsx
 src/components/header/ButtonTheme.tsx
 src/components/header/ButtonTheme.css
 src/components/header/Weather.tsx
 src/components/header/Weather.css
+src/components/header/IconUser.tsx
+src/components/header/IconUser.module.css
 
 src/components/nav
 src/components/nav/Navigation.tsx
