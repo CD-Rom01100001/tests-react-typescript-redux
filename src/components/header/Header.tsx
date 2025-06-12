@@ -7,12 +7,13 @@ import ButtonTheme from './ButtonTheme';
 import Weather from './Weather';
 import RegistrationButtons from './RegistrationButtons';
 import RegistrationForm from './RegistrationForm';
+import LoginForm from './LoginForm';
 
 const Header: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
-  const registrationWindow = useAppSelector(state => state.registeredOrNotIndex.openWindow)
+  const registrationWindowState = useAppSelector(state => state.registrationWindowIndex.registrationWindowState)
+  const loginWindowState = useAppSelector(state => state.loginWindowReducerIndex.loginWindowState)
   const dispatch = useAppDispatch();
-  console.log(theme)
 
   return (
     <header className={css.header}>
@@ -22,8 +23,11 @@ const Header: FC = () => {
         <RegistrationButtons/>
         <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} />
         <Weather/>
-        {registrationWindow &&
+        {registrationWindowState === 'open' &&
           <RegistrationForm/>
+        }
+        {loginWindowState === 'open' && 
+          <LoginForm/>
         }
       </div>
 

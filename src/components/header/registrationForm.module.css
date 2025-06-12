@@ -12,7 +12,7 @@
   backdrop-filter: blur(1px)
 }
 
-.registrationForm {
+.registrationForm, .loginForm {
   position: relative;
   width: 40rem;
   padding: 4rem 4rem 2rem 2rem;

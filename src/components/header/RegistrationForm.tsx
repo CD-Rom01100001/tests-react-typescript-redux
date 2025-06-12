@@ -1,8 +1,8 @@
 import { FC, useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosError } from "axios";
 import css from './registrationForm.module.css'
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { openEntryWindow } from '../../store/slices';
+import { useAppDispatch } from '../../store/hooks';
+import { registrationWindow } from '../../store/slices';
 
 type UserDataType = Partial<{
   firstName: string;
@@ -12,19 +12,19 @@ type UserDataType = Partial<{
   password: string;
 }>
 
-type RegisterErrorResponse = {
-  error: string;
-  details?: {
-    code?: number;
-    errmsg?: string;
-  };
-};
+// type RegisterErrorResponse = {
+//   error: string;
+//   details?: {
+//     code?: number;
+//     errmsg?: string;
+//   };
+// };
 
 const RegistrationForm: FC = () => {
 
   const dispatch = useAppDispatch()
   const exit = () => {
-    dispatch(openEntryWindow(false))
+    dispatch(registrationWindow('close'))
   }
 
   const userData: UserDataType = {
@@ -52,7 +52,8 @@ const RegistrationForm: FC = () => {
       setFormData(userData)// очищает форму
       exit()
     } catch (error) {
-      const err = error as AxiosError<RegisterErrorResponse>
+      // const err = error as AxiosError<RegisterErrorResponse>
+      const err = error as AxiosError<{ error: string }>;
       if(err.response?.status === 409) {
         alert('Пользователь с таким email уже существует');
       } else {

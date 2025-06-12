@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
+// Registration
 export const register = async (req: Request, res: Response): Promise<void> => {
 
   try {
@@ -26,6 +27,41 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     }
     // console.error('Ошибка регистрации:', err);
     res.status(500).json({ err: "Ошибка регистрации", details: err });
+  }
+};
+
+// Login
+export const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(401).json({ error: "Неверный email или пароль" });
+      return;
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      res.status(401).json({ error: "Неверный email или пароль" });
+      return;
+    }
+
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
+
+    res.json({
+      message: "Вход выполнен",
+      token,
+      user: {
+        id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        middleName: user.middleName,
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Ошибка входа", details: err });
   }
 };
 

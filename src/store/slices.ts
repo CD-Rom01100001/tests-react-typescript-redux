@@ -18,8 +18,8 @@ type TInitialState = {
   arrayAnswers: (ObjInfoSelectedAnswerType | null)[];
   openStages: number;
   defineEnd: boolean;
-  registration: boolean;
-  openWindow: boolean;
+  loginWindowState: 'close' | 'open';
+  registrationWindowState: 'close' | 'open';
   timeKey: number;
 }
 
@@ -35,8 +35,8 @@ const initialState: TInitialState = {
   arrayAnswers: [],
   openStages: 1,
   defineEnd: false,
-  registration: true,
-  openWindow: false,
+  loginWindowState: 'close',
+  registrationWindowState: 'close',
   timeKey: 0
 }
 
@@ -152,17 +152,24 @@ const qAEnd = createSlice({
     }
   }
 })
-/* зарегистрирован или нет */
-const registration = createSlice({
+/* закрыто или открыто окно регистрации */
+const setStateRegWindow = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    registeredOrNot: (state, action: PayloadAction<boolean>) => {
-      state.registration = action.payload;
+    registrationWindow: (state, action: PayloadAction<'close' | 'open'>) => {
+      state.registrationWindowState = action.payload;
     },
-    openEntryWindow: (state, action: PayloadAction<boolean>) => {
-      state.openWindow = action.payload
-    }
+  }
+})
+/* закрыто или открыто окно входа */
+const setStateLoginWindow = createSlice({
+  name: 'login',
+  initialState,
+  reducers: {
+    loginWindow: (state, action: PayloadAction<'close' | 'open'>) => {
+      state.loginWindowState = action.payload;
+    },
   }
 })
 /* управление временем */
@@ -199,8 +206,11 @@ export const setAnswersReducer = arrayAnswers.reducer
 export const {defineEndTest} = qAEnd.actions
 export const defineEndTestReducer = qAEnd.reducer
 
-export const {registeredOrNot, openEntryWindow} = registration.actions
-export const registeredOrNotReducer = registration.reducer
+export const {registrationWindow} = setStateRegWindow.actions
+export const registrationWindowReducer = setStateRegWindow.reducer
+
+export const {loginWindow} = setStateLoginWindow.actions
+export const loginWindowReducer = setStateLoginWindow.reducer
 
 export const { resetTime } = timeSlice.actions;
 export const resetTimeReducer = timeSlice.reducer;

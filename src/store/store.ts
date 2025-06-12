@@ -7,7 +7,8 @@ import {
   indicatorIdReducer,
   setAnswersReducer,
   defineEndTestReducer,
-  registeredOrNotReducer,
+  registrationWindowReducer,
+  loginWindowReducer,
   resetTimeReducer,
 } from './slices'
 import {resultsDataReducer} from './setResultsSlice'
@@ -21,7 +22,8 @@ export const store = configureStore({
     indicatorIdIndex: indicatorIdReducer,
     arrayAnswersIndex: setAnswersReducer,
     defineEndTestIndex: defineEndTestReducer,
-    registeredOrNotIndex: registeredOrNotReducer,
+    registrationWindowIndex: registrationWindowReducer,
+    loginWindowReducerIndex: loginWindowReducer,
     resetTimeIndex: resetTimeReducer,
     resultsDataIndex: resultsDataReducer,
   },
