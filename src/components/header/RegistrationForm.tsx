@@ -1,114 +1,118 @@
-import { FC } from 'react';
+import { FC, useState, ChangeEvent, FormEvent } from "react";
+import axios, { AxiosError } from "axios";
 import css from './registrationForm.module.css'
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { openEntryWindow } from '../../store/slices';
 
+type UserDataType = Partial<{
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  email: string;
+  password: string;
+}>
+
+type RegisterErrorResponse = {
+  error: string;
+  details?: {
+    code?: number;
+    errmsg?: string;
+  };
+};
+
 const RegistrationForm: FC = () => {
 
-  const registeredOrNot = useAppSelector(state => state.registeredOrNotIndex.registration)
   const dispatch = useAppDispatch()
-  console.log(registeredOrNot)
-
   const exit = () => {
     dispatch(openEntryWindow(false))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const userData: UserDataType = {
+    firstName: '',
+    lastName: '',
+    middleName: '',
+    email: '',
+    password: '',
+  }
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+  const [formData, setFormData] = useState(userData);
 
-    const user = {
-      lastName: formData.get('lastName') as string,
-      firstName: formData.get('firstName') as string,
-      middleName: formData.get('middleName') as string,
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-    };
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const key = event.target.name
+    const value = event.target.value
+    const newObj = {...formData, [key]: value}
+    setFormData(newObj)
+  };
 
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user),
-      });
-
-      const data = await res.json();
-      console.log(data);
-      alert('Регистрация прошла успешно');
-      form.reset();
+      await axios.post('http://localhost:5000/api/users/register', formData)
+      alert('Регистрация пользователя прошла успешно!')
+      setFormData(userData)// очищает форму
       exit()
     } catch (error) {
-      console.error('Ошибка регистрации:', error);
-      alert('Ошибка при регистрации');
+      const err = error as AxiosError<RegisterErrorResponse>
+      if(err.response?.status === 409) {
+        alert('Пользователь с таким email уже существует');
+      } else {
+        alert('Ошибка регистрации, попробуйте позже');
+      }
+      // console.log(err.response?.data)
+      // console.error(err)
     }
   };
+
+  const getData = async () => {
+    const response = await axios.get('http://localhost:5000/api/users/')
+    console.log(response.data.password)
+  }
 
   return (
     <div className={css.wrap}>
       <div className={css.registrationForm}>
         <form className={css.form} onSubmit={handleSubmit}>
-          <div className={css.blockTitle}>
-            <h2 className={css.title}>
-              {registeredOrNot ? 'Регистрация' : 'Вход'}
-            </h2>
-          </div>
-
-          {registeredOrNot &&
-            <div className={css.signIn}>
-              <label>
-                Фамилия:
-                <input 
-                  type="text" 
-                  name="lastName"
-                  required
-                />
-              </label>
-
-              <label>
-                Имя:
-                <input 
-                  type="text" 
-                  name="firstName"
-                  required
-                />
-              </label>
-
-              <label>
-                Отчество:
-                <input 
-                  type="text" 
-                  name="middleName"
-                  required
-                />
-              </label>
-            </div>
-          }
-
-          <label>
-            Электроная почта:
+          <div className={css.signIn}>
             <input 
+              name="firstName" 
+              value={formData.firstName} 
+              placeholder="Имя" 
+              required
+              onChange={handleChange} />
+            <input 
+              name="lastName" 
+              value={formData.lastName} 
+              placeholder="Фамилия" 
+              required
+              onChange={handleChange} />
+            <input 
+              name="middleName" 
+              value={formData.middleName} 
+              placeholder="Отчество" 
+              required
+              onChange={handleChange} />
+            <input 
+              name="email" 
+              value={formData.email} 
+              placeholder="Email" 
               type="email" 
-              name="email"
               required
-            />
-          </label>
-
-          <label>
-            Пароль:
+              onChange={handleChange} />
             <input 
+              name="password" 
+              value={formData.password} 
+              placeholder="Пароль" 
               type="password" 
-              name="password"
               required
-            />
-          </label>
-          <div className={css.buttonBlock}>
-            <button type="submit" className={`${css.btnSubmit} ${css.btn}`} >
-              {registeredOrNot ? 'Зарегистрировться' : 'Войти'}
-            </button>
-            <div className={`${css.btnExit} ${css.btn}`} onClick={exit}></div>
+              onChange={handleChange} />
+
+            <div className={css.buttonBlock}>
+              <button className={`${css.btnSubmit} ${css.btn}`} type="submit">Зарегистрироваться</button>
+              <div className={`${css.btnExit} ${css.btn}`} onClick={exit}></div>
+            </div>
+
           </div>
+          
         </form>
       </div>
     </div>
