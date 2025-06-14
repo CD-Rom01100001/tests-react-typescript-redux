@@ -9,18 +9,18 @@ type UserType = {
 }
 
 interface InitialStateI {
-  user: UserType | ''
+  user: UserType | null
 }
 
 const initialState: InitialStateI = {
-  user: ''
+  user: JSON.parse(localStorage.getItem('user') || 'null')
 }
 
 const userDateSlice = createSlice({
   name: 'userDate',
   initialState,
   reducers: {
-    getUserDate: (state, action: PayloadAction<UserType | ''>) => {
+    getUserDate: (state, action: PayloadAction<UserType | null>) => {
       state.user = action.payload
     }
   }

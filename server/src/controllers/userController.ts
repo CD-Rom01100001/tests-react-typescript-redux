@@ -11,7 +11,19 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { firstName, lastName, middleName, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ firstName, lastName, middleName, email, password: hashedPassword });
+    const user = new User({ 
+      firstName, 
+      lastName, 
+      middleName, 
+      email, 
+      password: hashedPassword,
+      resultsTrainingDataServer: {
+        bestResult: [],
+        lastResult: [],
+        openPreview: []
+      },
+      resultsExamDataServer: []
+    });
     await user.save();
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });

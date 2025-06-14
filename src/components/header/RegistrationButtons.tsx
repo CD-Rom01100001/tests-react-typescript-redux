@@ -14,7 +14,10 @@ const RegistrationButtons: FC = () => {
 
   const logout = () => {
     localStorage.removeItem('token')
-    dispatch(getUserDate(''))
+    localStorage.removeItem('user')
+    localStorage.removeItem('resultsTrainingDataServer')
+    localStorage.removeItem('resultsExamDataServer')
+    dispatch(getUserDate(null))
   }
 
   return (

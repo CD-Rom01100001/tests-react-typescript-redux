@@ -40,6 +40,8 @@ const LoginForm: FC = () => {
       alert('Вход выполнен')
       localStorage.setItem("token", response.data.token)// Сохраняем токен
       localStorage.setItem("user", JSON.stringify(response.data.user))
+      localStorage.setItem("resultsExamDataServer", JSON.stringify(response.data.user.resultsExamDataServer))
+      localStorage.setItem("resultsTrainingDataServer", JSON.stringify(response.data.user.resultsTrainingDataServer))
       console.log("Пользователь:", response.data.user);
       setFormData(formDataShema)// очищает форму
       exit()// закрывается окно входа
@@ -84,5 +86,3 @@ const LoginForm: FC = () => {
 }
 
 export default LoginForm;
-
-// https://chatgpt.com/c/6849e5e7-75f0-800e-908d-13630e5b0f0f#:~:text=Backend%20(Express%20%2B%20MongoDB%20%2B%20JWT)

@@ -71,7 +71,7 @@ const resultsDataSlice = createSlice({
       }
       return
     },
-    /* заполняет массив с лучшими результатами "lastResult" */
+    /* заполняет массив с последними результатами "lastResult" */
     setLastResult: (state, action: PayloadAction<string>) => {
       if (state.trainingLocate !== 'training') return
 
