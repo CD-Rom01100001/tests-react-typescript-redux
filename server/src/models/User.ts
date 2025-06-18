@@ -11,8 +11,8 @@ export interface IUser extends Document {
   middleName: string;
   email: string;
   password: string;
-  resultsTrainingDataServer: ResultData;
-  resultsExamDataServer: string[];
+  resultsTrainingData: ResultData;
+  resultsExamData: string[];
 }
 
 const UserSchema = new Schema<IUser>({
@@ -21,12 +21,12 @@ const UserSchema = new Schema<IUser>({
   middleName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  resultsTrainingDataServer: {
+  resultsTrainingData: {
     bestResult: { type: [String], default: [] },
     lastResult: { type: [String], default: [] },
     openPreview: { type: [Number], default: [] },
   },
-  resultsExamDataServer: {
+  resultsExamData: {
     type: [String],
     default: [],
   }

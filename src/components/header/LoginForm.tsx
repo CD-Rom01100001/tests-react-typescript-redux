@@ -40,8 +40,8 @@ const LoginForm: FC = () => {
       alert('Вход выполнен')
       localStorage.setItem("token", response.data.token)// Сохраняем токен
       localStorage.setItem("user", JSON.stringify(response.data.user))
-      localStorage.setItem("resultsExamDataServer", JSON.stringify(response.data.user.resultsExamDataServer))
-      localStorage.setItem("resultsTrainingDataServer", JSON.stringify(response.data.user.resultsTrainingDataServer))
+      localStorage.setItem("resultsExamData", JSON.stringify(response.data.user.resultsExamData))
+      localStorage.setItem("resultsTrainingData", JSON.stringify(response.data.user.resultsTrainingData))
       console.log("Пользователь:", response.data.user);
       setFormData(formDataShema)// очищает форму
       exit()// закрывается окно входа

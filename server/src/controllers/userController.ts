@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { mapUserToResponse } from "../utils/mapUserToResponse";
 
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
@@ -17,12 +18,12 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       middleName, 
       email, 
       password: hashedPassword,
-      resultsTrainingDataServer: {
+      resultsTrainingData: {
         bestResult: [],
         lastResult: [],
         openPreview: []
       },
-      resultsExamDataServer: []
+      resultsExamData: []
     });
     await user.save();
 
@@ -31,13 +32,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     res.status(201).json({ 
       message: "Пользователь зарегистрирован",
       token,
-      user: {
-        id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        middleName: user.middleName,
-        email: user.email,
-      }
+      user: mapUserToResponse(user)
     });
   } catch (err: unknown) {
     if (
@@ -78,13 +73,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     res.json({
       message: "Вход выполнен",
       token,
-      user: {
-        id: user._id,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        middleName: user.middleName,
-      }
+      user: mapUserToResponse(user)
     });
   } catch (err) {
     res.status(500).json({ error: "Ошибка входа", details: err });

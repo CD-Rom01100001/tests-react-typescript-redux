@@ -11,12 +11,12 @@ type UserDataType = Partial<{
   middleName: string;
   email: string;
   password: string;
-  resultsTrainingDataServer?: {
+  resultsTrainingData?: {
     bestResult: string[];
     lastResult: string[];
     openPreview: number[];
   };
-  resultsExamDataServer?: string[];
+  resultsExamData?: string[];
 }>
 
 // type RegisterErrorResponse = {
@@ -57,8 +57,8 @@ const RegistrationForm: FC = () => {
       const response = await axios.post('http://localhost:5000/api/users/register', formData)
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("user", JSON.stringify(response.data.user))
-      localStorage.setItem("resultsExamDataServer", JSON.stringify(response.data.user.resultsExamDataServer))
-      localStorage.setItem("resultsTrainingDataServer", JSON.stringify(response.data.user.resultsTrainingDataServer))
+      localStorage.setItem("resultsExamData", JSON.stringify(response.data.user.resultsExamData))
+      localStorage.setItem("resultsTrainingData", JSON.stringify(response.data.user.resultsTrainingData))
       dispatch(getUserDate(response.data.user))// 
       alert('Регистрация пользователя прошла успешно!')
       setFormData(userData)// очищает форму
