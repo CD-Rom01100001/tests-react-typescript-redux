@@ -9,7 +9,6 @@ const HistoryExam: FC<HistoryExamProps> = ({data}) => {
 
   return (
     <div className={css.historyExam}>
-      <h3>История экзаменов:</h3>
       <ul>
         {data.map((result, i) => {
           return (

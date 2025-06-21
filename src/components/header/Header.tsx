@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { changeTheme } from '../../store/slices';
-import css from './header.module.css'
+/* components */
 import Label from './Label';
 import ButtonTheme from './ButtonTheme';
 import Weather from './Weather';
@@ -9,6 +7,11 @@ import RegistrationButtons from './RegistrationButtons';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import IconUser from './IconUser';
+/* redux */
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { changeTheme } from '../../store/slices';
+/* css */
+import css from './header.module.css'
 
 const Header: FC = () => {
   const theme = useAppSelector(state => state.themeIndex.themeSlice);

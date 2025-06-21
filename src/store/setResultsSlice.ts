@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "./store";
+import { updateTrainingResults, updateExamResults } from "../api/updatingUserResultServer";
 import { saveResultsTrainingToLocalStorage } from "./utils/saveResultsTrainingToLocalStorage";
 import { saveResultsExamToLocalStorage } from "./utils/saveResultsExamToLocalStorage";
 import { saveExamIndex } from "./utils/saveExamIndex";
@@ -16,6 +19,8 @@ interface InitialStateI {
   resultsTrainingData: ResultData;
   resultsExamData: string[];
   index: number;
+  loading: boolean;//!
+  error: string | null;//!
 }
 
 const initialState: InitialStateI = {
@@ -28,8 +33,87 @@ const initialState: InitialStateI = {
     openPreview: [1]
   })),
   resultsExamData: JSON.parse(localStorage.getItem('resultsExamData') || '[]'),
-  index: JSON.parse(localStorage.getItem('examIndex') || '0')
+  index: JSON.parse(localStorage.getItem('examIndex') || '0'),
+  loading: false,//!
+  error: null//!
 }
+
+// Thunk для обновления данных пользователя на сервере
+// export const syncResultsToServer = createAsyncThunk(
+//   'results/syncResultsToServer',
+//   async (_, thunkAPI) => {
+//     try {
+//       const state = thunkAPI.getState() as RootState;
+//       const token = localStorage.getItem("token");
+//       const user = JSON.parse(localStorage.getItem("user") || "{}");
+//       const userId = user.id;
+
+//       const dataToUpdate = {
+//         resultsTrainingData: state.resultsDataIndex.resultsTrainingData,
+//         resultsExamData: state.resultsDataIndex.resultsExamData
+//       };
+
+//       const response = await updateUserResults(userId, dataToUpdate, token ?? undefined);
+
+//       // Обновим localStorage
+//       localStorage.setItem("resultsTrainingData", JSON.stringify(response.user.resultsTrainingData));
+//       localStorage.setItem("resultsExamData", JSON.stringify(response.user.resultsExamData));
+
+//       return response.user;
+//     } catch (error: unknown) {
+//       if (axios.isAxiosError(error)) {
+//         return thunkAPI.rejectWithValue(error.response?.data?.message || "Ошибка синхронизации! Попробуйте еще раз.");
+//       }
+//       return thunkAPI.rejectWithValue("Неизвестная ошибка");
+//     }
+//   }
+// );
+
+export const syncTrainingResultsToServer = createAsyncThunk(
+  'results/syncTrainingResultsToServer',
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState() as RootState;
+      const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      const userId = user.id;
+
+      const response = await updateTrainingResults(userId, state.resultsDataIndex.resultsTrainingData, token ?? undefined);
+
+      localStorage.setItem("resultsTrainingData", JSON.stringify(response.user.resultsTrainingData));
+
+      return response.user;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || "Ошибка синхронизации обучения");
+      }
+      return thunkAPI.rejectWithValue("Неизвестная ошибка");
+    }
+  }
+);
+
+export const syncExamResultsToServer = createAsyncThunk(
+  'results/syncExamResultsToServer',
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState() as RootState;
+      const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      const userId = user.id;
+
+      const response = await updateExamResults(userId, state.resultsDataIndex.resultsExamData, token ?? undefined);
+
+      localStorage.setItem("resultsExamData", JSON.stringify(response.user.resultsExamData));
+
+      return response.user;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || "Ошибка синхронизации экзамена");
+      }
+      return thunkAPI.rejectWithValue("Неизвестная ошибка");
+    }
+  }
+);
 
 const resultsDataSlice = createSlice({
   name: 'results',

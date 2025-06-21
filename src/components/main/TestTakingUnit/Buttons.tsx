@@ -4,7 +4,15 @@ import { AllQAT } from '../../allStageLink';
 import css from './buttons.module.css'
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getIndicatorId, setFullAnswers, defineEndTest, resetTime } from '../../../store/slices';
-import { setOpenPreview, setBestResult, setLastResult, getTrainingLocate, setExamHistory } from '../../../store/setResultsSlice';
+import { 
+  setOpenPreview, 
+  setBestResult, 
+  setLastResult, 
+  getTrainingLocate, 
+  setExamHistory, 
+  syncTrainingResultsToServer,
+  syncExamResultsToServer 
+} from '../../../store/setResultsSlice';
 
 interface ButtonsI {
   numberOfQuestions: AllQAT[];
@@ -68,18 +76,22 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
     const resultStringExam = `пройдено ${Math.round((right / numberOfQuestions.length) * 100)}% (${date} в ${time})`;
 
     /* определим на какой странице мы находимся и в зависимости от этого определим условие */
-    const setTheCondition = location ? numberOfQuestions.length-3 : numberOfQuestions.length-1//! поменять на numberOfQuestions.length-3!!!!!!!!!!
+    const setTheCondition = location ? numberOfQuestions.length-34 : numberOfQuestions.length-1//! поменять на numberOfQuestions.length-3!!!!!!!!!!
 
     if (right >= setTheCondition) {
       dispatch(setOpenPreview(previewNumber+1))// добавляет в массив номер разблокированного этапа
       dispatch(setBestResult(resultString))// добавляет лучший результат
       dispatch(setLastResult(resultString))// добавляет последний результат
       dispatch(setExamHistory(resultStringExam))// добавляет результат экзамена
+      dispatch(syncTrainingResultsToServer())//!
+      dispatch(syncExamResultsToServer())//!
       setResultText('Вы прошли этап! 🙂')
     } else {
       dispatch(setLastResult(resultString))// добавляет последний результат
       dispatch(setBestResult(resultString))// добавляет лучший результат
       dispatch(setExamHistory(resultStringExam))// добавляет результат экзамена
+      dispatch(syncTrainingResultsToServer())//!
+      dispatch(syncExamResultsToServer())//!
       setResultText('Вы не прошли этап! 🙁')
     }
     

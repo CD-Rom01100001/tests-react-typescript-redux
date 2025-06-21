@@ -6,7 +6,7 @@ import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
 import StagePreviewLink from './StagePreviewLink';
 
-import { useAppDispatch } from '../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { getTotalNumberPreview } from '../../../store/setResultsSlice';
 
 import css from './training.module.css'
@@ -14,10 +14,11 @@ import css from './training.module.css'
 const Training: FC = () => {
 
   const dispatch = useAppDispatch()
+  const userDataState = useAppSelector(state => state.userDataIndex.user)// меняет состояние превьюшек в зависимости от того залогинен пользователь или нет
 
   useEffect(() => {
     dispatch(getTotalNumberPreview(getAllStageLink().length))
-  }, [dispatch])
+  }, [dispatch, userDataState])
 
   return (
     <div className={css.training}>

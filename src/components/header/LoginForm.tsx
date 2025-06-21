@@ -37,6 +37,7 @@ const LoginForm: FC = () => {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', formData)
+      console.log(response.data.user.id)
       alert('Вход выполнен')
       localStorage.setItem("token", response.data.token)// Сохраняем токен
       localStorage.setItem("user", JSON.stringify(response.data.user))
