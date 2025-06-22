@@ -31,6 +31,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       middleName, 
       email, 
       password: hashedPassword,
+      role: 'user',
       resultsTrainingData: {
         bestResult: [],
         lastResult: [],
@@ -40,7 +41,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
 
     res.status(201).json({ 
       message: "Пользователь зарегистрирован",
@@ -81,7 +82,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
 
     res.json({
       message: "Вход выполнен",

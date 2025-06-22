@@ -11,7 +11,8 @@ export interface IUser extends Document {
   middleName: string;
   email: string;
   password: string;
-  isAdmin?: boolean;
+  role?: 'user' | 'moderator' | 'admin';//!
+  // isAdmin?: boolean;
   resultsTrainingData: ResultData;
   resultsExamData: string[];
 }
@@ -22,7 +23,12 @@ const UserSchema = new Schema<IUser>({
   middleName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  isAdmin: { type: Boolean, default: false },
+  role: { 
+    type: String, 
+    enum: ['user', 'moderator', 'admin'],
+    default: false 
+  },//!
+  // isAdmin: { type: Boolean, default: false },
   resultsTrainingData: {
     bestResult: { type: [String], default: [] },
     lastResult: { type: [String], default: [] },

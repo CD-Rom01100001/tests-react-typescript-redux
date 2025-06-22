@@ -6,7 +6,7 @@ type UserType = {
   middleName: string;
   email: string;
   id: string;
-  isAdmin: boolean
+  role: 'user' | 'moderator' | 'admin'
 }
 
 interface InitialStateI {

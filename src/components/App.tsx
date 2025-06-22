@@ -17,6 +17,8 @@ import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
 
 import './app.css';
 import '../styles/themeStyles.css'
+import Admin from './admin/Admin';
+import UsersList from './admin/UsersList';
 
 const questArray = Object.entries(contentQuest)
 
@@ -83,6 +85,13 @@ const App: FC = () => {
                   sectionAndNum={getSectionAndNumber(tenRandomQuestions())}/>
               } 
             />
+
+            {/* Панель настроек */}
+            <Route  path='settings' element={<Admin/>}/>
+
+            {/* Список зарегестрированных пользователей */}
+            <Route  path='users' element={<UsersList/>}/>
+
             <Route  path='*' element={<NotFoundPage/>}></Route>
           </Route>
         </Routes>

@@ -13,7 +13,7 @@ const Navigation: FC = () => {
   const userData = useAppSelector(state => state.userDataIndex.user)
 
   useEffect(() => {
-    console.log(userData?.isAdmin)
+    console.log(userData)
   }, [userData])
 
   /* пра нажатии на кнопку ВЫХОД */
@@ -72,11 +72,19 @@ const Navigation: FC = () => {
             <NavLink className={setActive} to='/exam' onClick={stopTest}>Экзамен</NavLink>
           }
         </li>
-        {userData?.isAdmin &&
+        {userData?.role === 'admin' &&
           <li className={css.li}>
             {((locationTraining || locationExam) && !defineEndTestSlice) ? 
-              <p id='/admin' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Панель администратора</p> :
-              <NavLink className={setActive} to='/admin' onClick={stopTest}>Панель администратора</NavLink>
+              <p id='/settings' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Настройки</p> :
+              <NavLink className={setActive} to='/settings' onClick={stopTest}>Настройки</NavLink>
+            }
+          </li>
+        }
+        {(userData?.role === 'admin' || userData?.role === 'moderator') &&
+          <li className={css.li}>
+            {((locationTraining || locationExam) && !defineEndTestSlice) ? 
+              <p id='/users' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Пользователи</p> :
+              <NavLink className={setActive} to='/users' onClick={stopTest}>Пользователи</NavLink>
             }
           </li>
         }
