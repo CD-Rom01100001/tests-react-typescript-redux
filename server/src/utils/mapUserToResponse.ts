@@ -6,6 +6,7 @@ export const mapUserToResponse = (user: IUser) => ({
   firstName: user.firstName,
   lastName: user.lastName,
   middleName: user.middleName,
+  isAdmin: user.isAdmin,
   resultsTrainingData: user.resultsTrainingData,
   resultsExamData: user.resultsExamData,
 })

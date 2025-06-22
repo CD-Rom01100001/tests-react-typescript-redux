@@ -40,7 +40,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: "1h" });
 
     res.status(201).json({ 
       message: "Пользователь зарегистрирован",
@@ -81,7 +81,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user._id, isAdmin: user.isAdmin }, JWT_SECRET, { expiresIn: "1h" });
 
     res.json({
       message: "Вход выполнен",
@@ -104,53 +104,6 @@ export const updateUser = async (req: Request, res: Response) => {
   await User.findByIdAndUpdate(id, update);
   res.json({ message: "Пользователь обновлён" });
 };
-
-// обновление результатов
-// export const updateUserResults = async (
-//   req: Request<{ id: string }, object, UpdateUserResultsBody>,
-//   res: Response
-// ): Promise<void> => {
-//   const { id } = req.params;
-//   const { resultsTrainingData, resultsExamData } = req.body;
-
-//   try {
-//     const updateFields: Record<string, string[] | number[]> = {};
-
-//     if (resultsTrainingData) {
-//       for (const key in resultsTrainingData) {
-//         const value = resultsTrainingData[key as keyof ResultsTrainingDataUpdate];
-//         if (value !== undefined) {
-//           updateFields[`resultsTrainingData.${key}`] = value;
-//         }
-//       }
-//     }
-
-//     if (resultsExamData) {
-//       updateFields["resultsExamData"] = resultsExamData;
-//     }
-
-//     const updatedUser = await User.findByIdAndUpdate(
-//       id,
-//       { $set: updateFields },
-//       { new: true }
-//     );
-
-//     if (!updatedUser) {
-//       res.status(404).json({ message: "Пользователь не найден" });
-//       return;
-//     }
-
-//     res.json({
-//       message: "Результаты обновлены",
-//       user: updatedUser,
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       message: "Ошибка обновления результатов",
-//       error: err,
-//     });
-//   }
-// };
 
 // обновление результатов Обучения
 export const updateUserTrainingResults = async (

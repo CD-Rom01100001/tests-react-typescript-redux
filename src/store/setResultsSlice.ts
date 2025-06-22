@@ -38,37 +38,6 @@ const initialState: InitialStateI = {
   error: null//!
 }
 
-// Thunk для обновления данных пользователя на сервере
-// export const syncResultsToServer = createAsyncThunk(
-//   'results/syncResultsToServer',
-//   async (_, thunkAPI) => {
-//     try {
-//       const state = thunkAPI.getState() as RootState;
-//       const token = localStorage.getItem("token");
-//       const user = JSON.parse(localStorage.getItem("user") || "{}");
-//       const userId = user.id;
-
-//       const dataToUpdate = {
-//         resultsTrainingData: state.resultsDataIndex.resultsTrainingData,
-//         resultsExamData: state.resultsDataIndex.resultsExamData
-//       };
-
-//       const response = await updateUserResults(userId, dataToUpdate, token ?? undefined);
-
-//       // Обновим localStorage
-//       localStorage.setItem("resultsTrainingData", JSON.stringify(response.user.resultsTrainingData));
-//       localStorage.setItem("resultsExamData", JSON.stringify(response.user.resultsExamData));
-
-//       return response.user;
-//     } catch (error: unknown) {
-//       if (axios.isAxiosError(error)) {
-//         return thunkAPI.rejectWithValue(error.response?.data?.message || "Ошибка синхронизации! Попробуйте еще раз.");
-//       }
-//       return thunkAPI.rejectWithValue("Неизвестная ошибка");
-//     }
-//   }
-// );
-
 export const syncTrainingResultsToServer = createAsyncThunk(
   'results/syncTrainingResultsToServer',
   async (_, thunkAPI) => {

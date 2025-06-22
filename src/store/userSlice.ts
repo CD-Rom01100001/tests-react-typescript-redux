@@ -6,14 +6,15 @@ type UserType = {
   middleName: string;
   email: string;
   id: string;
+  isAdmin: boolean
 }
 
 interface InitialStateI {
-  user: UserType | null
+  user: UserType | null;
 }
 
 const initialState: InitialStateI = {
-  user: JSON.parse(localStorage.getItem('user') || 'null')
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
 }
 
 const userDateSlice = createSlice({
