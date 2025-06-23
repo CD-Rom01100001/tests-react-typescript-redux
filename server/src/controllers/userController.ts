@@ -94,6 +94,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+// получим зареганых пользователей 
 export const getUsers = async (_req: Request, res: Response) => {
   const users = await User.find();
   res.json(users);

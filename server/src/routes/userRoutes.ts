@@ -15,7 +15,6 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/", getUsers);
 router.put("/:id", updateUser);
-// router.patch("/:id/results", updateUserResults);
 router.patch("/:id/results/training", updateUserTrainingResults);
 router.patch("/:id/results/exam", updateUserExamResults);
 router.delete("/:id", deleteUser);

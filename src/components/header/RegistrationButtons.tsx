@@ -21,6 +21,7 @@ const RegistrationButtons: FC = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('resultsTrainingData')
     localStorage.removeItem('resultsExamData')
+    localStorage.removeItem('userList')
     dispatch(getUserDate(null))
   }
 
