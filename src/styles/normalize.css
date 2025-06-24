@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, p, span, a, button, ul, ol, li, time, i, input, label {
+h1, h2, h3, h4, h5, h6, p, span, a, button, ul, ol, li, time, i, input, label, th, td {
   font-size: 1.6rem;
 }
 

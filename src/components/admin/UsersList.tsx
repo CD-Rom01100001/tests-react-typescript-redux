@@ -44,21 +44,48 @@ const UsersList: FC = () => {
       })
   }
 
+  const sortedUsers = users.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+  console.log(users)
+  console.log(sortedUsers)
+
   return (
     <div className={css.usersList}>
       <h2>Список пользователей</h2>
       {loading &&
         <p>Ожидает загрузку пользователей...</p>
       }
-      {users.map(user => {
-        return (
-          <div className={css.user} key={user._id}>
-            <p>{user.lastName}</p>
-            <p>{user.firstName}</p>
-            <p>{user.middleName}</p>
-          </div>
-        )
-      })}
+      <table>
+        <thead>
+          <tr>
+            <th>ФИО</th>
+            <th>Email</th>
+            <th>Статус</th>
+            <th>Обучение</th>
+            <th>Экзамен</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => {
+            return (
+              <tr key={user._id}>
+                <td>{`${user.lastName} ${user.firstName[0]}.${user.middleName[0]}.`}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>{user.resultsTrainingData.lastResult.map((result, index) => 
+                  <p className={css.resultText} key={index}>
+                    {`${user.resultsTrainingData.openPreview[index]}-й этап: `}
+                    <span className={css.result}>{result}</span>
+                  </p>
+                )}</td>
+                <td>{user.resultsExamData.map((result, index) => 
+                  <p className={css.resultText} key={index}>{result}</p>
+                )}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
       <button onClick={updateUserData}>Обновить</button>
     </div>
   );

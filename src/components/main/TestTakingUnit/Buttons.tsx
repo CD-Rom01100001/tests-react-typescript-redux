@@ -48,7 +48,7 @@ const Buttons: FC<ButtonsI> = ({ numberOfQuestions, onRestart}) => {
 
     const newArray = [...arrayAnswersSlice]// создал копию массива arrayAnswersSlice для того, что-бы этот массив был имутабельным
     const date = new Date().toLocaleDateString()
-    const time = new Date().toLocaleTimeString()
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     /* заполняет массив null */
     if (newArray.length < numberOfQuestions.length) {
