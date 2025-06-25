@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { registrationWindow, loginWindow } from '../../store/slices';
 import { getUserDate } from '../../store/userSlice';
+import { resetResultsData } from '../../store/setResultsSlice';
 
 import css from './registrationButtons.module.css'
 import '../../styles/themeStyles.css'
@@ -23,6 +24,7 @@ const RegistrationButtons: FC = () => {
     localStorage.removeItem('resultsExamData')
     localStorage.removeItem('userList')
     dispatch(getUserDate(null))
+    dispatch(resetResultsData())
   }
 
   return (

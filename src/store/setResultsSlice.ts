@@ -151,6 +151,43 @@ const resultsDataSlice = createSlice({
         state.index = (state.index + 1) % maxLength
         saveResultsExamToLocalStorage(results)
       }
+        // results[state.index] = currentResult;//!
+        // state.index = (state.index + 1) % maxLength;//!
+
+        // saveExamIndex(state.index);//!
+        // saveResultsExamToLocalStorage(results);//!
+    },
+    setResultsData: (
+      state,
+      action: PayloadAction<{
+        resultsTrainingData: ResultData,
+        resultsExamData: string[]
+      }>
+    ) => {
+      state.resultsTrainingData = action.payload.resultsTrainingData;
+      state.resultsExamData = action.payload.resultsExamData;
+
+      saveResultsTrainingToLocalStorage(state.resultsTrainingData);
+      saveResultsExamToLocalStorage(state.resultsExamData);
+      saveExamIndex(state.index);
+    },
+    resetResultsData: (state) => {
+      state.trainingLocate = null;
+      state.totalNumberPreview = 0;
+      state.previewNumber = 1;
+      state.resultsTrainingData = {
+        bestResult: [],
+        lastResult: [],
+        openPreview: [1],
+      };
+      state.resultsExamData = [];
+      state.index = 0;
+      state.loading = false;
+      state.error = null;
+
+      localStorage.removeItem('resultsTrainingData');
+      localStorage.removeItem('resultsExamData');
+      localStorage.removeItem('examIndex');
     }
   }
 })
@@ -162,6 +199,8 @@ export const {
   getTotalNumberPreview,
   setBestResult,
   setLastResult,
-  setExamHistory
+  setExamHistory,
+  setResultsData,
+  resetResultsData
 } = resultsDataSlice.actions
 export const resultsDataReducer = resultsDataSlice.reducer

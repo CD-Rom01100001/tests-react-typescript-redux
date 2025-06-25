@@ -70,9 +70,9 @@ const UsersList: FC = () => {
             return (
               <tr key={user._id}>
                 <td>{`${user.lastName} ${user.firstName[0]}.${user.middleName[0]}.`}</td>
-                <td>{user.email}</td>
+                <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
                 <td>{user.role}</td>
-                <td>{user.resultsTrainingData.lastResult.map((result, index) => 
+                <td>{user.resultsTrainingData.bestResult.map((result, index) => 
                   <p className={css.resultText} key={index}>
                     {`${user.resultsTrainingData.openPreview[index]}-й этап: `}
                     <span className={css.result}>{result}</span>
@@ -86,7 +86,7 @@ const UsersList: FC = () => {
           })}
         </tbody>
       </table>
-      <button onClick={updateUserData}>Обновить</button>
+      <button className='buttonDef' onClick={updateUserData}>Обновить</button>
     </div>
   );
 }
