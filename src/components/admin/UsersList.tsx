@@ -66,7 +66,7 @@ const UsersList: FC = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => {
+          {sortedUsers.map(user => {
             return (
               <tr key={user._id}>
                 <td>{`${user.lastName} ${user.firstName[0]}.${user.middleName[0]}.`}</td>
@@ -78,9 +78,11 @@ const UsersList: FC = () => {
                     <span className={css.result}>{result}</span>
                   </p>
                 )}</td>
-                <td>{user.resultsExamData.map((result, index) => 
-                  <p className={css.resultText} key={index}>{result}</p>
-                )}</td>
+                <td>
+                  {user.resultsExamData.map((result, index) => 
+                    <p className={css.resultText} key={index}>{result}</p>
+                  )}
+                </td>
               </tr>
             )
           })}
