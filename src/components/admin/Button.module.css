@@ -1,0 +1,18 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3), 
+  inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset 1px 1px 1px 1px rgb(255, 255, 255);
+}
+
+.button svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}

@@ -1,16 +1,14 @@
-.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-  transition: all 0.2s ease-in-out;
+.admin {
+  padding: 2rem;
+  overflow-x: auto; /* важно, если не используешь wrapper */
 }
 
-.button:hover {
-  transform: scale(1.1);
+.tableWrapper {
+  overflow-x: auto;
+  width: 100%;
 }
 
-.buttonSVG {
-  width: 1.8rem;
-  height: 1.8rem;
+.userTable {
+  width: max-content; /* ширина зависит от содержимого */
+  border-collapse: collapse;
 }

@@ -12,9 +12,9 @@ const Navigation: FC = () => {
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const userData = useAppSelector(state => state.userDataIndex.user)
 
-  useEffect(() => {
-    console.log(userData)
-  }, [userData])
+  // useEffect(() => {
+  //   console.log(userData)
+  // }, [userData])
 
   /* пра нажатии на кнопку ВЫХОД */
   const stopTest = (e: React.MouseEvent<HTMLAnchorElement>) => {

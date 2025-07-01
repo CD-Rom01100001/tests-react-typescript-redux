@@ -27,3 +27,12 @@ export const getUsers = async (): Promise<User[]> => {
     throw error;
   }
 }
+
+export const deleteUserById = async (id: string): Promise<void> => {
+  try {
+    await axios.delete(`${URL}/${id}`)
+  } catch (error) {
+    console.error("Ошибка при удалении пользователя:", error);
+    throw error;
+  }
+}
