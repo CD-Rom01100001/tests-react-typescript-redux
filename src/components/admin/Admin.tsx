@@ -1,12 +1,19 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect, useRef } from 'react'
 
-import { getUsers, User } from '../../api/usersApi';
+import { getUsers, User } from '../../api/usersApi'
 import css from './Admin.module.css'
-import UserTable from './UserTable';
+import UserTable from './UserTable'
 
 const Admin: FC = () => {
   const [users, setUsers] = useState<User[]>([])// список пользователей из locslStorage
   const [loading, setLoading] = useState(true)// загрузка
+  const [cloneWidth, setCloneWidth] = useState(0)
+  const [tableScrollWidth, setTableScrollWidth] = useState(0)
+  const [showScrollbarClone, setShowScrollbarClone] = useState(false)
+
+  const tableWrapperRef = useRef<HTMLDivElement>(null)
+  const scrollbarCloneRef = useRef<HTMLDivElement>(null)
+  const tableRef = useRef<HTMLTableElement>(null)
 
   /* получить актуальный список пользователей как на сервере */
   const updateUserData = () => {
@@ -24,19 +31,72 @@ const Admin: FC = () => {
       })
   }
 
+  /* дубликат прокрутки */
+  useEffect(() => {
+    const tableWrapper = tableWrapperRef.current
+    const scrollbarClone = scrollbarCloneRef.current
+    const table = tableRef.current
+
+    if (!tableWrapper || !scrollbarClone || !table) return
+
+    /* 1. Синхронизация прокрутки */
+    const syncScroll = (from: HTMLElement, to: HTMLElement) => {
+      const onScroll = () => {
+        to.scrollLeft = from.scrollLeft
+      }
+      from.addEventListener('scroll', onScroll)
+      return () => from.removeEventListener('scroll', onScroll)
+    }
+
+    const removeScroll1 = syncScroll(tableWrapper, scrollbarClone)
+    const removeScroll2 = syncScroll(scrollbarClone, tableWrapper)
+
+    /* 2. Установка ширины scrollbarClone */
+    const updateCloneWidth = () => {
+      setCloneWidth(tableWrapper.clientWidth)
+    }
+    updateCloneWidth()
+
+    window.addEventListener('resize', updateCloneWidth)
+
+    /* 3. ResizeObserver для отслеживания ширины таблицы */
+    const resizeObserver = new ResizeObserver(() => {
+      setTableScrollWidth(table.scrollWidth)
+    })
+
+    resizeObserver.observe(table)
+
+    /* Установка начального значения */
+    setTableScrollWidth(table.scrollWidth)
+
+    /* Очистка */
+    return () => {
+      removeScroll1()
+      removeScroll2()
+      window.removeEventListener('resize', updateCloneWidth)
+      resizeObserver.disconnect()
+    }
+  }, [users])
+  
+
   return (
     <div className={css.admin}>
       <h2 className={css.adminTitle}>Панель администратора</h2>
       {loading &&
         <p>Ожидает загрузку пользователей...</p>
       }
-      <div className={css.tableWrapper}>
-        <UserTable users={users} setUsers={setUsers} setLoading={setLoading}/>
+      <div className={css.tableWrapper} ref={tableWrapperRef}>
+        <UserTable ref={tableRef} users={users} setUsers={setUsers} setLoading={setLoading}/>
       </div>
+       {/* Прокрутка снизу */}
+      <div className={css.scrollbarClone} ref={scrollbarCloneRef} style={{ width: cloneWidth }}>
+        <div style={{ width: tableScrollWidth, height: 1 }}></div>
+      </div>
+
       <button className='buttonDef' onClick={updateUserData}>Обновить</button>
     </div>
-  );
+  )
 }
 
-export default Admin;
+export default Admin
 

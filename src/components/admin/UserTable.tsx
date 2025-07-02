@@ -1,8 +1,8 @@
-import { FC, useState, useEffect } from 'react';
+import React, { forwardRef, ForwardRefRenderFunction, useState, useEffect } from 'react';
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { GoPencil } from "react-icons/go";
-import { GrUpdate } from "react-icons/gr";
-import { IoReturnUpBackSharp } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa6";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { getUsers, User } from '../../api/usersApi';
 import Button from './Button';
 import { deleteUserById } from '../../api/usersApi';
@@ -11,10 +11,10 @@ import css from './UserTable.module.css'
 interface UserTableProps {
   users: User[];
   setUsers: (option: User[]) => void;
-  setLoading: (option: boolean) => void
+  setLoading: (option: boolean) => void;
 }
 
-const UserTable: FC<UserTableProps> = ({users, setUsers, setLoading}) => {
+const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({users, setUsers, setLoading}, ref) => {
 
   const [editUserId, setEditUserId] = useState<string | null>(null)// получить id пользователя
   // const [editFormUsers, setEditFormUsers] = useState({
@@ -93,7 +93,7 @@ const UserTable: FC<UserTableProps> = ({users, setUsers, setLoading}) => {
 
   return (
     <div className={css.userTable}>
-      <table>
+      <table ref={ref}>
         <thead>
           <tr>
             <th>Фамилия</th>
@@ -176,8 +176,8 @@ const UserTable: FC<UserTableProps> = ({users, setUsers, setLoading}) => {
                   {editUserId !== user._id ?
                   <Button iconType={<GoPencil />} title='Редактировать' onClick={() => handleEdit(user._id)}/> :
                   <>
-                    <Button iconType={<IoReturnUpBackSharp />} title='Назад' onClick={() => setEditUserId(null)}/>
-                    <Button iconType={<GrUpdate />} title='Обновить' onClick={() => setEditUserId(null)}/>
+                    <Button iconType={<MdOutlineKeyboardBackspace />} title='Отмена' onClick={() => setEditUserId(null)}/>
+                    <Button iconType={<FaCheck />} title='Принять изменения' onClick={() => setEditUserId(null)}/>
                   </>
                   }
                   <Button iconType={<RiDeleteBin2Line />} onClick={() => handleDeleteUser(user._id)} title='Удалить'/>
@@ -191,4 +191,4 @@ const UserTable: FC<UserTableProps> = ({users, setUsers, setLoading}) => {
   );
 }
 
-export default UserTable;
+export default forwardRef(UserTable);

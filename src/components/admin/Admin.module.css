@@ -1,14 +1,27 @@
 .admin {
+  position: relative;
+  width: 100%;
   padding: 2rem;
-  overflow-x: auto; /* важно, если не используешь wrapper */
 }
 
 .tableWrapper {
-  overflow-x: auto;
+  overflow-x: hidden;
   width: 100%;
 }
 
 .userTable {
-  width: max-content; /* ширина зависит от содержимого */
+  width: max-content;
   border-collapse: collapse;
+}
+
+.scrollbarClone {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1040px;
+  height: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  z-index: 999;
 }
