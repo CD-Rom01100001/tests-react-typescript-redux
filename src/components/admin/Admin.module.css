@@ -19,8 +19,8 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 1040px;
-  height: 16px;
+  max-width: 100.5rem;
+  height: 1.6rem;
   overflow-x: auto;
   overflow-y: hidden;
   z-index: 999;

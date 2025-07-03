@@ -1,3 +1,18 @@
-.userTable p {
+.userTable p, label {
   white-space: nowrap;
+}
+
+.focus {
+  background: #fff;
+  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.9)
+}
+
+.resultTextInput {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.settings svg {
+  width: 2rem;
+  height: 2rem;
 }
