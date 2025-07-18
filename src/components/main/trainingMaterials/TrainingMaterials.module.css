@@ -1,0 +1,51 @@
+.trainingMaterials {
+  display: flex;
+  width: 100%;
+}
+
+.blockNavigation {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem 0;
+  padding: 3rem;
+  background: #fff;
+  box-shadow: 1px 1px 0px 1px rgba(131, 130, 130, 0.1921568627);
+}
+
+.blockNavigation a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  list-style: none;
+  color: #000;
+  background: #e6e6e6;
+  border-radius: 0.3rem;
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1), 
+  inset -1px -1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset 1px 1px 1px 1px rgba(255, 255, 255, 0.6);
+  user-select: none;
+}
+
+.blockNavigation .active {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2), 
+  inset 1px 1px 1px 1px rgba(0, 0, 0, 0.219), 
+  inset -1px -1px 1px 1px rgba(255, 255, 255, 0.349);
+}
+
+.stickCard {
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 1px 1px 0px 1px rgba(131, 130, 130, 0.1921568627);
+}
+
+.blockImage {
+  display: flex;
+  align-items: center;
+  width: 30rem;
+  min-height: 15rem;
+}
+
+.blockImage img {
+  width: 100%;
+}

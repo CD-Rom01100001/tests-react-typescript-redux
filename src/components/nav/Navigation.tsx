@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -11,10 +11,6 @@ const Navigation: FC = () => {
   const dispatch = useAppDispatch()
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const userData = useAppSelector(state => state.userDataIndex.user)
-
-  // useEffect(() => {
-  //   console.log(userData)
-  // }, [userData])
 
   /* пра нажатии на кнопку ВЫХОД */
   const stopTest = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -58,6 +54,12 @@ const Navigation: FC = () => {
           {((locationTraining || locationExam) && !defineEndTestSlice) ? 
             <p id='/questions' onClick={x} className={css.p}>Вопросы</p> :
             <NavLink className={setActive} to='/questions' onClick={stopTest}>Вопросы</NavLink>
+          }
+        </li>
+        <li className={css.li}>
+          {((locationTraining || locationExam) && !defineEndTestSlice) ? 
+            <p id='/training-materials' onClick={x} className={css.p}>Учебные материалы</p> :
+            <NavLink className={setActive} to='/training-materials' onClick={stopTest}>Учебные материалы</NavLink>
           }
         </li>
         <li className={css.li}>

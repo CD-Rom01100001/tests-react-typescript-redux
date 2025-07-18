@@ -4,6 +4,7 @@ import { useAppSelector } from '../store/hooks';
 import { getAllStageLink } from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
 import { tenRandomQuestions } from './TenExamQuestion';
+import { TrainingMaterialsData } from '../data/trainingMaterials/trainingMaterialsData';
 
 import contentQuest from '../data/allQuestions.json'
 import Layout from './Layout';
@@ -14,11 +15,13 @@ import Training from './main/training/Training';
 import Exam from './main/exam/Exam';
 import NotFoundPage from './NotFoundPage';
 import TestTakingUnit from './main/TestTakingUnit/TestTakingUnit';
+import Admin from './admin/Admin';
+import UsersList from './admin/UsersList';
+import TrainingMaterials from './main/trainingMaterials/TrainingMaterials';
+import MaterialDescription from './main/trainingMaterials/MaterialDescription';
 
 import './app.css';
 import '../styles/themeStyles.css'
-import Admin from './admin/Admin';
-import UsersList from './admin/UsersList';
 
 const questArray = Object.entries(contentQuest)
 
@@ -57,6 +60,13 @@ const App: FC = () => {
                     />} 
                 key={i}/>
               )}
+            </Route>
+
+            {/* блок "Учебные материалы" */}
+            <Route  path='training-materials' element={<TrainingMaterials/>}>
+              {TrainingMaterialsData.map((section, i) => {
+                return <Route path={section.path} element={<MaterialDescription />} key={i} />
+              })}
             </Route>
 
             {/* блок "Обучение" */}

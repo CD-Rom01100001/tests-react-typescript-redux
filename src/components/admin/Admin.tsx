@@ -9,7 +9,6 @@ const Admin: FC = () => {
   const [loading, setLoading] = useState(true)// загрузка
   const [cloneWidth, setCloneWidth] = useState(0)
   const [tableScrollWidth, setTableScrollWidth] = useState(0)
-  const [showScrollbarClone, setShowScrollbarClone] = useState(false)
 
   const tableWrapperRef = useRef<HTMLDivElement>(null)
   const scrollbarCloneRef = useRef<HTMLDivElement>(null)
