@@ -65,7 +65,7 @@ const App: FC = () => {
             {/* блок "Учебные материалы" */}
             <Route  path='training-materials' element={<TrainingMaterials/>}>
               {TrainingMaterialsData.map((section, i) => {
-                return <Route path={section.path} element={<MaterialDescription />} key={i} />
+                return <Route path={section.path} element={<MaterialDescription title={section.title} data={section.data} />} key={i} />
               })}
             </Route>
 

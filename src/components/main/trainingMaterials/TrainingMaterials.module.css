@@ -1,6 +1,18 @@
 .trainingMaterials {
   display: flex;
+  gap: 0 2rem;
   width: 100%;
+}
+
+.trainingMaterials nav {
+  flex: 1;
+}
+
+section {
+  flex: 3;
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 1px 1px 0px 1px rgba(131, 130, 130, 0.1921568627);
 }
 
 .blockNavigation {

@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { FC, useMemo } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { TrainingMaterialsData } from '../../../data/trainingMaterials/trainingMaterialsData';
 import css from './TrainingMaterials.module.css'
 
@@ -9,6 +9,10 @@ type ActiveType = {
 const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
 
 const TrainingMaterials: FC = () => {
+
+  const pathname = useLocation().pathname;
+  const location = useMemo(() => pathname.match(/^\/training-materials\//), [pathname])
+  console.log(location)
 
   return (
     <div className={css.trainingMaterials}>
@@ -26,7 +30,9 @@ const TrainingMaterials: FC = () => {
       </nav>
 
       <section>
-        <Outlet/>
+        {location ? 
+        <Outlet/> :
+        <h2>Выбирете раздел</h2>}
       </section>
 
     </div>

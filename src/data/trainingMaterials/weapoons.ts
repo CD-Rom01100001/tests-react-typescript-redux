@@ -1,4 +1,24 @@
-export const weapoons = [
+export type DescriptionT = {
+  'Калибр': string;
+  'Масса без патронов': string;
+  'Емкость шнекового магазина'?: string;
+  'Емкость магазина'?: string;
+  'Скорострельность': string;
+  'Принцип автоматики': string;
+  'Прицельная дальность стрельбы': string;
+  'Эффективная дальность стрельбы': string;
+  'Дальность прямого выстрела'?: string;
+  'Предельная дальность полета пули': string;
+  'Дальность прямого выстрела по грудной фигуре'?: string;
+}
+
+export type WeaponsT = {
+  name: string;
+  image: string;
+  description: DescriptionT;
+}
+
+export const weapoons: WeaponsT[] = [
   {
     name: 'ПМ',
     image: '/weapoon/пм.jpg',

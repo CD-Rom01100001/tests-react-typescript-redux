@@ -1,0 +1,19 @@
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.weapoonsCard {
+  padding: 1rem;
+  box-shadow: 0px 0px 0px 1px rgba(131, 130, 130, 0.1921568627);
+}
+
+.blockImage img {
+  width: 20rem;
+}
+
+.weapoonsCard ul {
+  margin-left: 2rem;
+  list-style-type: disc;
+}
