@@ -1,4 +1,6 @@
 .iconUser {
+  position: relative;
+  z-index: 1011;
   display: flex;
   justify-content: center;
   align-items: center;

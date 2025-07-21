@@ -1,10 +1,13 @@
 import { FC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setStateUserWindow } from '../../store/userWindowSlice';
 import css from './IconUser.module.css'
-import { useAppSelector } from '../../store/hooks';
+
 
 const IconUser: FC = () => {
 
   const userDate = useAppSelector(state => state.userDataIndex.user)
+  const dispatch = useAppDispatch()
 
   const getFirstLetterUser = (): string => {
     if (userDate) {
@@ -13,8 +16,12 @@ const IconUser: FC = () => {
     return ''
   }
 
+  const getFullName = (): string => {
+    return `${userDate?.lastName} ${userDate?.firstName} ${userDate?.middleName}`
+  }
+
   return (
-    <div className={css.iconUser}>
+    <div className={css.iconUser} title={getFullName()} onClick={()=>dispatch(setStateUserWindow())}>
       {getFirstLetterUser()}
     </div>
   );

@@ -11,8 +11,9 @@ import {
   loginWindowReducer,
   resetTimeReducer,
 } from './slices'
-import {resultsDataReducer} from './setResultsSlice'
+import { resultsDataReducer } from './setResultsSlice'
 import { userDateReducer } from "./userSlice";
+import { userWindowReducer } from "./userWindowSlice";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     resetTimeIndex: resetTimeReducer,
     resultsDataIndex: resultsDataReducer,
     userDataIndex: userDateReducer,
+    userWindow: userWindowReducer,
   },
 })
 

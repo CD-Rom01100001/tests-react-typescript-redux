@@ -1,36 +1,46 @@
 import { FC } from 'react';
 /* components */
 import Label from './Label';
-import ButtonTheme from './ButtonTheme';
+// import ButtonTheme from './ButtonTheme';
 import Weather from './Weather';
 import RegistrationButtons from './RegistrationButtons';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import IconUser from './IconUser';
+import UserMenu from './UserMenu';
 /* redux */
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { changeTheme } from '../../store/slices';
+import { /* useAppDispatch, */ useAppSelector } from '../../store/hooks';
+// import { changeTheme } from '../../store/slices';
 /* css */
 import css from './header.module.css'
 
 const Header: FC = () => {
-  const theme = useAppSelector(state => state.themeIndex.themeSlice);
+  // const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const registrationWindowState = useAppSelector(state => state.registrationWindowIndex.registrationWindowState)
   const loginWindowState = useAppSelector(state => state.loginWindowReducerIndex.loginWindowState)
   const user = useAppSelector(state => state.userDataIndex.user)
-  const dispatch = useAppDispatch();
+  const userMenuState = useAppSelector(state => state.userWindow.window)
+  // const dispatch = useAppDispatch();
 
   return (
     <header className={css.header}>
 
       <div className={css.blockTop}>
         <Label/>
-        {user && <IconUser/>}
+        <div className={css.userMenuWrapper}>
+          {user && 
+            <IconUser/>
+          }
+          {/* {userMenuState &&
+            <UserMenu />
+          } */}
+          <UserMenu />
+        </div>
       </div>
 
       <div className={css.blockControl}>
         <RegistrationButtons/>
-        <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} />
+        {/* <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} /> */}
         <Weather/>
         {registrationWindowState === 'open' &&
           <RegistrationForm/>
@@ -38,6 +48,7 @@ const Header: FC = () => {
         {loginWindowState === 'open' && 
           <LoginForm/>
         }
+        
       </div>
 
       <div className={css.blockTitle}>
