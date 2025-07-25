@@ -1,11 +1,15 @@
 .userMenu {
   position: absolute;
   z-index: 1010;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem 0;
   top: 0;
   right: 0;
   width: 0;
   height: 0;
-  padding: 3.5rem 1rem 1rem 1rem;
+  padding: 3.5rem 1rem 3.5rem 1rem;
   background: #F6F6F6;
   border: 1px solid #000;
   border-radius: 0 2rem 0 0;
@@ -16,6 +20,11 @@
 
 .userMenu.active {
   width: 30rem;
-  height: 50rem;
+  height: 40rem;
   opacity: 1;
+}
+
+.blockButton {
+  display: flex;
+  justify-content: flex-end;
 }
