@@ -114,7 +114,7 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
   const handleSave = async () => {
     if (!editUserId) return
     try {
-      await axios.put(`http://localhost:5000/api/users/${editUserId}`, editFormUsers)
+      await axios.put(`/api/users/${editUserId}`, editFormUsers)
 
       const updatedUsers = users.map(user =>
         user._id === editUserId ? { ...user, ...editFormUsers } : user

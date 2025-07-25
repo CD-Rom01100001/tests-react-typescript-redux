@@ -10,7 +10,7 @@ export const updateTrainingResults = async (
   token?: string
 ) => {
   const res = await axios.patch(
-    `http://localhost:5000/api/users/${userId}/results/training`,
+    `/api/users/${userId}/results/training`,
     { resultsTrainingData: trainingData },
     {
       headers: {
@@ -29,7 +29,7 @@ export const updateExamResults = async (
   token?: string
 ) => {
   const res = await axios.patch(
-    `http://localhost:5000/api/users/${userId}/results/exam`,
+    `/api/users/${userId}/results/exam`,
     { resultsExamData: examData },
     {
       headers: {

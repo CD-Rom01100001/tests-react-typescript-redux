@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:5000/api/users'
+const URL = '/api/users'
 
 export interface User {
   _id: string;
