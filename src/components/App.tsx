@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getAllStageLink } from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
 import { tenRandomQuestions } from './TenExamQuestion';
@@ -22,12 +22,15 @@ import MaterialDescription from './main/trainingMaterials/MaterialDescription';
 
 import './app.css';
 import '../styles/themeStyles.css'
+import { setStateUserWindow } from '../store/userWindowSlice';
 
 const questArray = Object.entries(contentQuest)
 
 const App: FC = () => {
   /* test commit */
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
+  const userWindowState = useAppSelector(state => state.userWindow.window)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (theme === 'Light') {
@@ -41,6 +44,9 @@ const App: FC = () => {
 
   return (
     <BrowserRouter>
+      <div 
+        className={userWindowState ? 'close-user-menu-wrapper' : ''} 
+        onClick={()=>dispatch(setStateUserWindow())}></div>
       <div className={`${'app'} ${theme.toLowerCase()}-theme`}>
         {/* окно предупреждения */}
         {/* {alert === 'open' ? openAlert() : ''} */}

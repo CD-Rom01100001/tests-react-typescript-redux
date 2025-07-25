@@ -19,6 +19,8 @@ const UserMenu: FC = () => {
     }
   }
 
+
+
   return (
     <div className={`${css.userMenu} ${userWindowState ? css.active : ''}`}>
       <h3>ФИО</h3>

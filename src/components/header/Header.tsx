@@ -10,6 +10,7 @@ import IconUser from './IconUser';
 import UserMenu from './UserMenu';
 /* redux */
 import { /* useAppDispatch, */ useAppSelector } from '../../store/hooks';
+// import { setStateUserWindow } from '../../store/userWindowSlice';
 // import { changeTheme } from '../../store/slices';
 /* css */
 import css from './header.module.css'
@@ -19,7 +20,6 @@ const Header: FC = () => {
   const registrationWindowState = useAppSelector(state => state.registrationWindowIndex.registrationWindowState)
   const loginWindowState = useAppSelector(state => state.loginWindowReducerIndex.loginWindowState)
   const user = useAppSelector(state => state.userDataIndex.user)
-  const userMenuState = useAppSelector(state => state.userWindow.window)
   // const dispatch = useAppDispatch();
 
   return (
@@ -31,9 +31,6 @@ const Header: FC = () => {
           {user && 
             <IconUser/>
           }
-          {/* {userMenuState &&
-            <UserMenu />
-          } */}
           <UserMenu />
         </div>
       </div>
