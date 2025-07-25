@@ -54,6 +54,7 @@ const RegistrationForm: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      /* 'http://localhost:5000/api/users/register' */
       const response = await axios.post('/api/users/register', formData)
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("user", JSON.stringify(response.data.user))

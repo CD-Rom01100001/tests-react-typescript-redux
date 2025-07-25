@@ -37,6 +37,7 @@ const LoginForm: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      /* 'http://localhost:5000/api/users/login' */
       const response = await axios.post('/api/users/login', formData)
       const { user, token } = response.data
       console.log(response.data.user.id)
