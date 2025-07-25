@@ -2,7 +2,6 @@
   "name": "tests-react-typescript-redux",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://CD-Rom01100001.github.io/tests-react-typescript-redux",
   "type": "module",
   "scripts": {
     "dev": "vite",
