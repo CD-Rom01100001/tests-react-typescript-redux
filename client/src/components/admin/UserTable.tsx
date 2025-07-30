@@ -250,7 +250,12 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
                   <Button iconType={<GoPencil />} title='Редактировать' onClick={() => handleEdit(user._id)}/> :
                   <>
                     <Button iconType={<MdOutlineKeyboardBackspace />} title='Отмена' onClick={() => setEditUserId(null)}/>
-                    <Button iconType={<FaCheck />} title='Принять изменения' onClick={handleSave}/>
+                    <Button iconType={<FaCheck />} title='Принять изменения' onClick={
+                      () => {
+                        console.log('click Принять изменения')
+                        handleSave()
+                      }
+                    }/>
                   </>
                   }
                   <Button iconType={<RiDeleteBin2Line />} onClick={() => handleDeleteUser(user._id)} title='Удалить'/>
