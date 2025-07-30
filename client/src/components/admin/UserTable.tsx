@@ -247,9 +247,15 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
                 <td className={css.buttonWrap}>
                   {/* если нажали на карандаш, то эта кнопка пропадает и появляется кнопка отмены и наоборот */}
                   {editUserId !== user._id ?
-                  <Button iconType={<GoPencil />} title='Редактировать' onClick={() => handleEdit(user._id)}/> :
+                  <Button iconType={<GoPencil />} title='Редактировать' onClick={() => {
+                    console.log('click Редактировать')
+                    handleEdit(user._id)
+                  }}/> :
                   <>
-                    <Button iconType={<MdOutlineKeyboardBackspace />} title='Отмена' onClick={() => setEditUserId(null)}/>
+                    <Button iconType={<MdOutlineKeyboardBackspace />} title='Отмена' onClick={() => {
+                      console.log('click Отмена')
+                      setEditUserId(null)
+                    }}/>
                     <Button iconType={<FaCheck />} title='Принять изменения' onClick={
                       () => {
                         console.log('click Принять изменения')
