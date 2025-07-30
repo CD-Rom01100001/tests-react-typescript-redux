@@ -113,7 +113,10 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
 
   /* отправляет PUT-запрос на сервер, обновляет users и localStorage */
   const handleSave = async () => {
-    if (!editUserId) return
+    if (!editUserId) {
+      console.log('not users')
+      return
+    }
     try {
       await axiosInstance.put(`/api/users/${editUserId}`, editFormUsers)
 
