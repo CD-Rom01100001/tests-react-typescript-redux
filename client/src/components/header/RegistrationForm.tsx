@@ -1,5 +1,5 @@
 import { FC, useState, ChangeEvent, FormEvent } from "react";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import axiosInstance from "../../api/axiosInstance";
 import css from './registrationForm.module.css'
 import { useAppDispatch } from '../../store/hooks';

@@ -1,5 +1,5 @@
 import { FC, useState, ChangeEvent, FormEvent } from 'react';
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import axiosInstance from '../../api/axiosInstance';
 import { useAppDispatch } from '../../store/hooks';
 import { loginWindow } from '../../store/slices';
