@@ -1,5 +1,6 @@
 import { FC, useState, ChangeEvent, FormEvent } from 'react';
 import axios, { AxiosError } from "axios";
+import axiosInstance from '../../api/axiosInstance';
 import { useAppDispatch } from '../../store/hooks';
 import { loginWindow } from '../../store/slices';
 import { getUserDate } from '../../store/userSlice';
@@ -38,7 +39,7 @@ const LoginForm: FC = () => {
     event.preventDefault();
     try {
       /* 'http://localhost:5000/api/users/login' */
-      const response = await axios.post('/api/users/login', formData)
+      const response = await axiosInstance.post('/api/users/login', formData)
       const { user, token } = response.data
       console.log(response.data.user.id)
       alert('Вход выполнен')

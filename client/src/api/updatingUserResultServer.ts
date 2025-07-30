@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 export const updateTrainingResults = async (
   userId: string,
@@ -9,8 +10,8 @@ export const updateTrainingResults = async (
   },
   token?: string
 ) => {
-  const res = await axios.patch(
-    `http://localhost:5000/api/users/${userId}/results/training`,
+  const res = await axiosInstance.patch(
+    `/api/users/${userId}/results/training`,
     { resultsTrainingData: trainingData },
     {
       headers: {
@@ -28,7 +29,7 @@ export const updateExamResults = async (
   examData: string[],
   token?: string
 ) => {
-  const res = await axios.patch(
+  const res = await axiosInstance.patch(
     /* `http://localhost:5000/api/users/${userId}/results/exam` */
     `/api/users/${userId}/results/exam`,
     { resultsExamData: examData },

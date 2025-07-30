@@ -1,5 +1,6 @@
 import { FC, useState, ChangeEvent, FormEvent } from "react";
 import axios, { AxiosError } from "axios";
+import axiosInstance from "../../api/axiosInstance";
 import css from './registrationForm.module.css'
 import { useAppDispatch } from '../../store/hooks';
 import { registrationWindow } from '../../store/slices';
@@ -55,7 +56,7 @@ const RegistrationForm: FC = () => {
     event.preventDefault();
     try {
       /* 'http://localhost:5000/api/users/register' */
-      const response = await axios.post('/api/users/register', formData)
+      const response = await axiosInstance.post('/api/users/register', formData)
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("user", JSON.stringify(response.data.user))
       localStorage.setItem("resultsExamData", JSON.stringify(response.data.user.resultsExamData))

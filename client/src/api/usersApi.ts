@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosInstance from './axiosInstance';
 
 /* 'http://localhost:5000/api/users' */
 const URL = '/api/users'
@@ -20,7 +21,7 @@ export interface User {
 
 export const getUsers = async (): Promise<User[]> => {
   try {
-    const response = await axios.get(URL)
+    const response = await axiosInstance.get(URL)
     console.log(response.data)
     return response.data;
   } catch (error) {
