@@ -123,6 +123,7 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
       setUsers(updatedUsers)
       localStorage.setItem('userList', JSON.stringify(updatedUsers))
       setEditUserId(null)
+      console.log('Отправляем PUT-запрос на URL:', axiosInstance.defaults.baseURL + `/api/users/${editUserId}`);
     } catch (error) {
       console.error("Ошибка при обновлении пользователя:", error)
       alert("Не удалось обновить пользователя")
