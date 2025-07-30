@@ -59,7 +59,8 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
 
   /* получает id пользователя */
   const handleEdit = (userId: string) => {
-    const userToEdit = users.find(u => u._id === userId)
+    // const userToEdit = users.find(u => u._id === userId)
+    const userToEdit = users.find(u => u._id === userId || u._id?.toString() === userId);
     if (userToEdit) {
       setEditUserId(userId)
       setEditFormUsers({ ...userToEdit })
@@ -124,8 +125,10 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
         user._id === editUserId ? { ...user, ...editFormUsers } : user
       )
       setUsers(updatedUsers)
+
       localStorage.setItem('userList', JSON.stringify(updatedUsers))
       setEditUserId(null)
+
       console.log('Отправляем PUT-запрос на URL:', axiosInstance.defaults.baseURL + `/api/users/${editUserId}`);
     } catch (error) {
       console.error("Ошибка при обновлении пользователя:", error)
@@ -256,8 +259,10 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
                       console.log('click Отмена')
                       setEditUserId(null)
                     }}/>
+                    <p>{editUserId} === {user._id ? '✅' : '❌'}</p>
                     <Button iconType={<FaCheck />} title='Принять изменения' onClick={
                       () => {
+                        alert('click Принять изменения')
                         console.log('click Принять изменения')
                         handleSave()
                       }
