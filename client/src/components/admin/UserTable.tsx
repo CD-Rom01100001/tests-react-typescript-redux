@@ -1,5 +1,6 @@
 import React, { forwardRef, ForwardRefRenderFunction, useState, useEffect } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
+import axiosInstance from '../../api/axiosInstance'
 import { RiDeleteBin2Line } from "react-icons/ri"
 import { GoPencil } from "react-icons/go"
 import { FaCheck } from "react-icons/fa6"
@@ -114,7 +115,7 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
   const handleSave = async () => {
     if (!editUserId) return
     try {
-      await axios.put(`/api/users/${editUserId}`, editFormUsers)
+      await axiosInstance.put(`/api/users/${editUserId}`, editFormUsers)
 
       const updatedUsers = users.map(user =>
         user._id === editUserId ? { ...user, ...editFormUsers } : user
