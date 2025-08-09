@@ -1,3 +1,13 @@
+.weather {
+  display: block;
+}
+
+@media(max-width: 813px){
+  .weather {
+    display: none;
+  }
+}
+
 .weather-icon {
   font-size: 44px;
 }

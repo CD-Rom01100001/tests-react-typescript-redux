@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { TrainingMaterialsData } from '../../../data/trainingMaterials/trainingMaterialsData';
 import css from './TrainingMaterials.module.css'
 
@@ -16,6 +17,7 @@ const TrainingMaterials: FC = () => {
 
   return (
     <div className={css.trainingMaterials}>
+      {/* {useWindowWidth() < 800 && <Link to='/'>Назад</Link>} */}
       <nav className={css.blockNavigation}>
         {TrainingMaterialsData.map((section, i) => {
           return (

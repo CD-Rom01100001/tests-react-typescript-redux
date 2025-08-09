@@ -2,9 +2,25 @@
   position: relative;
 }
 
+@media(max-width: 813px){
+  .navigation {
+    margin: 0 0 3rem 0;
+  }
+}
+
 .unList {
   display: flex;
-  gap: 0 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media(max-width: 813px){
+  .unList {
+    justify-content: center;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
 }
 
 .li {
@@ -12,6 +28,13 @@
   background: #E6E6E6;
   border: 1px solid #E6E6E6;
   border-bottom: 0;
+}
+
+@media(max-width: 813px){
+  .li {
+    border-radius: 1rem;
+    overflow: hidden;
+  }
 }
 
 .li a, .p {

@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 import contentDescr from '../../../data/descriptions.json'
 import contentQuest from '../../../data/allQuestions.json'
 import downloadFile from '../../../assets/txt-files/pp_okhranniki_i_rabotniki_2023_itog.pdf'
 import type { QuesitonsType } from '../../../data/types';
+import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 import Description from '../Description';
 import QuestionSectionLink from './QuestionSectionLink';
@@ -30,6 +31,8 @@ const getSectionNameLinkList = (): string[][] => {
 const Questions: FC = () => {
   return (
     <div className={css.questions}>
+      {/* {useWindowWidth() < 800 && <Link to='/'>Назад</Link>} */}
+      
       <Description 
       title={contentDescr.questions.title} 
       description={contentDescr.questions.description}/>

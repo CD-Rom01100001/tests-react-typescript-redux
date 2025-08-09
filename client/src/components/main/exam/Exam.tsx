@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import contentDescr from '../../../data/descriptions.json'
+import { useWindowWidth } from '../../hooks/useWindowWidth';
 import Description from '../Description';
 import css from './exam.module.css'
 import HistoryExam from './HistoryExam';
@@ -16,6 +17,7 @@ const Exam: FC = () => {
 
   return (
     <div className={css.exam}>
+      {/* {useWindowWidth() < 800 && <Link to='/'>Назад</Link>} */}
       <Description 
       title={contentDescr.exam.title} 
       description={contentDescr.exam.description}/>

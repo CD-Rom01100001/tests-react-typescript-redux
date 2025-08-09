@@ -1,6 +1,8 @@
 import { FC, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getAllStageLink } from '../../allStageLink';
 import { getSectionAndNumber } from '../../sectionAndNumber';
+import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
@@ -22,6 +24,7 @@ const Training: FC = () => {
 
   return (
     <div className={css.training}>
+      {/* {useWindowWidth() < 800 && <Link to='/'>Назад</Link>} */}
       <Description 
       title={contentDescr.training.title} 
       description={contentDescr.training.description}/>

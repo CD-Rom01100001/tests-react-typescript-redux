@@ -5,8 +5,11 @@ import Navigation from './nav/Navigation';
 import Footer from './footer/Footer';
 import css from './layout.module.css'
 
-const Layout: FC = () => {
+interface LayoutProps {
+  children?: React.ReactNode
+}
 
+const Layout: FC/* <LayoutProps> */ = (/* {children} */) => {
 
   return (
     <div className={css.layout}>
@@ -15,6 +18,7 @@ const Layout: FC = () => {
 
       <main className={css.main}>
         <Outlet/>
+        {/* {children} */}
       </main>
 
       <Footer/>

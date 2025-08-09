@@ -1,10 +1,11 @@
-import { FC, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { FC, useEffect, useMemo, useState } from 'react'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { getAllStageLink } from './allStageLink'
 import { getSectionAndNumber } from './sectionAndNumber';
 import { tenRandomQuestions } from './TenExamQuestion';
 import { TrainingMaterialsData } from '../data/trainingMaterials/trainingMaterialsData';
+import { useWindowWidth } from './hooks/useWindowWidth';
 
 import contentQuest from '../data/allQuestions.json'
 import Layout from './Layout';
@@ -23,14 +24,21 @@ import MaterialDescription from './main/trainingMaterials/MaterialDescription';
 import './app.css';
 import '../styles/themeStyles.css'
 import { setStateUserWindow } from '../store/userWindowSlice';
+import Navigation from './nav/Navigation';
 
 const questArray = Object.entries(contentQuest)
+
+// const ResponsiveLayout: FC = () => {
+//   const width = useWindowWidth()
+//   return width > 800 ? <Layout><Outlet /></Layout> : <Outlet />
+// };
 
 const App: FC = () => {
   /* test commit */
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const userWindowState = useAppSelector(state => state.userWindow.window)
   const dispatch = useAppDispatch()
+  const randomQuestions = useMemo(() => tenRandomQuestions(), [])
 
   useEffect(() => {
     if (theme === 'Light') {
@@ -50,10 +58,20 @@ const App: FC = () => {
       <div className={`${'app'} ${theme.toLowerCase()}-theme`}>
         {/* окно предупреждения */}
         {/* {alert === 'open' ? openAlert() : ''} */}
+
         <Routes>
-          <Route path='/' element={<Layout/>}>
+          <Route path='/' element={<Layout/>}>//!
+
+            {/* {useWindowWidth() > 800 ? 
+            <Route index element={<Home/>}/> :
+            <>
+            <Route index element={<Navigation/>}/>
+            <Route path='/' element={<Home/>}/>
+            </>
+            } */}
             {/* главная */}
-            <Route index element={<Home/>}/>
+
+            <Route index element={<Home/>}/>//!
 
             {/* блок "Вопросы" */}
             <Route  path='questions' element={<Questions/>}>
@@ -97,8 +115,8 @@ const App: FC = () => {
               element={
                 <TestTakingUnit 
                   title={'Экзамен'}
-                  numberOfQuestions={tenRandomQuestions()}
-                  sectionAndNum={getSectionAndNumber(tenRandomQuestions())}/>
+                  numberOfQuestions={randomQuestions}
+                  sectionAndNum={getSectionAndNumber(randomQuestions)}/>
               } 
             />
 
@@ -111,6 +129,7 @@ const App: FC = () => {
             <Route  path='*' element={<NotFoundPage/>}></Route>
           </Route>
         </Routes>
+
       </div>
     </BrowserRouter>
   )
