@@ -6,6 +6,7 @@ import { getSectionAndNumber } from './sectionAndNumber';
 import { tenRandomQuestions } from './TenExamQuestion';
 import { TrainingMaterialsData } from '../data/trainingMaterials/trainingMaterialsData';
 import { useWindowWidth } from './hooks/useWindowWidth';
+import { useDeviceType } from './hooks/useDeviceType';
 
 import contentQuest from '../data/allQuestions.json'
 import Layout from './Layout';
@@ -34,11 +35,13 @@ const questArray = Object.entries(contentQuest)
 // };
 
 const App: FC = () => {
-  /* test commit */
   const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const userWindowState = useAppSelector(state => state.userWindow.window)
   const dispatch = useAppDispatch()
   const randomQuestions = useMemo(() => tenRandomQuestions(), [])
+  const isMobile = useDeviceType()// определяет ПК это или телефон ()
+  if(isMobile === 'PC') console.log('Комп')
+  else console.log('мобила')
 
   useEffect(() => {
     if (theme === 'Light') {
