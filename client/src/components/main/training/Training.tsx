@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllStageLink } from '../../allStageLink';
 import { getSectionAndNumber } from '../../sectionAndNumber';
-import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { useDeviceType } from '../../hooks/useDeviceType';
 
 import contentDescr from '../../../data/descriptions.json'
 import Description from '../Description';
@@ -17,6 +17,7 @@ const Training: FC = () => {
 
   const dispatch = useAppDispatch()
   const userDataState = useAppSelector(state => state.userDataIndex.user)// меняет состояние превьюшек в зависимости от того залогинен пользователь или нет
+  const isMobile = useDeviceType()
 
   useEffect(() => {
     dispatch(getTotalNumberPreview(getAllStageLink().length))
@@ -24,7 +25,11 @@ const Training: FC = () => {
 
   return (
     <div className={css.training}>
-      {/* {useWindowWidth() < 800 && <Link to='/'>Назад</Link>} */}
+      
+      {isMobile === 'mobile' && 
+        <Link to='/' className='buttonDef'>Назад</Link>
+      }
+
       <Description 
       title={contentDescr.training.title} 
       description={contentDescr.training.description}/>

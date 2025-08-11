@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useDeviceType } from '../hooks/useDeviceType';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getIndicatorId, clearAnswers, defineEndTest, setStateAlert, setPath } from '../../store/slices';
@@ -11,6 +12,7 @@ const Navigation: FC = () => {
   const dispatch = useAppDispatch()
   const defineEndTestSlice = useAppSelector(state => state.defineEndTestIndex.defineEnd)
   const userData = useAppSelector(state => state.userDataIndex.user)
+  const isMobile = useDeviceType()
 
   /* пра нажатии на кнопку ВЫХОД */
   const stopTest = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -40,14 +42,14 @@ const Navigation: FC = () => {
   }
   const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
 
-
+  // to={isMobile === 'PC' ? '/' : 'home'}
   return (
     <nav className={css.navigation}>
       <ul className={css.unList}>
         <li className={css.li}>
           {((locationTraining || locationExam) && !defineEndTestSlice) ? 
-            <p id='/' onClick={x} className={css.p}>Главная</p> :
-            <NavLink className={setActive} to='/' onClick={stopTest}>Главная</NavLink>
+            <p id='/' onClick={x} className={css.p}>О ГЦСС</p> :
+            <NavLink className={setActive} to={isMobile === 'PC' ? '/' : 'home'} onClick={stopTest}>О ГЦСС</NavLink>
           }
         </li>
         <li className={css.li}>

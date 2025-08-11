@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { useWindowWidth } from '../../hooks/useWindowWidth';
+import { useDeviceType } from '../../hooks/useDeviceType';
 import { TrainingMaterialsData } from '../../../data/trainingMaterials/trainingMaterialsData';
 import css from './TrainingMaterials.module.css'
 
@@ -14,10 +14,15 @@ const TrainingMaterials: FC = () => {
   const pathname = useLocation().pathname;
   const location = useMemo(() => pathname.match(/^\/training-materials\//), [pathname])
   console.log(location)
+  const isMobile = useDeviceType()
 
   return (
     <div className={css.trainingMaterials}>
-      {/* {useWindowWidth() < 800 && <Link to='/'>Назад</Link>} */}
+      
+      {isMobile === 'mobile' && 
+        <Link to='/' className='buttonDef'>Назад</Link>
+      }
+
       <nav className={css.blockNavigation}>
         {TrainingMaterialsData.map((section, i) => {
           return (

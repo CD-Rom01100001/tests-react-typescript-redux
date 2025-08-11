@@ -1,12 +1,21 @@
 import { FC } from 'react';
-import css from './home.module.css'
+import { Link } from 'react-router-dom';
+import { useDeviceType } from '../../hooks/useDeviceType';
+import css from './DescriptionOrganization.module.css'
 
-const Home: FC = () => {
+const DescriptionOrganization: FC = () => {
+
+  const isMobile = useDeviceType()
 
   return (
-    <div className={css.home}>
+    <div className={css.descriptionOrganization}>
+      
+      {isMobile === 'mobile' && 
+        <Link to='/' className='buttonDef'>Назад</Link>
+      }
+
       <h2 className={css.title}>
-        Главная
+        О ГЦСС
       </h2>
 
       <div className={css.blockHistory}>
@@ -39,4 +48,4 @@ const Home: FC = () => {
   );
 }
 
-export default Home;
+export default DescriptionOrganization;

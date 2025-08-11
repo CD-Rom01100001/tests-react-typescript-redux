@@ -1,26 +1,24 @@
 import { FC } from 'react';
+import { useDeviceType } from '../hooks/useDeviceType';
 /* components */
 import Label from './Label';
-// import ButtonTheme from './ButtonTheme';
 import Weather from './Weather';
 import RegistrationButtons from './RegistrationButtons';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import IconUser from './IconUser';
 import UserMenu from './UserMenu';
+import Navigation from '../nav/Navigation';
 /* redux */
-import { /* useAppDispatch, */ useAppSelector } from '../../store/hooks';
-// import { setStateUserWindow } from '../../store/userWindowSlice';
-// import { changeTheme } from '../../store/slices';
+import { useAppSelector } from '../../store/hooks';
 /* css */
 import css from './header.module.css'
 
 const Header: FC = () => {
-  // const theme = useAppSelector(state => state.themeIndex.themeSlice);
   const registrationWindowState = useAppSelector(state => state.registrationWindowIndex.registrationWindowState)
   const loginWindowState = useAppSelector(state => state.loginWindowReducerIndex.loginWindowState)
   const user = useAppSelector(state => state.userDataIndex.user)
-  // const dispatch = useAppDispatch();
+  const isMobile = useDeviceType()// определяет ПК это или телефон
 
   return (
     <header className={css.header}>
@@ -37,7 +35,6 @@ const Header: FC = () => {
 
       <div className={css.blockControl}>
         <RegistrationButtons/>
-        {/* <ButtonTheme theme={theme} active={()=>dispatch(changeTheme())} /> */}
         <Weather/>
         {registrationWindowState === 'open' &&
           <RegistrationForm/>
@@ -51,6 +48,9 @@ const Header: FC = () => {
       <div className={css.blockTitle}>
         <h1 className={css.titleH1}>Обучение сотрудников ФГУП ГЦСС:</h1>
       </div>
+
+      {/* если открыто через мобильник */}
+      {isMobile === 'mobile' && <Navigation/>}
       
     </header>
   );
