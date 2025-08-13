@@ -1,8 +1,14 @@
-.registrationButtons{
+.btnWrap {
   display: flex;
-  gap: 0 2rem;
+  gap: 2rem;
 }
 
-.registrationButtons button:hover {
+@media (hover: none) and (pointer: coarse) and (max-width: 425px) {
+  .btnWrap {
+    flex-direction: column;
+  }
+}
+
+.btnWrap button:hover {
   cursor: pointer;
 }

@@ -5,14 +5,14 @@ import Navigation from '../../nav/Navigation';
 import Footer from '../../footer/Footer';
 import css from './layoutPC.module.css'
 
-const Layout: FC = () => {
+const LayoutPC: FC = () => {
 
   return (
-    <div className={css.layout}>
+    <div className={css.layoutPC}>
       <Header/>
       <Navigation/>
 
-      <main className={css.main}>
+      <main className={css.mainPC}>
         <Outlet/>
       </main>
 
@@ -21,4 +21,4 @@ const Layout: FC = () => {
   );
 }
 
-export default Layout;
+export default LayoutPC;

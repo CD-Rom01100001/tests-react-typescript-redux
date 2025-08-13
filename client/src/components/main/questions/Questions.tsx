@@ -60,8 +60,11 @@ const Questions: FC = () => {
 
         <div className={css.additionalInfo}>
           <div className={css.ordersBlock}>
-            <p className={css.orders}>Все они утверждены</p>
-            <a href="https://rosguard.gov.ru/document/article/prikaz-federalnoj-sluzhby-vojsk-nacionalnoj-gvardii-rossijskoj-federacii-ot-25112019--387" className={css.orderLink} target=':black'>Приказом Росгвардии от 25.11.2019 N 387</a>
+            <p className={css.orders}>Все они утверждены&nbsp;
+              <a href="https://rosguard.gov.ru/document/article/prikaz-federalnoj-sluzhby-vojsk-nacionalnoj-gvardii-rossijskoj-federacii-ot-25112019--387" className={css.orderLink} target=':black'>
+                Приказом Росгвардии от 25.11.2019 N 387
+              </a>
+            </p>
           </div>
           <div className={css.dawnloadLinkBlock}>
             <a href={downloadFile} className={css.downloadLink} download>Скачать вопросы с ответами</a>

@@ -11,9 +11,13 @@ import css from './registrationForm.module.css'
 type LoginFormData = {
   email: string;
   password: string;
-};
+}
 
-const LoginForm: FC = () => {
+interface LoginFormProps {
+  onToggle: () => void
+}
+
+const LoginForm: FC<LoginFormProps> = ({onToggle}) => {
 
   const dispatch = useAppDispatch()
 
@@ -38,6 +42,7 @@ const LoginForm: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      onToggle()// закрывает меню в мобильном при ширине 425px
       /* 'http://localhost:5000/api/users/login' */
       const response = await axiosInstance.post('/api/users/login', formData)
       const { user, token } = response.data

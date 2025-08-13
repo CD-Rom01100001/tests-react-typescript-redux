@@ -1,4 +1,4 @@
-.layout {
+.layoutPC {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -6,7 +6,7 @@
   padding: 2rem 2rem 0 2rem;
 }
 
-.main {
+.mainPC {
   display: flex;
   justify-content: center;
   flex: 1;

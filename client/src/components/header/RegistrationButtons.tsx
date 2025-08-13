@@ -15,7 +15,7 @@ const RegistrationButtons: FC = () => {
     <div className={css.registrationButtons}>
       {/* если пользователь не авторизован то кнопка "Вход" и "Регистрация" */}
       {!user && 
-        <>
+        <div className={css.btnWrap}>
           <button className={`${css.signIn} buttonDef ${theme}`} 
           onClick={()=>dispatch(registrationWindow('open'))}>
             Регистрация
@@ -24,7 +24,7 @@ const RegistrationButtons: FC = () => {
           onClick={() => dispatch(loginWindow('open'))}>
             Вход
           </button>
-        </>
+        </div>
       }
 
     </div>

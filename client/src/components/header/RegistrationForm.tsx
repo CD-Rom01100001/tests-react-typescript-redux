@@ -28,7 +28,11 @@ type UserDataType = Partial<{
 //   };
 // };
 
-const RegistrationForm: FC = () => {
+interface RegistrationFormProps {
+  onToggle: () => void
+}
+
+const RegistrationForm: FC<RegistrationFormProps> = ({onToggle}) => {
 
   const dispatch = useAppDispatch()
   const exit = () => {
@@ -55,6 +59,7 @@ const RegistrationForm: FC = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
+      onToggle()// закрывает меню в мобильном при ширине 425px
       /* 'http://localhost:5000/api/users/register' */
       const response = await axiosInstance.post('/api/users/register', formData)
       localStorage.setItem("token", response.data.token)

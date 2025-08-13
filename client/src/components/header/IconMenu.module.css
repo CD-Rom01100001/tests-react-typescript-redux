@@ -1,0 +1,57 @@
+.iconMenu {
+  position: relative;
+  z-index: 2;
+  display: none;
+  width: 3rem;
+  height: 2rem;
+  margin: 0.3rem 0.3rem 0 0;
+  cursor: pointer;
+}
+
+@media (hover: none) and (pointer: coarse) and (max-width: 425px) {
+  .iconMenu {
+    display: block;
+  }
+}
+
+.iconMenu::before,
+.centerLine,
+.iconMenu::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #4b4b4b;
+  transition: all 0.3s ease
+}
+
+/* верхняя линия */
+.iconMenu::before {
+  top: 0;
+}
+
+/* Средняя линия */
+.centerLine {
+ top: 50%;
+ transform: translateY(-50%);
+}
+
+/* Нижняя линия */
+.iconMenu::after {
+  bottom: 0;
+}
+
+.iconMenu.active::before {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.iconMenu.active .centerLine {
+ opacity: 0;
+}
+
+.iconMenu.active::after {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+

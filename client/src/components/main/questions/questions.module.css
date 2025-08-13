@@ -28,9 +28,22 @@
   margin-bottom: 5rem;
 }
 
+@media (max-width: 820px) {
+  .additionalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .ordersBlock {
   display: flex;
   gap: 0 0.5rem;
+}
+
+@media (max-width: 820px) {
+  .ordersBlock {
+    margin-bottom: 2rem;
+  }
 }
 
 .additionalInfo {

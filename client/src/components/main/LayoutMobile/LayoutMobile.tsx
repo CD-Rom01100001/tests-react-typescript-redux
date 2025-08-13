@@ -6,7 +6,9 @@ const LayoutMobile: FC = () => {
 
   return (
     <div className={css.layoutMobile}>
-      <Outlet/>
+      <main className={css.mainMobile}>
+        <Outlet/>
+      </main>
     </div>
   );
 }

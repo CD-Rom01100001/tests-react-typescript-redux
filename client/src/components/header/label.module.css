@@ -2,16 +2,22 @@
   display: flex;
   align-items: center;
   margin-bottom: 3rem;
-  width: 64rem;
+  max-width: 64rem;
 }
 
 .logo {
   width: 17rem;
 }
 
-@media(max-width: 813px){
+@media (max-width: 768px){
   .logo {
-    width: 20vw;
+    width: 23vw;
+  }
+}
+
+@media (max-width: 668px){
+  .logo {
+    width: 27vw;
   }
 }
 
@@ -26,7 +32,13 @@
   color: #00396F;
 }
 
-@media(max-width: 813px){
+@media (max-width: 920px){
+  .company_name {
+    display: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
   .company_name {
     display: none;
   }
