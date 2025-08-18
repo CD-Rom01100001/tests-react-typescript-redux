@@ -7,6 +7,14 @@
   overflow: auto;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .questAndAnswers {
+    height: auto;
+    padding: 0;
+    border: none;
+  }
+}
+
 .questAndAnswersEnd {
   pointer-events: none;
 }

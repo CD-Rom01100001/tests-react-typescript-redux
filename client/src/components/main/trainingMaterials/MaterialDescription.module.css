@@ -17,3 +17,13 @@
   margin-left: 2rem;
   list-style-type: disc;
 }
+
+.bntBack {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .bntBack {
+    display: inline;
+  }
+}

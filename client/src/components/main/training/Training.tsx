@@ -27,7 +27,7 @@ const Training: FC = () => {
     <div className={css.training}>
       
       {isMobile === 'mobile' && 
-        <Link to='/' className='buttonDef'>Назад</Link>
+        <Link to='/' className='buttonBack buttonDef'>&lt;</Link>
       }
 
       <Description 

@@ -4,6 +4,12 @@
   gap: 0 2rem;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .buttons {
+    justify-content: space-around;
+  }
+}
+
 .buttonNav {
   display: inline-block;
   padding: 0 1rem;

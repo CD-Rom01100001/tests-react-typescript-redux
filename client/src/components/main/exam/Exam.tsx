@@ -21,7 +21,7 @@ const Exam: FC = () => {
     <div className={css.exam}>
       
       {isMobile === 'mobile' && 
-        <Link to='/' className='buttonDef'>Назад</Link>
+        <Link to='/' className='buttonBack buttonDef'>&lt;</Link>
       }
 
       <Description 

@@ -3,6 +3,12 @@
   justify-content: center;
 }
 
+/* @media (hover: none) and (pointer: coarse) {
+  .blockIndicators {
+    display: none;
+  }
+} */
+
 .indicatorsWrap {
   display: flex;
   justify-content: start;

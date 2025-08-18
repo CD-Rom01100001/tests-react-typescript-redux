@@ -4,6 +4,13 @@
   width: 100%;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .trainingMaterials {
+    flex-direction: column;
+  }
+}
+
+
 .trainingMaterials nav {
   flex: 1;
 }
@@ -60,4 +67,10 @@ section {
 
 .blockImage img {
   width: 100%;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .sectionPc {
+    display: none;
+  }
 }

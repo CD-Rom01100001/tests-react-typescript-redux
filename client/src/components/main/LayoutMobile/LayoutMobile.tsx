@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import Footer from '../../footer/Footer';
 import css from './LayoutMobile.module.css'
 
 const LayoutMobile: FC = () => {
@@ -9,6 +10,7 @@ const LayoutMobile: FC = () => {
       <main className={css.mainMobile}>
         <Outlet/>
       </main>
+      <Footer/>
     </div>
   );
 }

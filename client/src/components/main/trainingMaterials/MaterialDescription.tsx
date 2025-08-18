@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import type { WeaponsT } from '../../../data/trainingMaterials/weapoons';
 import type { RubberSticksT } from '../../../data/trainingMaterials/rubberSticks';
 import css from './MaterialDescription.module.css'
@@ -12,6 +13,8 @@ const MaterialDescription: FC<MaterialDescriptionProp> = ({title, data}) => {
 
   return (
     <div className={css.materialDescription}>
+      <Link to='/training-materials' className={`${css.bntBack} buttonDef buttonBack`}>&lt;</Link>
+      
       <div className={css.blockTitle}>
         <h2 className={css.title}>{title}</h2>
       </div>

@@ -1,8 +1,10 @@
 import { FC, useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 import { getUsers, User } from '../../api/usersApi'
-import css from './Admin.module.css'
 import UserTable from './UserTable'
+import { useDeviceType } from '../hooks/useDeviceType'
+import css from './Admin.module.css'
 
 const Admin: FC = () => {
   const [users, setUsers] = useState<User[]>([])// список пользователей из locslStorage
@@ -13,6 +15,7 @@ const Admin: FC = () => {
   const tableWrapperRef = useRef<HTMLDivElement>(null)
   const scrollbarCloneRef = useRef<HTMLDivElement>(null)
   const tableRef = useRef<HTMLTableElement>(null)
+  const isMobile = useDeviceType()
 
   /* получить актуальный список пользователей как на сервере */
   const updateUserData = () => {
@@ -80,6 +83,10 @@ const Admin: FC = () => {
 
   return (
     <div className={css.admin}>
+      {isMobile === 'mobile' && 
+        <Link to='/' className='buttonBack buttonDef'>&lt;</Link>
+      }
+
       <h2 className={css.adminTitle}>Панель администратора</h2>
       {loading &&
         <p>Ожидает загрузку пользователей...</p>

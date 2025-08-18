@@ -22,10 +22,10 @@ import UsersList from './admin/UsersList';
 import TrainingMaterials from './main/trainingMaterials/TrainingMaterials';
 import MaterialDescription from './main/trainingMaterials/MaterialDescription';
 import DescriptionOrganization from './main/DescriptionOrganization/DescriptionOrganization';
+import Header from './header/Header';
 
 import './app.css';
 import '../styles/themeStyles.css'
-import Header from './header/Header';
 
 const questArray = Object.entries(contentQuest)
 
@@ -60,12 +60,26 @@ const App: FC = () => {
           )}
         </Route>
 
-        {/* блок "Учебные материалы" */}
-        <Route  path='training-materials' element={<TrainingMaterials/>}>
-          {TrainingMaterialsData.map((section, i) => {
-            return <Route path={section.path} element={<MaterialDescription title={section.title} data={section.data} />} key={i} />
-          })}
-        </Route>
+        {isMobile === 'PC' ?
+          /* блок "Учебные материалы" для ПК */
+          <Route  path='training-materials' element={<TrainingMaterials/>}>
+            {TrainingMaterialsData.map((section, i) => {
+              return <Route path={section.path} element={<MaterialDescription title={section.title} data={section.data} />} key={i} />
+            })}
+          </Route> 
+          : 
+          /* блок "Учебные материалы" для мобильных */
+          <>
+            <Route  path='training-materials' element={<TrainingMaterials/>}/>
+            {TrainingMaterialsData.map((section, i) => {
+              console.log(section.path)
+              return <Route 
+                path={`training-materials/${section.path}`} 
+                element={<MaterialDescription title={section.title} 
+                data={section.data} />} key={i} />
+            })}
+          </>
+        }
 
         {/* блок "Обучение" */}
         <Route  path='training' element={<Training/>}/>
@@ -83,6 +97,7 @@ const App: FC = () => {
           } 
           key={sectionId}
         />})}
+
         <Route path='exam' element={<Exam/>}/>
         <Route  
           path={`exam/test`} 

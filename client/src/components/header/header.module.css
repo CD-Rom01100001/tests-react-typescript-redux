@@ -3,9 +3,10 @@
   width: 100%;
 }
 
-@media(max-width: 425px) {
+@media (hover: none) and (pointer: coarse) {
   .header {
     position: relative;
+    padding-top: 0.4rem;
     overflow: hidden;
   }
 }
@@ -34,7 +35,7 @@
   gap: 0 2rem;
 }
 
-@media (max-width: 425px) {
+@media (hover: none) and (pointer: coarse) {
   .blockControl {
     display: none;
   }
@@ -44,17 +45,18 @@
   display: none;
 }
 
-@media (hover: none) and (pointer: coarse) and (max-width: 425px) {
+@media (hover: none) and (pointer: coarse) {
   .blockControlMobile {
     position: absolute;
     z-index: 1;
     right: 0;
-    top: 0;
+    top: 0rem;
     display: flex;
     justify-content: center;
     align-items: start;
     gap: 0 2rem;
     width: 0;
+    max-width: 22rem;/* нужно для того, что-бы при закрытии меню оно не расширялось на 60% */
     height: 0;
     padding-top: 5rem;
     background: #F6F6F6;
@@ -67,6 +69,7 @@
   .blockControlMobile.active {
     /* right: 0.4rem; */
     width: 60%;
+    max-width: 22rem;
     height: 40rem;
     opacity: 1;
   }
@@ -79,4 +82,10 @@
 
 .titleH1 {
   font: 500 2.4rem / 2.4rem "agora";
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .titleH1 {
+    margin-bottom: 5rem;
+  }
 }

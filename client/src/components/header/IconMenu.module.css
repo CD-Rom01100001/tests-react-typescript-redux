@@ -8,7 +8,7 @@
   cursor: pointer;
 }
 
-@media (hover: none) and (pointer: coarse) and (max-width: 425px) {
+@media (hover: none) and (pointer: coarse) {
   .iconMenu {
     display: block;
   }
