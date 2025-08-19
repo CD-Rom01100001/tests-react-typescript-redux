@@ -22,16 +22,20 @@ const TrainingMaterials: FC = () => {
       </div>
 
       <nav className={css.blockNavigation}>
-        {TrainingMaterialsData.map((section, i) => {
-          return (
-            <NavLink 
-            to={section.path} 
-            className={setActive} 
-            key={i}>
-              {section.title}
-            </NavLink>
-          )
-        })}
+        <ul>
+          {TrainingMaterialsData.map((section, i) => {
+            return (
+              <li className={css.li}>
+                <NavLink 
+                to={section.path} 
+                className={setActive} 
+                key={i}>
+                  {section.title}
+                </NavLink>
+              </li>
+            )
+          })}
+        </ul>
       </nav>
 
       <section className={css.sectionPc}>

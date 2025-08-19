@@ -9,6 +9,12 @@
   width: 100%;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .tableWrapper {
+    display: none;
+  }
+}
+
 .userTable {
   width: max-content;
   border-collapse: collapse;

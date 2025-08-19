@@ -1,3 +1,9 @@
+@media (hover: none) and (pointer: coarse) {
+  .exam {
+    margin: 0 auto;
+  }
+}
+
 .buttonBlock {
   display: flex;
   justify-content: center;

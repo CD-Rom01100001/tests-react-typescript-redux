@@ -259,7 +259,7 @@ const UserTable: ForwardRefRenderFunction<HTMLTableElement, UserTableProps> = ({
                       console.log('click Отмена')
                       setEditUserId(null)
                     }}/>
-                    <p>{editUserId} === {user._id ? '✅' : '❌'}</p>
+                    {/* <p>{isEditing ? '✅' : '❌'}</p> */}
                     <Button iconType={<FaCheck />} title='Принять изменения' onClick={
                       () => {
                         alert('click Принять изменения')

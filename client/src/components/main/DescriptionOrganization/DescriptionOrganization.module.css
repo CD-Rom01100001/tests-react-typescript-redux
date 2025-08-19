@@ -1,3 +1,9 @@
+@media (hover: none) and (pointer: coarse) {
+  .descriptionOrganization {
+    margin: 0 auto;
+  }
+}
+
 .blockHistory {
   max-width: 70.68rem;
   margin: 0 auto 3rem auto;

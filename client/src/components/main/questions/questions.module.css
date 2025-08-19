@@ -1,3 +1,9 @@
+@media (hover: none) and (pointer: coarse) {
+  .questions {
+    margin: 0 auto;
+  }
+}
+
 .blockTitle {
   margin-bottom: 3rem;
 }

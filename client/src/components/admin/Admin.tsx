@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { getUsers, User } from '../../api/usersApi'
 import UserTable from './UserTable'
+import { useDeviceType } from '../hooks/useDeviceType'
 import css from './Admin.module.css'
 
 const Admin: FC = () => {
@@ -14,6 +15,7 @@ const Admin: FC = () => {
   const tableWrapperRef = useRef<HTMLDivElement>(null)
   const scrollbarCloneRef = useRef<HTMLDivElement>(null)
   const tableRef = useRef<HTMLTableElement>(null)
+  const isMobile = useDeviceType()
 
   /* получить актуальный список пользователей как на сервере */
   const updateUserData = () => {
@@ -87,9 +89,13 @@ const Admin: FC = () => {
       {loading &&
         <p>Ожидает загрузку пользователей...</p>
       }
-      <div className={css.tableWrapper} ref={tableWrapperRef}>
+      {!isMobile ? 
+        <div className={css.tableWrapper} ref={tableWrapperRef}>
         <UserTable ref={tableRef} users={users} setUsers={setUsers} setLoading={setLoading}/>
-      </div>
+      </div> :
+      <UserTable ref={tableRef} users={users} setUsers={setUsers} setLoading={setLoading}/>
+      }
+      
        {/* Прокрутка снизу */}
       <div className={css.scrollbarClone} ref={scrollbarCloneRef} style={{ width: cloneWidth }}>
         <div style={{ width: tableScrollWidth, height: 1 }}></div>

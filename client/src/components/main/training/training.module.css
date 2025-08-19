@@ -1,3 +1,9 @@
+@media (hover: none) and (pointer: coarse) {
+  .training {
+    margin: 0 auto;
+  }
+}
+
 .stageBlock {
   display: flex;
   justify-content: center;
