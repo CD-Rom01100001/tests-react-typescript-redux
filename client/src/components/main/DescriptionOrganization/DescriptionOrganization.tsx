@@ -1,18 +1,13 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { useDeviceType } from '../../hooks/useDeviceType';
 import css from './DescriptionOrganization.module.css'
 
 const DescriptionOrganization: FC = () => {
 
-  const isMobile = useDeviceType()
-
   return (
     <div className={css.descriptionOrganization}>
-      
-      {isMobile === 'mobile' && 
-        <Link to='/' className='buttonDef'>Назад</Link>
-      }
+
+      <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
 
       <h2 className={css.title}>
         О ГЦСС

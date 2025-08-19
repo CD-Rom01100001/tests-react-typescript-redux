@@ -42,7 +42,8 @@ const Navigation: FC = () => {
   }
   const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
 
-  // to={isMobile === 'PC' ? '/' : 'home'}
+  const xxx: string = 'admin'//!!!!!!!!!!!!!!
+  
   return (
     <nav className={css.navigation}>
       <ul className={css.unList}>
@@ -76,7 +77,8 @@ const Navigation: FC = () => {
             <NavLink className={setActive} to='/exam' onClick={stopTest}>Экзамен</NavLink>
           }
         </li>
-        {userData?.role === 'admin' &&
+        {/* !!!!!!!!!!!!!!!!!!!!!!!!!! */}
+        {/* userData?.role */ xxx === 'admin' &&
           <li className={css.li}>
             {((locationTraining || locationExam) && !defineEndTestSlice) ? 
               <p id='/settings' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Настройки</p> :
@@ -84,7 +86,8 @@ const Navigation: FC = () => {
             }
           </li>
         }
-        {(userData?.role === 'admin' || userData?.role === 'moderator') &&
+        {/* !!!!!!!!!!!!!!!!!!!!!!!!!! */}
+        {(/* userData?.role */ xxx === 'admin' /* || userData?.role === 'moderator' */) &&
           <li className={css.li}>
             {((locationTraining || locationExam) && !defineEndTestSlice) ? 
               <p id='/users' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Пользователи</p> :

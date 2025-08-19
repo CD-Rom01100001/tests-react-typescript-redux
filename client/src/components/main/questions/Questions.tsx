@@ -5,7 +5,6 @@ import contentDescr from '../../../data/descriptions.json'
 import contentQuest from '../../../data/allQuestions.json'
 import downloadFile from '../../../assets/txt-files/pp_okhranniki_i_rabotniki_2023_itog.pdf'
 import type { QuesitonsType } from '../../../data/types';
-import { useDeviceType } from '../../hooks/useDeviceType';
 
 import Description from '../Description';
 import QuestionSectionLink from './QuestionSectionLink';
@@ -30,13 +29,9 @@ const getSectionNameLinkList = (): string[][] => {
 
 const Questions: FC = () => {
 
-  const isMobile = useDeviceType()
-
   return (
     <div className={css.questions}>
-      {isMobile === 'mobile' && 
-        <Link to='/' className='buttonDef'>Назад</Link>
-      }
+      <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
       
       <Description 
       title={contentDescr.questions.title} 

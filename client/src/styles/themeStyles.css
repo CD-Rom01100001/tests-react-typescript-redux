@@ -16,9 +16,16 @@
   user-select: none;
 }
 
-.buttonBack {
-  font-size: 3rem;
-  font-weight: 100;
+.btnBackMobile {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .btnBackMobile {
+    display: inline-block;
+    font-size: 3rem;
+    font-weight: 100;
+  }
 }
 
 .buttonDef:active {

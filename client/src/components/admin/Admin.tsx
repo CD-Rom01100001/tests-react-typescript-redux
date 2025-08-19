@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { getUsers, User } from '../../api/usersApi'
 import UserTable from './UserTable'
-import { useDeviceType } from '../hooks/useDeviceType'
 import css from './Admin.module.css'
 
 const Admin: FC = () => {
@@ -15,7 +14,6 @@ const Admin: FC = () => {
   const tableWrapperRef = useRef<HTMLDivElement>(null)
   const scrollbarCloneRef = useRef<HTMLDivElement>(null)
   const tableRef = useRef<HTMLTableElement>(null)
-  const isMobile = useDeviceType()
 
   /* получить актуальный список пользователей как на сервере */
   const updateUserData = () => {
@@ -83,9 +81,7 @@ const Admin: FC = () => {
 
   return (
     <div className={css.admin}>
-      {isMobile === 'mobile' && 
-        <Link to='/' className='buttonBack buttonDef'>&lt;</Link>
-      }
+      <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
 
       <h2 className={css.adminTitle}>Панель администратора</h2>
       {loading &&

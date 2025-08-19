@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { getUsers, User } from '../../api/usersApi';
 import css from './UsersList.module.css'
 
@@ -51,6 +52,9 @@ const UsersList: FC = () => {
 
   return (
     <div className={css.usersList}>
+
+      <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
+
       <h2>Список пользователей</h2>
       {loading &&
         <p>Ожидает загрузку пользователей...</p>

@@ -13,7 +13,7 @@ const MaterialDescription: FC<MaterialDescriptionProp> = ({title, data}) => {
 
   return (
     <div className={css.materialDescription}>
-      <Link to='/training-materials' className={`${css.bntBack} buttonDef buttonBack`}>&lt;</Link>
+      <Link to='/training-materials' className='btnBackMobile buttonDef'>&lt;</Link>
       
       <div className={css.blockTitle}>
         <h2 className={css.title}>{title}</h2>

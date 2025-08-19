@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import HistoryExam from './HistoryExam';
 import { useAppSelector } from '../../../store/hooks';
 import contentDescr from '../../../data/descriptions.json'
-import { useDeviceType } from '../../hooks/useDeviceType';
 import Description from '../Description';
 import css from './exam.module.css'
 
@@ -11,7 +10,6 @@ import css from './exam.module.css'
 const Exam: FC = () => {
   const resultsExamDataLS = localStorage.getItem('resultsExamData')
   const userDataState = useAppSelector(state => state.userDataIndex.user)// меняет состояние превьюшек в зависимости от того залогинен пользователь или нет
-  const isMobile = useDeviceType()
   
   useEffect(() => {
   }, [userDataState])
@@ -19,10 +17,8 @@ const Exam: FC = () => {
 
   return (
     <div className={css.exam}>
-      
-      {isMobile === 'mobile' && 
-        <Link to='/' className='buttonBack buttonDef'>&lt;</Link>
-      }
+
+      <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
 
       <Description 
       title={contentDescr.exam.title} 

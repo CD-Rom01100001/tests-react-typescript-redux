@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { useDeviceType } from '../../hooks/useDeviceType';
 import { TrainingMaterialsData } from '../../../data/trainingMaterials/trainingMaterialsData';
 import css from './TrainingMaterials.module.css'
 
@@ -14,15 +13,12 @@ const TrainingMaterials: FC = () => {
   const pathname = useLocation().pathname;
   const location = useMemo(() => pathname.match(/^\/training-materials\//), [pathname])
   console.log(location)
-  const isMobile = useDeviceType()
 
   return (
     <div className={css.trainingMaterials}>
       
       <div className={css.blockBtnBack}>
-        {isMobile === 'mobile' && 
-          <Link to='/' className='buttonBack buttonDef'>&lt;</Link>
-        }
+        <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
       </div>
 
       <nav className={css.blockNavigation}>
