@@ -1,3 +1,12 @@
+.blockTitle {
+  margin-bottom: 2rem;
+}
+
+.blockTitle h2 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
 .descriptionBlock {
   display: flex;
   flex-direction: column;

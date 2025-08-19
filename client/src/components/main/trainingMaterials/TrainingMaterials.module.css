@@ -1,20 +1,24 @@
 .trainingMaterials {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 3rem;
+  text-align: center;
+  font: 500 2.4rem / 2.4rem "agora";
+}
+
+.mainBlock {
   display: flex;
   gap: 0 2rem;
   width: 100%;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  .trainingMaterials {
-    flex-direction: column;
-  }
-}
-
-.trainingMaterials nav {
+.mainBlock nav {
   flex: 1;
 }
 
-section {
+.mainBlock section {
   flex: 3;
   padding: 2rem;
   background: #fff;
@@ -72,7 +76,7 @@ section {
 
 @media (hover: none) and (pointer: coarse) {
   .blockNavigation .li {
-    width: 13rem;
+    max-width: 13rem;
     height: 6rem;
     padding: 0.2rem 0.5rem;
   }

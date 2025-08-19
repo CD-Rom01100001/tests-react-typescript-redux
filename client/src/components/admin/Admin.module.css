@@ -15,6 +15,12 @@
   }
 }
 
+.adminTitle {
+  margin-bottom: 3rem;
+  text-align: center;
+  font: 500 2.4rem / 2.4rem "agora";
+}
+
 .userTable {
   width: max-content;
   border-collapse: collapse;

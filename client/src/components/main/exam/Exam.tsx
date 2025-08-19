@@ -25,10 +25,10 @@ const Exam: FC = () => {
       description={contentDescr.exam.description}/>
 
       <div className={css.historyExamBlock}>
-        <h3>История экзаменов:</h3>
-        {resultsExamDataLS &&
-          <HistoryExam data={JSON.parse(resultsExamDataLS)}/>
-          // <HistoryExam data={resultsExamDataState}/>
+        <h3 className={css.historyTitle}>История экзаменов:</h3>
+        {resultsExamDataLS ?
+          <HistoryExam data={JSON.parse(resultsExamDataLS)}/> :
+          <p className={css.alert}>История пуста!</p>
         }
       </div>
       

@@ -21,7 +21,10 @@ const TrainingMaterials: FC = () => {
         <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
       </div>
 
-      <nav className={css.blockNavigation}>
+      <h2 className={css.title}>Учебные материалы</h2>
+        
+      <div className={css.mainBlock}>
+        <nav className={css.blockNavigation}>
         <ul>
           {TrainingMaterialsData.map((section, i) => {
             return (
@@ -36,13 +39,14 @@ const TrainingMaterials: FC = () => {
             )
           })}
         </ul>
-      </nav>
+        </nav>
 
-      <section className={css.sectionPc}>
-        {location ? 
-        <Outlet/> :
-        <h2>Выбирете раздел</h2>}
-      </section>
+        <section className={css.sectionPc}>
+          {location ? 
+          <Outlet/> :
+          <h2>Выбирете раздел</h2>}
+        </section>
+      </div>
 
     </div>
   );

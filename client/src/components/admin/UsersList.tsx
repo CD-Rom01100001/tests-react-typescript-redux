@@ -55,7 +55,7 @@ const UsersList: FC = () => {
 
       <Link to='/' className='btnBackMobile buttonDef'>&lt;</Link>
 
-      <h2>Список пользователей</h2>
+      <h2 className={css.userTitle}>Список пользователей</h2>
       {loading &&
         <p>Ожидает загрузку пользователей...</p>
       }

@@ -23,6 +23,7 @@
 @media (hover: none) and (pointer: coarse) {
   .btnBackMobile {
     display: inline-block;
+    margin-bottom: 3rem;
     font-size: 3rem;
     font-weight: 100;
   }
