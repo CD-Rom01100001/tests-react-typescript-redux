@@ -42,7 +42,7 @@ const Navigation: FC = () => {
   }
   const setActive = ({isActive}: ActiveType): string => isActive ? css.active : '';
 
-  const xxx: string = 'admin'//!!!!!!!!!!!!!!
+  // const xxx: string = 'admin'//!!!!!!!!!!!!!!
   
   return (
     <nav className={css.navigation}>
@@ -78,7 +78,7 @@ const Navigation: FC = () => {
           }
         </li>
         {/* !!!!!!!!!!!!!!!!!!!!!!!!!! */}
-        {/* userData?.role */ xxx === 'admin' &&
+        {userData?.role /* xxx */ === 'admin' &&
           <li className={css.li}>
             {((locationTraining || locationExam) && !defineEndTestSlice) ? 
               <p id='/settings' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Настройки</p> :
@@ -87,7 +87,7 @@ const Navigation: FC = () => {
           </li>
         }
         {/* !!!!!!!!!!!!!!!!!!!!!!!!!! */}
-        {(/* userData?.role */ xxx === 'admin' /* || userData?.role === 'moderator' */) &&
+        {(userData?.role /* xxx */ === 'admin' || userData?.role === 'moderator') &&
           <li className={css.li}>
             {((locationTraining || locationExam) && !defineEndTestSlice) ? 
               <p id='/users' onClick={x} className={`${css.p} ${locationExam && !defineEndTestSlice ? css.active : ''}`}>Пользователи</p> :
