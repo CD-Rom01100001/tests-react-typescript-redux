@@ -28,11 +28,10 @@ const TrainingMaterials: FC = () => {
         <ul>
           {TrainingMaterialsData.map((section, i) => {
             return (
-              <li className={css.li}>
+              <li className={css.li} key={i}>
                 <NavLink 
                 to={section.path} 
-                className={setActive} 
-                key={i}>
+                className={setActive}>
                   {section.title}
                 </NavLink>
               </li>

@@ -79,7 +79,6 @@ const Admin: FC = () => {
       resizeObserver.disconnect()
     }
   }, [users])
-  
 
   return (
     <div className={css.admin}>
@@ -89,10 +88,10 @@ const Admin: FC = () => {
       {loading &&
         <p>Ожидает загрузку пользователей...</p>
       }
-      {!isMobile ? 
+      {isMobile === 'PC' ? 
         <div className={css.tableWrapper} ref={tableWrapperRef}>
-        <UserTable ref={tableRef} users={users} setUsers={setUsers} setLoading={setLoading}/>
-      </div> :
+          <UserTable ref={tableRef} users={users} setUsers={setUsers} setLoading={setLoading}/>
+        </div> :
       <UserTable ref={tableRef} users={users} setUsers={setUsers} setLoading={setLoading}/>
       }
       
