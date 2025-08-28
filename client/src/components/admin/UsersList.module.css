@@ -1,3 +1,19 @@
+.usersList {
+  width: 100%;
+}
+
+.usersList table {
+  width: max-content;
+  border-collapse: collapse;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .usersList {
+    padding: 0 2rem 0 0;
+    overflow-x: auto;
+  }
+}
+
 .userTitle {
   margin-bottom: 3rem;
   text-align: center;
