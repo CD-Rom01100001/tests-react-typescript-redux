@@ -64,7 +64,7 @@ const Header: FC = () => {
       </div>
 
       <div className={css.blockTitle}>
-        <h1 className={css.titleH1}>Обучение сотрудников ФГУП ГЦСС:</h1>
+        <h1 className={css.titleH1}>Обучение сотрудников:</h1>
       </div>
 
       {/* если открыто через мобильник */}

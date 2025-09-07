@@ -50,7 +50,7 @@ const Navigation: FC = () => {
         <li className={css.li}>
           {((locationTraining || locationExam) && !defineEndTestSlice) ? 
             <p id='/' onClick={x} className={css.p}>О ГЦСС</p> :
-            <NavLink className={setActive} to={isMobile === 'PC' ? '/' : 'home'} onClick={stopTest}>О ГЦСС</NavLink>
+            <NavLink className={setActive} to={isMobile === 'PC' ? '/' : 'home'} onClick={stopTest}>О проекте</NavLink>
           }
         </li>
         <li className={css.li}>

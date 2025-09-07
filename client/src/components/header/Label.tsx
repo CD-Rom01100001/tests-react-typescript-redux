@@ -9,9 +9,9 @@ const Label: FC = () => {
       <img className={css.logo} src={label} alt="Label" />
       <h1 className={css.company_name}>
         <span className={css.legal_status}>
-          Федеральное государственное унитарное предприятие
+          обучающая плотформа
         </span>
-        &laquo;Главный центр специальной связи&raquo;
+        &laquo;Учебная академия&raquo;
       </h1>
     </div>
   );

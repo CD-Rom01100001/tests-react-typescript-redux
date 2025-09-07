@@ -15,6 +15,10 @@
   font: 500 2.4rem / 2.4rem "agora";
 }
 
+.appName {
+  font-weight: 600;
+}
+
 .historyTitle {
   margin-bottom: 0.7rem;
 }
@@ -25,3 +29,16 @@
   text-align: justify;
   text-indent: 2rem;
 }
+
+.descriptionOrganization ul {
+  list-style-position: inside; 
+  margin: 0 0 2rem 0;
+  padding-left: 0;  
+}
+
+.descriptionOrganization li {
+  font: 400 1.6rem / 2rem "agora";
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
